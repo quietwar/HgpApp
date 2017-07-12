@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :admins, :controllers => { registrations: 'registrations' }
   devise_for :users, :controllers => { registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -6,8 +7,14 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show] do
     resources :projects
-    resources :features
+
   end
+
+   namespace :admins do
+        resources :cohorts
+
+        root to: "cohorts#index"
+      end
 
   resources :dashboards, only: [:index] do
     collection do
@@ -15,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :features
   resources :friendships, only: [:show, :create, :destroy]
   resources :messages, only: [:create]
 

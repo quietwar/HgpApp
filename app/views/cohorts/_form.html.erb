@@ -1,0 +1,53 @@
+<div class='row'>
+  <div class='col-md-12'>
+  <%= form_for([current_admin,@cohort)],:html => {class: "form-horizontal", role: "form"}) do |f| %>
+    <% if cohort.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cohort.errors.count, "error") %> prohibited this cohort from being saved:</h2>
+
+      <ul>
+      <% cohort.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+      <div class='form-group'>
+        <div class='control-label col-md-2'>
+          <%= f.label :cohort, "Cohort" %>
+        </div>
+        <div class='col-md-10'>
+          <%= f.text_field :cohort, class: 'form-control' %>
+        </div>
+      </div>
+      <div class='form-group'>
+        <div class='control-label col-md-2'>
+          <%= f.label :benchmark, "benchmark" %>
+        </div>
+        <div class='col-md-10'>
+          <%= f.text_field :benchmark, class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='control-label col-md-2'>
+          <%= f.label :completion, "Have finished?" %><br>
+        </div>
+        <div class='col-md-10'>
+          <%= f.text_area :completion, class: 'form-control', rows: "5" %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='col-md-offset-2 col-md-10'>
+          <%= f.submit class: 'btn btn-success btn-lg' %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
