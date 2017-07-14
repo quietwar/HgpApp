@@ -1,4 +1,4 @@
-class Room < ApplicationRecord
+class Chatroom < ApplicationRecord
   belongs_to :user
   has_many :messages
 end

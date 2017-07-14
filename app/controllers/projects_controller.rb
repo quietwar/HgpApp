@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project#, only: [:show, :edit, :update, :destroy]
 
   def index
     @projects = current_user.projects
@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit(:app_name, :language, :project_details, :start_date, :user_id)
+    params.require(:project).permit(:app_name, :language, :project_details, :start_date, :user_id, :avatar, :username)
   end
 
   def set_current_room

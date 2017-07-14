@@ -3,14 +3,16 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         attr_accessor :login
 
   has_many :projects
   has_many :friendships
   has_many :friends, through: :friendships, class_name: "User"
-  has_one :room
+  has_one :chatroom
   has_many :Features
   has_many :messages
 
+  validates :username, presence: true, length: {maximum: 255}, uniqueness: { case_sensitive: false }, format: { with: /\A[a-zA-Z0-9]*\z/, message: "may only contain letters and numbers." }
   validates :first_name, presence: true
   validates :last_name, presence: true
 
@@ -33,6 +35,15 @@ class User < ApplicationRecord
         or last_name LIKE ?', "%#{names_array[0]}%",
         "%#{names_array[1]}%", "%#{names_array[0]}%",
         "%#{names_array[1]}%").order(:first_name)
+    end
+  end
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["username = :value OR lower(email) = lower(:value)", { :value => login }]).first
+    else
+      where(conditions).first
     end
   end
 

@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170711161705) do
+ActiveRecord::Schema.define(version: 20170714192123) do
+
+  create_table "admin_cohorts", force: :cascade do |t|
+    t.integer  "admin_id"
+    t.integer  "cohort_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_admin_cohorts_on_admin_id"
+    t.index ["cohort_id"], name: "index_admin_cohorts_on_cohort_id"
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string   "first_name",             default: "", null: false
@@ -27,20 +36,15 @@ ActiveRecord::Schema.define(version: 20170711161705) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "username"
+    t.string   "login"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_admins_on_username", unique: true
   end
 
   create_table "cohorts", force: :cascade do |t|
-    t.string   "genius"
-    t.string   "benchmark"
-    t.integer  "class_id"
-    t.integer  "genius_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "features", force: :cascade do |t|
+    t.text     "genius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -50,7 +54,6 @@ ActiveRecord::Schema.define(version: 20170711161705) do
     t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "new_friend"
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
@@ -100,8 +103,10 @@ ActiveRecord::Schema.define(version: 20170711161705) do
     t.string   "first_name"
     t.string   "last_name"
     t.boolean  "admin",                  default: false
+    t.string   "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

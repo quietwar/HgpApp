@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+
   devise_for :admins, :controllers => { registrations: 'registrations' }
   devise_for :users, :controllers => { registrations: 'registrations' }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -21,6 +23,8 @@ Rails.application.routes.draw do
       post :search, to: 'dashboards#search'
     end
   end
+
+  resources :admin
 
   resources :features
   resources :friendships, only: [:show, :create, :destroy]
