@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714192123) do
-
-  create_table "admin_cohorts", force: :cascade do |t|
-    t.integer  "admin_id"
-    t.integer  "cohort_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["admin_id"], name: "index_admin_cohorts_on_admin_id"
-    t.index ["cohort_id"], name: "index_admin_cohorts_on_cohort_id"
-  end
+ActiveRecord::Schema.define(version: 20170722155314) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "first_name",             default: "", null: false
@@ -43,6 +34,25 @@ ActiveRecord::Schema.define(version: 20170714192123) do
     t.index ["username"], name: "index_admins_on_username", unique: true
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_chatrooms_on_user_id"
+  end
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string   "genius"
+    t.integer  "cohorts"
+    t.string   "email"
+    t.integer  "cell"
+    t.integer  "stipend"
+    t.boolean  "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cohorts", force: :cascade do |t|
     t.text     "genius"
     t.datetime "created_at", null: false
@@ -56,6 +66,17 @@ ActiveRecord::Schema.define(version: 20170714192123) do
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
+  end
+
+  create_table "grids", force: :cascade do |t|
+    t.string   "genius"
+    t.integer  "cohorts"
+    t.string   "email"
+    t.integer  "cell"
+    t.integer  "stipend"
+    t.boolean  "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -79,12 +100,21 @@ ActiveRecord::Schema.define(version: 20170714192123) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "staff_cohort", force: :cascade do |t|
+    t.integer  "admin_id"
+    t.integer  "cohort_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_staff_cohort_on_admin_id"
+    t.index ["cohort_id"], name: "index_staff_cohort_on_cohort_id"
+  end
+
+  create_table "table_chatrooms", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_rooms_on_user_id"
+    t.index ["user_id"], name: "index_table_chatrooms_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
