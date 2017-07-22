@@ -1,10 +1,7 @@
-$(document).ready(function() {
-
-    $('#example tr').click(function() {
-        var href = $(this).find("a").attr("href");
-        if(href) {
-            window.location = href;
-        }
-    });
-
+$(document).on("click", "#table-id tr", function() {
+  var link  = $(this).data("href")
+  $.ajax({
+    url: link,
+    type: "GET"
+  });
 });

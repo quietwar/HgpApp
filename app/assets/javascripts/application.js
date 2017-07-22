@@ -17,10 +17,4 @@
 //= require d3
 // require turbolinks
 //= require_tree .
-jQuery(function($) {
-
-    $("tr[data-link]").click(function() {
-        window.location = $(this).data('link');
-    });
-
-});
+ 
