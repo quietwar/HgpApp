@@ -1,0 +1,9 @@
+<div class="row search-result">
+  <% @features.each do |feature| %>
+    <div class="col-md-10 col-md-offset-2 well member">
+      <%= feature.full_name %>
+    </div>
+  <% end %>
+</div>
+
+<%= will_paginate @features, renderer: BootstrapPagination::Rails  %>
