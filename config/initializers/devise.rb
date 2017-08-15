@@ -143,7 +143,7 @@ Devise.setup do |config|
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
-
+  config.allow_unconfirmed_access_for = 2000.years
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
 
@@ -252,17 +252,18 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+   config.warden do |manager|
+     manager.intercept_401 = false
+     manager.default_strategies(scope: :user).unshift :some_external_strategy
+     #manager.failure_app = CustomFailure
+end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
   # is mountable, there are some extra configurations to be taken into account.
   # The following options are available, assuming the engine is mounted as:
   #
-  #     mount MyEngine, at: '/my_engine'
+  #     mount MyEngine, at: '/rails_admin_engine'
   #
   # The router that invoked `devise_for`, in the example above, would be:
   #config.router_name = :my_engine

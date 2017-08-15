@@ -13,7 +13,7 @@ class CohortsController < ApplicationController
       # print "============================"
       # current_admin.cohorts << @cohort
       # set_current_cohort
-      redirect_to admin_index_url
+       #redirect_to users_index_path
       # redirect_to admins_root_path
 
       @features = User.paginate(:page => params[:per_page => 1])

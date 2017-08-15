@@ -15,7 +15,7 @@
           <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="active"><%= link_to "Home", root_path %></li>
-              <li class="active"><%= link_to "The Hidden Genius Lounge-Staff only!", admins_cohorts_path %></li>
+              <li class="active"><%= link_to "The Hidden Genius Lounge-Staff only!", rails_admin_path %></li>
 
             </ul>
             <%= form_tag(search_dashboards_path,
@@ -31,15 +31,15 @@
             <ul class="nav navbar-nav navbar-right">
 
 
-              <% unless user_signed_in? %>
+              <% unless current_user %>
                 <li><%= link_to "Genius sign up", new_user_registration_path %></li>
-                <li><%= link_to "Tap in", sign_in_path %></li>
-                <li><%= link_to "Staff sign up",new_admin_user_registration_path %></li>
-                <li><%= link_to "Staff Tap in", admins_cohorts_path %></li>
+                <li><%= link_to "Tap in",  sign_in_path %></li>
+                <li><%= link_to "Staff sign up",admin_session_path %></li>
+                <li><%= link_to "Staff Tap in", new_admin_session_path %></li>
               <% else %>
-                <li><%= link_to "My Lab", user_projects_path(current_user) %></li>
+                <li><%= link_to "My Lab", cohort_user_projects_path(current_user) %></li>
                 <li><%= link_to "Tap out", destroy_user_session_path, method: :delete %></li>
-                <li><%= link_to "Genius Lounge - Staff only", users_path %></li>
+                <li><%= link_to "Staff Tap out", destroy_admin_session_path, method: :delete %></li>
                 <div class="navbar-right signed-in-user">
                   <p class="navbar-text">
                     Signed in as <%= "#{current_user.email}" %>
