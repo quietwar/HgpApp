@@ -27,7 +27,9 @@ class EventsController < Devise::OmniauthCallbacksController
   end
 
   def edit
+    @event = Event.find(params[:id])
   end
+
 
   def create
     @event = Event.new(event_params)

@@ -7,7 +7,8 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
 
-  config.secret_key = 'cba52b9879adc14a361f8b26e1985ff3e909bd33c273a67ffd4f8d041f98d043f448f9d60952ca5280a539a655203e874f174fcfbd39df83b6050d6b8f'
+  #config.secret_key = 'cba52b9879adc14a361f8b26e1985ff3e909bd33c273a67ffd4f8d041f98d043f448f9d60952ca5280a539a655203e874f174fcfbd39df83b6050d6b8f'
+  config.secret_key = ENV['config.secret_key'] if Rails.env.production?
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -268,7 +269,13 @@ Devise.setup do |config|
   #
   # The router that invoked `devise_for`, in the example above, would be:
   # config.router_name = :my_engine
-  #
+  #config.omniauth :google_oauth2, 'AIzaSyB49uC_ZAuE5ef0ouy5DuVJ1qroP7qN6Ss', 'tDdFW_ZGEoSYyn8o5PpqScGJ', scope: 'user,calendars,email,maps'
+  config.omniauth :google_oauth2,
+    Figaro.env.google_client_id,
+    Figaro.env.google_client_secret, {
+      scope: "email,calendar"
+    }
+
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'

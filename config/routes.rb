@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #mount_devise_token_auth_for 'User', at: 'auth'
   ActiveAdmin.routes(self)
    devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
 
       devise_scope :user do
         get '/events', to: 'events#index'
-        get '/events/new', to: 'events#new'
+        get '/events/new', to: 'events#new', as: 'new_event'
         get '/events/1/', to: 'events#show', :id => "1"
         get '/events/1/edit/', to: 'events#edit', :id => "1"
         post '/events', to: 'events#create'
@@ -26,7 +27,11 @@ Rails.application.routes.draw do
         get 'auth/:google_oauth2/callback', to: 'authentications#create', as: 'google_signin'
         get 'signout', to: 'sessions#destroy', as: 'signout'
       end
-    match 'api/v1/users' , to: 'registrations#create' , via: :post
+  scope :api do
+    scope :v1 do
+      get 'api/v1/users' , to: 'authentications#create' , via: :post
+    end
+  end
 
   # devise_for :admin_users, ActiveAdmin::Devise.config.merge(:path => :admin)
   #   ActiveAdmin.routes(self) do
