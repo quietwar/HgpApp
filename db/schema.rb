@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171207234905) do
+ActiveRecord::Schema.define(version: 20180105003126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,14 @@ ActiveRecord::Schema.define(version: 20171207234905) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "messages", id: :serial, force: :cascade do |t|
     t.text "body"
     t.integer "user_id"
@@ -143,16 +151,6 @@ ActiveRecord::Schema.define(version: 20171207234905) do
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
-  create_table "places", force: :cascade do |t|
-    t.string "title"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "visited_by"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "projects", id: :serial, force: :cascade do |t|

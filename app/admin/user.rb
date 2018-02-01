@@ -2,8 +2,8 @@ ActiveAdmin.register User, :as => 'Genius' do
   permit_params :avatar, :first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :password, :password_confirmation, :stipend, :benchmarks, avatar_attributes: [:_destroy]
   menu priority: 4
   config.batch_actions = true
-  active_admin_importable
-  
+  #active_admin_importable
+
   # index do
   #
   # end

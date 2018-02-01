@@ -1,5 +1,4 @@
 Devise.setup do |config|
-<<<<<<< HEAD
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -8,19 +7,14 @@ Devise.setup do |config|
 
   #config.secret_key = 'cba52b9879adc14a361f8b26e1985ff3e909bd33c273a67ffd4f8d041f98d043f448f9d60952ca5280a539a655203e874f174fcfbd39df83b6050d6b8f'
   config.secret_key = ENV['config.secret_key'] if Rails.env.production?
-=======
->>>>>>> 953703d3ca0a5d21984e53c1d444c50ab07d2b44
-
-  #config.secret_key = 'cba52b9879adc14a361f8b26e1985ff3e909bd33c273a67ffd4f8d041f98d043f448f9d60952ca5280a539a655203e874f174fcfbd39df83b6050d6b8f'
-  config.secret_key = ENV['config.secret_key'] if Rails.env.production?
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'hodari@hiddengeniusproject.org'
+  config.mailer_sender = 'Devise Omniauth <hodari@hiddengeniusproject.org>'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
    config.parent_mailer = 'ActionMailer::Base'
@@ -39,7 +33,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:email]
+  config.authentication_keys = [:email, :password]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -62,44 +56,44 @@ Devise.setup do |config|
   # It can be set to an array that will enable params authentication only for the
   # given strategies, for example, `config.params_authenticatable = [:database]` will
   # enable it only for database (email + password) authentication.
-  # config.params_authenticatable = true
+  config.params_authenticatable = true
 
   # Tell if authentication through HTTP Auth is enabled. False by default.
   # It can be set to an array that will enable http authentication only for the
   # given strategies, for example, `config.http_authenticatable = [:database]` will
   # enable it only for database authentication. The supported strategies are:
   # :database      = Support basic authentication with authentication key + password
-  # config.http_authenticatable = false
+  config.http_authenticatable = false
 
   # If 401 status code should be returned for AJAX requests. True by default.
-  # config.http_authenticatable_on_xhr = true
+  config.http_authenticatable_on_xhr = true
 
   # The realm used in Http Basic Authentication. 'Application' by default.
-  # config.http_authentication_realm = 'Application'
+  config.http_authentication_realm = 'Application'
 
   # It will change confirmation, password recovery and other workflows
   # to behave the same regardless if the e-mail provided was right or wrong.
   # Does not affect registerable.
-  # config.paranoid = true
+   config.paranoid = true
 
   # By default Devise will store the user in session. You can skip storage for
   # particular strategies by setting this option.
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  #config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX
   # requests for sign in and sign up, you need to get a new CSRF token
   # from the server. You can disable this option at your own risk.
-  #config.clean_up_csrf_token_on_authentication = true
+  config.clean_up_csrf_token_on_authentication = true
 
   # When false, Devise will not attempt to reload routes on eager load.
   # This can reduce the time taken to boot the app but if your application
   # requires the Devise mappings to be loaded during boot time the application
   # won't boot properly.
-  # config.reload_routes = true
+  config.reload_routes = true
 
   # ==> Configuration for :database_authenticatable
   # For bcrypt, this is the cost for hashing the password and defaults to 11. If
@@ -113,7 +107,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'd93ffa1a3085936609a2ce3fcb0b255624d9cd0f89f0e6e92ccbab3b802224cb1705b13d77d9a6f1eaba923881f388bbf4a2df98405206f20464f214fdab4929'
+  config.pepper = 'd93ffa1a3085936609a2ce3fcb0b255624d9cd0f89f0e6e92ccbab3b802224cb1705b13d77d9a6f1eaba923881f388bbf4a2df98405206f20464f214fdab4929'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -193,7 +187,7 @@ Devise.setup do |config|
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   # config.unlock_in = 1.hour
-  config.authentication_keys = [ :login ]
+  #config.authentication_keys = [ :sign_in]
   # Warn on the last attempt before the account is locked.
   # config.last_attempt_warning = true
 
@@ -254,17 +248,20 @@ Devise.setup do |config|
   # up on your models and hooks.
 
   #config.provider "KEY", "SECRET"
-      # provider
-      #     google_oauth2: '542001295987-1a2tcq6vm4ndsov68svt3e1379lpetnk.apps.googleusercontent.com',
-      #     google_client_secret: 'tDdFW_ZGEoSYyn8o5PpqScGJ',
-      #     prompt: "consent",
-      #       access_type: "offline",
-      #     select_account: true,
-      #     scope: 'calendars,maps,email',
-      #     image_aspect_ratio: 'square',
-      #     image_size: 50
-      #     on_failure { |env| AuthenticationsController.action(:failure).call(env) }
-      #   end
+  # config.provider =
+  #         {
+  #         google_oauth2: '542001295987-1a2tcq6vm4ndsov68svt3e1379lpetnk.apps.googleusercontent.com',
+  #         google_client_secret: 'tDdFW_ZGEoSYyn8o5PpqScGJ',
+  #         prompt: "consent",
+  #           access_type: "offline",
+  #         select_account: true,
+  #         scope: 'calendars,maps,email',
+  #         image_aspect_ratio: 'square',
+  #         image_size: 50
+  #         on_failure }
+  #         { |env| AuthenticationsController.action(:failure).call(env) }
+  #
+  #       end
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -284,43 +281,48 @@ Devise.setup do |config|
   #
   # The router that invoked `devise_for`, in the example above, would be:
   # config.router_name = :my_engine
-  #config.omniauth :google_oauth2, 'AIzaSyB49uC_ZAuE5ef0ouy5DuVJ1qroP7qN6Ss', 'tDdFW_ZGEoSYyn8o5PpqScGJ', scope: 'user,calendars,email,maps'
-  config.omniauth :google_oauth2,
-    Figaro.env.google_client_id,
-    Figaro.env.google_client_secret, {
-      scope: "email,calendar"
-    }
 
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-  # config.omniauth_path_prefix = '/my_engine/users/auth'
-  #config.omniauth :google_oauth2, 'AIzaSyB49uC_ZAuE5ef0ouy5DuVJ1qroP7qN6Ss', 'tDdFW_ZGEoSYyn8o5PpqScGJ', scope: 'user,calendars,email,maps'
-  module OmniAuth
-    module Strategies
-      class GoogleAuth < OmniAuth::Strategies::GoogleOauth2
-        option :name, 'google_auth'
-        option :callback_path, '/callbacks/google'
-      end
-    end
-  end
+  # config.omniauth_path_prefix = '/users/auth'
+  # module OmniAuth
+  #   module Strategies
+  #     class GoogleAuth < OmniAuth::Strategies::GoogleOauth2
+  #       option :name, 'google_auth'
+  #       option :callback_path, '/callbacks/google'
+  #     end
+  #   end
+  # end
+  #
+  # require 'omniauth-google-oauth2'
+  config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH_CLIENT_ID"], ENV["GOOGLE_OAUTH_SECRET"], {
+   scope: 'email, profile, plus.me, calendar'
+ }
+  # Rails.application.config.middleware.use OmniAuth::Builder do
+  #   provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
+  #     {
+  #       name: 'google',
+  #       scope: 'email, profile, plus.me, calendar',
+  #       prompt: 'select_account',
+  #       image_aspect_ratio: 'square',
+  #       image_size: 50
+  #     }
+  # end
+  #   #def google_oauth2_options
 
-  require 'omniauth-google-oauth2'
-
-  Rails.application.config.middleware.use OmniAuth::Builder do
-    #def google_oauth2_options
-   #config.omniauth 
-    provider :google_oauth2,
-     Figaro.env.google_client_id,
-     Figaro.env.google_client_secret
+  #config.omniauth :google_oauth2, '81909937110-9qkbu78955ge23fhinrkkv1ih2cl13sh.apps.googleusercontent.com', '6raMG_ql1d-EwxAOnwbMP1B3', scope: 'user, calendars, email, maps'
+     # Figaro.env.google_client_id,
+     # Figaro.env.google_client_secret,
      #google_oauth2_options
-      {
-        scope: 'email, calendar',
-        prompt: 'select_account',
-        image_aspect_ratio: 'original',
-        name: 'google',
-        access_type: 'offline',
-        provider_ignores_state: true
-      }
-    end
+      # {
+      #   scope: 'email, calendar',
+      #   provider_ignores_state: true,
+      #   redirect_uri: 'http://localhost:3000/users/auth/google_oauth2/callback/',
+      #   prompt: 'select_account',
+      #   image_aspect_ratio: 'original',
+      #   name: 'google',
+      #   access_type: 'offline'
+      # }
+    #end
 
   end

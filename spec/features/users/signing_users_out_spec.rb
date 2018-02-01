@@ -10,7 +10,7 @@ RSpec.feature "Signing users out" do
     click_link "Tap in"
     fill_in "Email", with: @john.email
     fill_in "Password",  with: @john.password
-    fill_in "Cohort", with: 3
+    fill_in "Cohort_id", with: 3
     fill_in "City",  with: "Oakland"
     fill_in "Cell",  with: (5107779311)
     click_button "Log in"

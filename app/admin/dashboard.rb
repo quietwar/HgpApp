@@ -61,7 +61,7 @@ ActiveAdmin.register_page "Dashboard" do
          panel "Events" do
            table_for Event.order("id desc").limit(10) do
              ul "Upcoming Events" do
-               li link_to "HGP Events Calendar",  events_path
+               li link_to "HGP Events Calendar",  hgp_event_path(:current_admin)
              end
             end
           end

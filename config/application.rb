@@ -13,6 +13,12 @@ module GeniusLounge
     # Initialize configuration defaults for originally generated Rails version.
     config.exceptions_app = self.routes
     config.load_defaults 5.1
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+       origins '*'
+       resource '*', :headers => :any, :methods => [:get, :post, :options, :patch]
+      end
+    end
     #config.middleware.use Rack::MethodOverride
     config.app_generators.scaffold_controller :responders_controller
     # Settings in config/environments/* take precedence over those specified here.
@@ -20,6 +26,7 @@ module GeniusLounge
     # -- all .rb files in that directory are automatically loaded.
     #config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore
+    config.assets.precompile += ['application-print.css']
 
   end
 end

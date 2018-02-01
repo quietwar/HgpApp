@@ -37,25 +37,53 @@ ActiveAdmin.setup do |config|
   #   config.default_namespace = false
   #
   # Default:
+  # If you wanted to add a static menu item to the default menu provided:
+  #
+  #   config.namespace :admin do |admin|
+  #     admin.build_menu :default do |menu|
+  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
+  #     end
+  #   end
+
+  # == Download Links
+  #
+  # You can disable download links on resource listing pages,
+  # or customize the formats shown per namespace/globally
+  #
+  # To disable/customize for the :admin namespace:
+  #
+  #   config.namespace :admin do |admin|
+    # admin_user.build_menu do |menu|
+    #   menu.add :label => "Ad", :priority => 1
+    #   menu.add :label => "Second Item", :priority => 2
+    #   menu.add :label => "Third Item", :priority => 3
+    # end
+  #end
+  #     # Disable the links entirely
+  #     admin.download_links = false
+  #
+  #     # Only show XML & PDF options
+  #     admin.download_links = [:xml, :pdf]
+  #
+  #     # Enable/disable the links based on block
+  #     #   (for example, with cancan)
+  #     admin.download_links = proc { can?(:view_download_links) }
+  #
+  #   end
 
 
   config.default_namespace = :Hgp_staff
     config.namespace :Hgp_staff do |hgp_staff|
       hgp_staff.build_menu :utility_navigation do |menu|
-        menu.add id: 'current_user', label: -> { display_name current_user } #url: -> { hgp_staff_dashboard(current_user) }, if: :current_user
-        #menu.add label: "HGP Webpage", url: -> "http://www.hiddengeniusproject"
-                                            #html_options: { target: :blank }
-        #  add_current_user menu  menu
-        #  add_logout_button menu menu
-      end
+        menu.add label: "HGP Webpage", url: "http://www.hiddengeniusproject.org",
+                                            html_options: { target: :blank }
+      #  menu.add  add_current_user_to_menu menu :priority => 5,
+        #menu.add_logout_button_to_menu
+        # hgp_staff.add_current_user_to_menu  menu
+        #  hgp_staff.add_logout_button_to_menu menu
+      #end
     #end
 
-
-
-  #     hgp_staff.add_current_user_to_menu :current_admin
-  #     hgp_staff.add_logout_button_to_menu method: :delete
-  #   end
-  # end
   # You can customize the settings for each namespace by using
   # a namespace block. For example, to change the site title
   # within a namespace:
@@ -161,7 +189,7 @@ ActiveAdmin.setup do |config|
         resource_sym = config.resource_name.singular.to_sym
         controller do
           define_method :permitted_params do
-            params.permit :utf8, :authenticity_token, :commit
+            params.permit :email, :utf8, :authenticity_token, :commit
           #                 resource_sym =>
           #                 block? instance_exec(&block) : args do
           #
@@ -251,43 +279,6 @@ ActiveAdmin.setup do |config|
   # You can add a navigation menu to be used in your application, or configure a provided menu
   #
   # To change the default utility navigation to show a link to your website & a logout btn
-  #
-
-
-  # If you wanted to add a static menu item to the default menu provided:
-  #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :default do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #     end
-  #   end
-
-  # == Download Links
-  #
-  # You can disable download links on resource listing pages,
-  # or customize the formats shown per namespace/globally
-  #
-  # To disable/customize for the :admin namespace:
-  #
-  #   config.namespace :admin do |admin|
-    # admin_user.build_menu do |menu|
-    #   menu.add :label => "Ad", :priority => 1
-    #   menu.add :label => "Second Item", :priority => 2
-    #   menu.add :label => "Third Item", :priority => 3
-    # end
-  #end
-  #     # Disable the links entirely
-  #     admin.download_links = false
-  #
-  #     # Only show XML & PDF options
-  #     admin.download_links = [:xml, :pdf]
-  #
-  #     # Enable/disable the links based on block
-  #     #   (for example, with cancan)
-  #     admin.download_links = proc { can?(:view_download_links) }
-  #
-  #   end
-
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
@@ -328,6 +319,6 @@ ActiveAdmin.setup do |config|
   #
   #config.order_clause = MyOrderClause
 # end
-   #end
+   end
  end
 end

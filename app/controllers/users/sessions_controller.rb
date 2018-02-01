@@ -1,5 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+   before_action :configure_sign_in_params, only: [:create]
   # include Accessible
   # skip_before_action :check_user, only: :destroy
 
@@ -7,7 +7,8 @@ class Users::SessionsController < Devise::SessionsController
   # def new
   #   super
   # end
-POST /resource/sign_in
+
+#POST /resource/sign_in
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
@@ -15,7 +16,7 @@ POST /resource/sign_in
     super
   end
 
-DELETE /resource/sign_out
+#DELETE /resource/sign_out
   def destroy
     session[:user_id] = nil
     redirect_to root_path
@@ -27,6 +28,16 @@ DELETE /resource/sign_out
 
   #If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  end
+
+  private
+
+  def sign_up_params
+    params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def account_update_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password)
   end
 end

@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
   #wrap_parameters format: [:json, :xml, :url_encoded_form, :multipart_form]
   before_action :project_params, only: [:create]
-  before_action :authenticate_user!
+  #before_action :authenticate_user!
   before_action :set_project#, except: [:index, :new, :create]
+  load_and_authorize_resource param_method: :my_sanitizer
 
 
   def index
@@ -35,27 +36,18 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    #byebug
-
     @project = Project.new(project_params)
 
-    # if @project
-    #   @project.update(project_params)
-    #   flash[:notice] = 'Project has been updated'
-    #   redirect_to [current_user, @project]
-    # else
-    #   @project = Projects.new(project_params)
-
-      if @project.save
-        flash[:notice] = 'Project has been created'
-        redirect_to @project
-      else
-        flash[:alert] = 'Project has not been created'
-        render :new
-    #end
+    if @project.save
+      flash[:notice] = 'Project has been created'
+      redirect_to @project
+      # hurray
+    else
+      flash[:alert] = 'Project has not been created'
+      render :new
     end
-  #end
   end
+
 
   def edit
   end
@@ -76,7 +68,15 @@ class ProjectsController < ApplicationController
     redirect_to user_projects_path(current_user)
   end
 
+
+
+
 private
+
+  def my_sanitizer
+    params.require(:project).permit(:app_name, :coding, :project_details, :start_date)
+  end
+
 
   def full_name
     "#{first_name} #{last_name}"
@@ -85,11 +85,11 @@ private
   def set_project
     @project = user_projects_path(:current_user)
   end
-
-  def project_params
-    params.require(:project).permit(:app_name, :coding, :project_details, :start_date)
-    #params.permit(:app_name, :coding, :project_details, :start_date)
-  end
+  #
+  # def project_params
+  #   params.require(:project).permit(:app_name, :coding, :project_details, :start_date)
+  #   #params.permit(:app_name, :coding, :project_details, :start_date)
+  # end
 
   def set_current_room
     if params[:roomId]

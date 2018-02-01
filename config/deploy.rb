@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock "3.9.0"
 
-set :application, "Hgp_App5"
+set :application, "HgpApp"
 set :repo_url, "https://github.com/quietwar/HgpApp"
 
 # Default branch is :master

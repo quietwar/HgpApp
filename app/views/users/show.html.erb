@@ -1,5 +1,5 @@
 
-<<<<<<< HEAD
+
 <h1>Hello Genius</h1>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
     <script type="text/javascript">
       // Enter an API key from the Google API Console:
       //   https://console.developers.google.com/apis/credentials
-      var apiKey = 'AIzaSyB49uC_ZAuE5ef0ouy5DuVJ1qroP7qN6Ss';
+      var apiKey = 'AIzaSyAMB_XQbw9cggEXdYrtnA3EVD7fzCr5rXQ';
       // Enter the API Discovery Docs that describes the APIs you want to
       // access. In this example, we are accessing the People API, so we load
       // Discovery Doc found here: https://developers.google.com/people/api/rest/
@@ -28,7 +28,7 @@
       //   https://console.developers.google.com/apis/credentials?project=_
       // In your API Console project, add a JavaScript origin that corresponds
       //   to the domain where you will be running the script.
-      var clientId = '542001295987-1a2tcq6vm4ndsov68svt3e1379lpetnk.apps.googleusercontent.com';
+      var clientId = '81909937110-9qkbu78955ge23fhinrkkv1ih2cl13sh.apps.googleusercontent.com';
       // Enter one or more authorization scopes. Refer to the documentation for
       // the API or https://developers.google.com/people/v1/how-tos/authorizing
       // for details.
@@ -90,7 +90,7 @@
   </body>
 </html>
 redirect_to :root_path
-=======
+
 <!-- <h1>Hello Genius</h1>
 redirect_to :root_path -->
 
@@ -108,66 +108,3 @@ redirect_to :root_path -->
   To run this sample, replace YOUR API KEY with your application's API key.
   It can be found at https://code.google.com/apis/console/?api=plus under API Access.
 -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8' />
-    <style>
-      body {
-        font-size: 2em;
-      }
-      #info {
-        padding: 0.25em;
-      }
-    </style>
-    <script>
-      // Enter the API key from the Google Develoepr Console - to handle any unauthenticated
-      // requests in the code.
-      // The provided key works for this sample only when run from
-      // https://google-api-javascript-client.googlecode.com/hg/samples/plusProfileSearch.html
-      // To use in your own application, replace this API key with your own.
-      var apiKey = 'AIzaSyB49uC_ZAuE5ef0ouy5DuVJ1qroP7qN6Ss';
-      function load() {
-        gapi.client.setApiKey(apiKey);
-        gapi.client.load('urlshortener', 'v1', showInputs);
-      }
-      function showInputs() {
-        document.getElementById('requestFields').style.display = '';
-      }
-      function makeRequest() {
-        function writeResponse(resp) {
-          var responseText;
-          if (resp.code && resp.data[0].debugInfo == 'QuotaState: BLOCKED') {
-            responseText = 'Invalid API key provided. Please replace the "apiKey" value with your own.';
-          } else {
-            responseText = 'Short URL ' + shortUrl + ' expands to ' + resp.longUrl;
-          }
-          var infoDiv = document.getElementById('info');
-          infoDiv.innerHTML = '';
-          infoDiv.appendChild(document.createTextNode(responseText));
-        }
-        var shortUrl = document.getElementById('shortUrl').value;
-        var request = gapi.client.urlshortener.url.get({
-          'shortUrl': shortUrl
-        });
-        request.execute(writeResponse);
-      }
-    </script>
-    <script src="https://apis.google.com/js/client.js?onload=load"></script>
-  </head>
-  <body>
-    <p>Enter a short URL and click "Expand URL" to get the full URL.</p>
-    <div id="requestFields" style="display:none;">
-      <label for="shortUrl">Short URL </label>
-      <input id="shortUrl" type="text" value="http://goo.gl/fbsS" />
-      <button onclick="makeRequest();">
-        Expand URL
-      </button>
-    </div>
-    <fieldset>
-      <legend>Results</legend>
-      <span id="info"></span>
-    </fieldset>
-  </body>
-</html>
->>>>>>> 953703d3ca0a5d21984e53c1d444c50ab07d2b44

@@ -2,11 +2,13 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails' , '>= 5.0.0.rc2', '< 5.1.4'
+gem 'rails' , '>= 5.0.0.rc2', '< 5.2'
 gem 'bundler', '>= 1.8.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 #gem 'taps'
+gem 'arel', '~> 8.0' #git: 'https://github.com/rails/arel.git'
+gem 'retriable', '~> 3.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -31,10 +33,11 @@ gem 'responders', '~> 2.2'
 gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'geocoder'
+#gem 'sinatra-google-auth'
 gem 'google-api-client',  require: 'google/apis/calendar_v3'
 gem 'omniauth'
 gem 'omniauth-google-oauth2', git: 'https://github.com/zquestz/omniauth-google-oauth2.git'
-gem 'omniauth-oauth2', '~> 1.4'
+gem 'omniauth-oauth2'
 #gem 'pundit'
 gem 'activerecord-session_store'
 gem 'figaro'
@@ -57,18 +60,12 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'font-awesome-sass'
 gem 'bootstrap-sass', '~>3.3.6'
 gem 'devise', '~>4.2.0'
-<<<<<<< HEAD
-gem 'devise_token_auth'
 gem 'rack-cors', :require => 'rack/cors'
-#gem 'cancancan', '~> 1.10'
-=======
 gem 'cancancan', '~> 1.10'
->>>>>>> 953703d3ca0a5d21984e53c1d444c50ab07d2b44
 gem 'd3-rails','4.1.0'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'everett'
 gem 'cocoon'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -77,7 +74,8 @@ group :development, :test do
 end
 
 group :development do
-  #gem 'sqlite3'
+  # Use Dotenv for environment variables
+  gem 'dotenv', '~> 2.2.1'
   gem "better_errors"
   gem "binding_of_caller"
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
@@ -93,7 +91,7 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', '0.21.0'
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rails', group: :development

@@ -4,6 +4,7 @@ ActiveAdmin.register Event do
 #
  permit_params :event, :notes
  menu priority: 5
+ config.batch_actions = true
  index do
    selectable_column
    id_column
