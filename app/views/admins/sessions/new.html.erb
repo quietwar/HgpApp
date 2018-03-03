@@ -1,0 +1,23 @@
+<h2>Log in</h2>
+
+<%= form_with model: @admin_user, class: 'form-box' do |form|  %><br>
+  <div class="field">
+    <%= form.label :email %><br />
+    <%= form.email_field :email, autofocus: true %>
+    <%= form.label :password %><br />
+    <%= form.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <%= form.check_box :remember_me %>
+      <%= form.label :remember_me %>
+    </div>
+  <% end -%>
+
+  <div class="actions">
+    <%= form.submit class: 'btn btn-success btn-lg' %>
+  </div>
+<% end %>
+
+<%= render "admins/shared/links" %>

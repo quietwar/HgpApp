@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
-
+  devise_for :admin_users, ActiveAdmin::Devise.config.merge(:path => :admin)
   ActiveAdmin.routes(self)
-  devise_for :admin_users, ActiveAdmin::Devise.config.merge(:path => :active_admin)
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
       resources :users do
         resources :projects
       end
 
       devise_scope :user do
-          get "/admin/signup", to: 'active_admin/devise/registrations#new'
+          get "/admin/signup", to: 'admin_users/registrations#new'
           get '/users/:user_id/projects', to: 'projects#index', as: 'projects'
           get '/users/:user_id/projects/new', to: 'projects#new', as: 'new_project'
           post '/users/:user_id/projects/new', to: 'projects#new'
@@ -18,25 +17,16 @@ Rails.application.routes.draw do
           patch '/users/:user_id/projects/:id', to: 'projects#update'
           put    '/users/:user_id/projects/:id', to: 'projects#update'
           delete '/users/:user_id/projects/:id', to: 'projects#destroy', as: 'delete_project'
-          get '/events', to: 'events#index'
-          get '/events/new', to: 'events#new'#, as: 'new_event'
-          get '/events/1/', to: 'events#show', :id => "1"
-          get '/events/1/edit', to: 'events#edit', :id => "1"
-          post '/events', to: 'events#create'
-          #post '/new_event', to: 'events#create'
-          delete "/events/1", to: "events#destroy", :id => "1"
-          put "/events/1", to: "events#update", :id => "1"
-          patch "/events/1", to: "events#update", :id => "1"
           get 'user_google_oauth2_omniauth_authorize_path', to: 'events#calendars', as: 'calendars'
           get '/redirect', to: 'events#redirect', as: 'redirect'
           get '/callback', to: 'events#callback', as: 'callback'
 
-          get '/events/:calendar_id', to: 'events#events', as: 'hgp_event', calendar_id: /[^\/]+/
-          post '/events/:calendar_id', to: 'events#new_event', as: 'new_hgp_event', calendar_id: /[^\/]+/
+          get '/events/:calendar_id', to: 'events#events', as: 'event', calendar_id: /[^\/]+/
+          post '/events/:calendar_id', to: 'events#new_event', as: 'new_event', calendar_id: /[^\/]+/
           get 'tap_in', to: 'devise/sessions#new'
           get 'genius_signup', to: 'devise/registrations#new'
           get 'auth/google_oauth2/callback', to: 'users#create', as: 'google_signin'
-          get '/signout', to: 'devise/sessions#destroy', via: 'destroy'
+          delete 'signout', to: 'sessions#destroy', via: 'destroy'
           post 'signout', to: 'classrooms#index'
       #end
     end
@@ -55,7 +45,8 @@ Rails.application.routes.draw do
 
       resources :features,only: [:create]
       resources :cohorts, only: [:index, :show]
-      resources :classrooms, only: [:index, :show, :search] do
+      resources :classrooms  do
+        resources :attendances
         collection do
           post :search, to: 'classrooms#search'
         end

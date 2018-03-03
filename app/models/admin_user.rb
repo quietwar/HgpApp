@@ -1,4 +1,5 @@
 class AdminUser < ApplicationRecord
+  role_based_authorizable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -8,9 +9,9 @@ class AdminUser < ApplicationRecord
 
 
    #with_options presence: true do
-     validates :email, format: { with: /\.org\z/, message: "only allows HGP addresses" }
-     validates :provider, presence: true
-     validates :uid, uniqueness: { scope: :provider }
+     validates :email, presence: true# format: { with: /\.org\z/, message: "only allows HGP addresses" }
+     validates :provider, presence: false
+     validates :uid, uniqueness: false#{ scope: :provider }
      validates :first_name, presence: true
      validates :last_name, presence: true
      alias_attribute :Genius_Staff, :admin
@@ -29,16 +30,16 @@ class AdminUser < ApplicationRecord
      has_many :messages
 
 
-     ROLES = %i[admin superadmin]
+     ROLES = %i[guest user staff director admin]
 
      def roles=(roles)
        roles = [*roles].map { |r| r.to_sym }
-       self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
+       self.roles_mask = (roles & ROLES).map { |r| 5**ROLES.index(r) }.inject(0, :+)
      end
 
      def roles
        ROLES.reject do |r|
-         ((roles_mask.to_i || 0) & 2**ROLES.index(r)).zero?
+         ((roles_mask.to_i || 0) & 5**ROLES.index(r)).zero?
        end
      end
 
@@ -67,4 +68,4 @@ class AdminUser < ApplicationRecord
          where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
        end
     end
-  end 
+  end

@@ -37,19 +37,19 @@ ActiveAdmin.setup do |config|
   #   config.default_namespace = false
   #
   # Default:
-
-  config.namespace :admin do |admin|
-     admin.build_menu :utility_navigation do |menu|
-       menu.add  :label  => proc{ display_name current_active_admin_user },
-                 #:url    =>  proc{ edit_admin admin_path(current_active_admin_user) }  ,#link_to current_active_admin_user,
-                 :id     => 'current_admin_user',
-                 :if     => proc{ current_active_admin_user? }
-       admin.add_logout_button_to_menu menu
-       menu.add label: "HGP Website", url: "http://www.hiddengeniusproject.org",
-                                           html_options: { target: :blank }
-
-     end
-   end
+  #
+  # config.namespace :admin do |admin|
+  #    admin.build_menu :utility_navigation do |menu|
+  #      menu.add  :label  => proc{ display_name current_active_admin_user },
+  #                #:url    =>  proc{ edit_admin admin_path(current_active_admin_user) }  ,#link_to current_active_admin_user,
+  #                :id     => 'current_admin_user',
+  #                :if     => proc{ current_active_admin_user? }
+  #      admin.add_logout_button_to_menu menu
+  #      menu.add label: "HGP Website", url: "http://www.hiddengeniusproject.org",
+  #                                          html_options: { target: :blank }
+  #
+  #    end
+  #  end
 
 
 
@@ -83,7 +83,7 @@ ActiveAdmin.setup do |config|
   # # method in a before filter of all controller actions to
   # # ensure that there is a user with proper rights. You can use
   # # CanCanAdapter or make your own. Please refer to documentation.
-  # config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
   #
   # # In case you prefer Pundit over other solutions you can here pass
   # # the name of default policy class. This policy will be used in every
@@ -133,7 +133,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-   config.root_to = 'classrooms#index'
+  # config.root_to = 'classrooms#index'
 
   # == Admin Comments
   #
@@ -143,7 +143,7 @@ ActiveAdmin.setup do |config|
   config.comments = true
   # #
   # # You can change the name under which comments are registered:
-  config.comments_registration_name = 'staff-comments'
+  config.comments_registration_name = 'staffs-comments'
   # #
   # # You can change the order for the comments and you can change the column
   # # to be used for ordering:
@@ -153,7 +153,7 @@ ActiveAdmin.setup do |config|
    config.comments_menu = true
   # #
   # # You can customize the comment menu:
-   config.comments_menu = { parent: 'Staff', priority: 5 }
+   config.comments_menu = { parent: 'Staffs', priority: 5 }
   #module ActiveAdmin
     #class ResourceDSL < DSL
     #   def permit_params#(*args, &block)

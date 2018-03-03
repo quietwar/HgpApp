@@ -6,11 +6,11 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.all
-     :set_current_room
+     set_current_room
     #@projects =
     @friends = :friend_id
     @message = Message.new
-    @messages = :current_room if :current_room
+    @messages = current_room if current_room
     @follower = Friendship.where(friend_id: :user_id)
     @friends = Friendship.all
   end
@@ -28,16 +28,16 @@ class ProjectsController < ApplicationController
 
   def create
       @message = current_user.messages.build(message_params)
-      @message.room = :current_room
+      @message.room = current_room
 
       if @message.save
         respond_to do |format|
-          format.html { redirect_to projects_path(:current_user, roomId: current_room.id) }
+          format.html { redirect_to projects_path(current_user, roomId: current_room.id) }
           format.js { ActionCable.server.broadcast "messages_room_#{current_room.id}",
             render(partial: 'shared/message', object: @message ) }
         end
         flash[:notice] = "Comment has been created"
-        redirect_to projects_path(:current_user, roomId: current_room.id)
+        redirect_to projects_path(current_user, roomId: current_room.id)
       end
     end
   # def create
@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
   def update
     if @project.update(project_params)
       flash[:notice] = "project has been updated"
-      redirect_to [:current_user, @project]
+      redirect_to [current_user, @project]
     else
       flash[:alert] = "project has not been updated"
       render :edit
@@ -67,7 +67,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     flash[:notice] = "project has been deleted"
-    redirect_to projects_path(:current_user)
+    redirect_to projects_path(current_user)
   end
 
 private
@@ -77,7 +77,7 @@ private
   end
 
   def set_project
-    @project = projects_path(:current_user)
+    @project = projects_path(current_user)
   end
 
   def project_params
@@ -91,6 +91,6 @@ private
       @room = current_user.room
     end
   end
-    session[:current_room] = @room.id if @room
+    session[current_room] = @room.id if @room
   #end
 end

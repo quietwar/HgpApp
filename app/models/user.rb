@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
-      devise :registerable,:database_authenticatable, :confirmable,
+      devise :registerable,:database_authenticatable, 
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
              #validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
               validates :cohort_id, :city, presence: true
@@ -139,16 +139,16 @@ class User < ApplicationRecord
            avatar.clear if has_destroy_flag?(attributes) && !avatar.dirty?
          end
 
-         ROLES = %i[user admin superadmin]
+         ROLES = %i[user staff director admin]
 
          def roles=(roles)
            roles = [*roles].map { |r| r.to_sym }
-           self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
+           self.roles_mask = (roles & ROLES).map { |r| 5**ROLES.index(r) }.inject(0, :+)
          end
 
          def roles
            ROLES.reject do |r|
-             ((roles_mask.to_i || 0) & 2**ROLES.index(r)).zero?
+             ((roles_mask.to_i || 0) & 5**ROLES.index(r)).zero?
            end
          end
 

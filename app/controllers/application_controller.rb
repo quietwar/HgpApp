@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
-   helper_method :current_user, :logged_in?, :current_room, :authenticate_admin_user!, :authenticate_user!
-   before_action :configure_permitted_parameters, if: :devise_controller?
-   rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+   # helper_method :current_user, :logged_in?, :current_room, :authenticate_admin_user!, :authenticate_user!
+   # before_action :configure_permitted_parameters, if: :devise_controller?
+   # rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
 protected
 
@@ -17,26 +17,24 @@ protected
   #   redirect_to root_url
   # end
 
+    #
+    # def after_sign_out_path_for(user)
+    #     root_path
+    # end
+    #
+    # def after_sign_in_path_for(admin)
+    #     admin_dashboard_path
+    # end
+    #
+    # def after_sign_in_path_for(user)
+    #     root_path
+    # end
+    #
+    # def after_sign_out_path_for(admin)
+    #     root_path
+    # end
 
-    def after_sign_out_path_for(user)
-        root_path
-    end
 
-    def after_sign_in_path_for(admin)
-        admin_dashboard_path
-    end
-
-    def after_sign_in_path_for(user)
-        root_path
-    end
-
-    def after_sign_out_path_for(admin)
-        root_path
-    end
-
-
-
-protected
 
   def configure_permitted_parameters
        attributes = [:first_name, :last_name, :username, :email, :avatar, :cohort, :cohort_id, :city, :password, roles: []]
@@ -49,17 +47,15 @@ protected
 private
 
   def set_current_user
-    :current_user != nil
+    current_user != nil
   end
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-helper_method :current_user
-
   def logged_in?
-    :current_user != nil
+    current_user != nil
   end
 
   def authenticate_admin_user!
@@ -75,12 +71,11 @@ helper_method :current_user
   end
 
   def current_room
-    @room ||= Room.find(session[:current_room]) if session[:current_room]
+    @room ||= Room.find(session[current_room]) if session[current_room]
   end
-helper_method :current_room
 
   def current_class
-    @class ||= Class.find(session[:current_class]) if session[:current_class]
+    @class ||= Class.find(session[current_class]) if session[current_class]
   end
 
 
