@@ -1,17 +1,15 @@
 class AdminUsers::SessionsController < Devise::SessionsController
-  #before_action :configure_sign_in_params, only: [:create]
-  include Accessible
-  #skip_before_action :check_user, only: :destroy
+  permit_params :first_name, :last_name, :city, :email, :email2, :avatar, :username, :cell, :title,
 
-  #GET /resource/sign_in
-  def new
-    super
-  end
+  # #GET /resource/sign_in
+  # def new
+  #   super
+  # end
 
   #POST /resource/sign_in
-  def create
-    super
-  end
+  # def create
+  #   super
+  # en
 
   #DELETE /resource/sign_out
   def destroy
@@ -23,9 +21,14 @@ class AdminUsers::SessionsController < Devise::SessionsController
 
   protected
 
-  #If you have extra params to permit, append them to the sanitizer.
-  def initialize(*)
-    super
-    permit(:sign_up, keys: [:username, :email])
-  end
+  # def admin_user_params
+  #      params.require(:admin_user).permit(:first_name, :last_name, :city, :email, :avatar, :username, :cell, :title,
+  #      #params.permit(user: [ :first_name, :last_name, :city, :cohort, :email, :avatar, :username { projects: :app_name, :coding, :project_details, :start_date } ])
+  # end
+
+     #If you have extra params to permit, append them to the sanitizer.
+  # def initialize(*)
+  #   super
+  #   permit(:sign_up, keys: [:username, :email])
+  # end
 end

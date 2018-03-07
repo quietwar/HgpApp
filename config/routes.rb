@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config.merge(:path => :admin)
+  devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
       resources :users do
@@ -7,7 +7,8 @@ Rails.application.routes.draw do
       end
 
       devise_scope :user do
-          get "/admin/signup", to: 'admin_users/registrations#new'
+          # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
+          # post 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
           get '/users/:user_id/projects', to: 'projects#index', as: 'projects'
           get '/users/:user_id/projects/new', to: 'projects#new', as: 'new_project'
           post '/users/:user_id/projects/new', to: 'projects#new'

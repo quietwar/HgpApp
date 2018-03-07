@@ -5,7 +5,7 @@ class Ability
   def initialize(user)
     user ||= AdminUser.new
 
-    if user.super_user?
+    if user.user?
       can :manage, :all
     else
       register_role_based_abilities(user)

@@ -20,7 +20,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Aim for an image that's 21px high so it fits in the header.
   #
-   config.site_title_image = "/assets/HGPAssets_Emblem_Yellow.png"
+   config.site_title_image = "/assets/HGP_Yellow_small.png"
 
   # == Default Namespace
   #
@@ -73,7 +73,7 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # within the application controller.
 
-  # config.authentication_method = false #:authenticate_admin_user!
+   config.authentication_method = :authenticate_admin_user!
   #
   #
   #
@@ -98,10 +98,9 @@ ActiveAdmin.setup do |config|
   # because, by default, user gets redirected to Dashboard. If user
   # doesn't have access to Dashboard, he'll end up in a redirect loop.
   # Method provided here should be defined in application_controller.rb.
-   config.on_unauthorized_access = :access_denied
+   #config.on_unauthorized_access = :access_denied
 
   # == Current User
-  #config.authorization_adapter = :OnlyHgpAuthorization
   # Active Admin will associate actions with the current
   # user performing them.
   #

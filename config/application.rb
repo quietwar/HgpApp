@@ -19,11 +19,13 @@ module GeniusLounge
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
-    config.middleware.use ActionDispatch::Session::CookieStore
-    config.exceptions_app = self.routes
-    config.eager_load_paths = Dir.glob("#{Rails.root}/app/*").reject do |path|
-      path.include?("admin_user")
-    end
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session::CookieStore
+    # config.session_store :cookie_store
+    # config.exceptions_app = self.routes
+    # config.eager_load_paths = Dir.glob("#{Rails.root}/app/*").reject do |path|
+    #   path.include?("admin_user")
+    #end
 
   end
 end

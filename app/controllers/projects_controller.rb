@@ -1,16 +1,17 @@
 class ProjectsController < ApplicationController
   before_action :project_params, only: [:create, :edit]
+  helper_method :set_current_room
   #before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
 
   def index
     @projects = Project.all
-     set_current_room
+     :set_current_room
     #@projects =
     @friends = :friend_id
     @message = Message.new
-    @messages = current_room if current_room
+    @messages = :current_room if :current_room
     @follower = Friendship.where(friend_id: :user_id)
     @friends = Friendship.all
   end
@@ -18,38 +19,38 @@ class ProjectsController < ApplicationController
 
 
   def show
-    @project = Project.find(params[:current_user])
-    @friendship = Friendship(:user_id, @friends)
+    @project = Project.find(params[:id])
+    #@friendship = Friendship(:user_id, @friends)
   end
 
   def new
     @project = Project.new[:id]
   end
 
-  def create
-      @message = current_user.messages.build(message_params)
-      @message.room = current_room
+  #def create
+      #@message = @current_user.messages.build(message_params)
+      #@message.room = current_room
 
-      if @message.save
-        respond_to do |format|
-          format.html { redirect_to projects_path(current_user, roomId: current_room.id) }
-          format.js { ActionCable.server.broadcast "messages_room_#{current_room.id}",
-            render(partial: 'shared/message', object: @message ) }
-        end
-        flash[:notice] = "Comment has been created"
-        redirect_to projects_path(current_user, roomId: current_room.id)
+      # if @message.save
+      #   respond_to do |format|
+      #     format.html { redirect_to projects_path(current_user, roomId: current_room.id) }
+      #     format.js { ActionCable.server.broadcast "messages_room_#{current_room.id}",
+      #       render(partial: 'shared/message', object: @message ) }
+    #     end
+    #     flash[:notice] = "Comment has been created"
+    #     redirect_to projects_path(current_user, roomId: current_room.id)
+    #   end
+    # end
+  def create
+    @project = current_user.project.new(project_params)
+      if @project.save
+        flash[:notice] = 'Project has been created'
+        redirect_to @project
+      else
+        flash[:alert] = 'Project has not been created'
+        render :new
       end
-    end
-  # def create
-  #   @project = Project.new(project_params
-  #     if @project.save
-  #       flash[:notice] = 'Project has been created'
-  #       redirect_to @project
-  #     else
-  #       flash[:alert] = 'Project has not been created'
-  #       render :new
-  #     end
-  # end
+  end
 
   def edit
   end
@@ -67,7 +68,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     flash[:notice] = "project has been deleted"
-    redirect_to projects_path(current_user)
+    redirect_to projects_path(:user_id)
   end
 
 private
@@ -77,11 +78,11 @@ private
   end
 
   def set_project
-    @project = projects_path(current_user)
+    @project = user_projects_path(:user_id)
   end
 
   def project_params
-    params.permit(:app_name, :coding, :project_details, :start_date, :utf8, :authenticity_token, :commit, :locale)
+    params.permit(:app_name, :title, :user_id, :coding, :project_details, :start_date, :utf8, :authenticity_token, :commit, :locale)
   end
 
   def set_current_room

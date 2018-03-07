@@ -38,11 +38,11 @@
 #     admin_user.password_confirmation = 'quiet927'
 #   end
 # end
-%i[guest user staff director admin].each do |role|
-  AdminUser.find_or_create_by!(email: "#{role}@example.com") do |admin_user|
+%i[admin].each do |role|
+  AdminUser.find_or_create_by!(email: "#{role}@genius.com") do |admin_user|
     admin_user.role = role
-    admin_user.first_name = 'Hodari'
-    admin_user.last_name = 'Toure'
+    admin_user.first_name = 'bill'
+    admin_user.last_name = 'spill'
     admin_user.password = 'password'
     admin_user.password_confirmation = 'password'
   end

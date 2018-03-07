@@ -22,7 +22,7 @@
     </script>
 
            <a href="#" onclick="signOut();">Sign out</a>
-           <script>
+      <script>
              function signOut() {
                var auth2 = gapi.auth2.getAuthInstance();
                auth2.signOut().then(function () {
@@ -31,10 +31,7 @@
              }
       </script>
 
-
-
-       <!-- Custom Fonts -->
-
+   <!-- Custom Fonts -->
 
          <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
          <link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -49,9 +46,7 @@
     </head>
     <body>
 
-       <div>
        <%= yield %>
-       </div>
 
 
       <%= render 'shared/header' %>
@@ -60,6 +55,5 @@
 
       <%= render 'shared/footer' %>
 
-    </div>
-  </body>
+    </body>
 </html>

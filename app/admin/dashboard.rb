@@ -24,15 +24,15 @@ ActiveAdmin.register_page "Dashboard" do
               table_for Cohort.order("id desc").limit(10) do
                 ul "HGP Cohorts" do
 
-                  li link_to "Rich 1", admin_hgp_cohorts_path('Rich1')
-                  li link_to "Rich 2", admin_hgp_cohorts_path('Rich2')
-                  li link_to "Oak 1", admin_hgp_cohorts_path('Oak1')
-                  li link_to "Oak 2", admin_hgp_cohorts_path('Oak2')
-                  li link_to "Oak 3", admin_hgp_cohorts_path('Oak3')
-                  li link_to "Oak 4", admin_hgp_cohorts_path('Oak4')
-                  li link_to "Oak 5", admin_hgp_cohorts_path('Oak5')
-                  li link_to "Oak 6", admin_hgp_cohorts_path('Oak6')
-                  li link_to "Create a new HGP Cohort",   new_admin_hgp_cohort_path
+                  # li link_to "Rich 1", admin_hgp_cohorts_path('Rich1')
+                  # li link_to "Rich 2", admin_hgp_cohorts_path('Rich2')
+                  # li link_to "Oak 1", admin_hgp_cohorts_path('Oak1')
+                  # li link_to "Oak 2", admin_hgp_cohorts_path('Oak2')
+                  # li link_to "Oak 3", admin_hgp_cohorts_path('Oak3')
+                  # li link_to "Oak 4", admin_hgp_cohorts_path('Oak4')
+                  # li link_to "Oak 5", admin_hgp_cohorts_path('Oak5')
+                  # li link_to "Oak 6", admin_hgp_cohorts_path('Oak6')
+                  # li link_to "Create a new HGP Cohort",   new_admin_hgp_cohort_path
                 end
                end
             end
@@ -41,8 +41,8 @@ ActiveAdmin.register_page "Dashboard" do
           column do
             panel "Staff" do
                 ul link_to "Staffs sign in", new_admin_user_session_path
-                ul link_to "Staff sign in",  new_admin_staff_path
-                ul link_to "Staff sign up", admin_signup_path
+                # ul link_to "Staff sign in",  new_admin_staff_path
+                 ul link_to "Staff sign up", admin_staffs_path
                 ul link_to "Staffs sign up", new_admin_staff_path
             end
           end

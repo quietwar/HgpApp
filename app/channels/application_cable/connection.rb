@@ -12,13 +12,13 @@ module ApplicationCable
   protected
 
     def find_current_user
-      if :current_user then User.find_by(id: cookies.signed['user.id'])
+      if current_user then User.find_by(id: cookies.signed['user.id'])
 
 
-         :current_user
+         current_user
       else
         reject_unauthorized_connection
       end
     end
   end
-end 
+end

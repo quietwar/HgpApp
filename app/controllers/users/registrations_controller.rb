@@ -1,17 +1,17 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-  before_action :authenticate_user!
-  include Accessible
+  #
+  # include Accessible
 
-    def index
-      @users = User.all
-    end
-
-    def show
-      @user = User.find(params[:id])
-      unless @user == current_user
-        redirect_to :back, :alert => "Access denied."
-      end
-    end
+    # def index
+    #   @users = User.all
+    # end
+    #
+    # def show
+    #   @user = User.find(params[:id])
+    #   unless @user == current_user
+    #     redirect_to :back, :alert => "Access denied."
+    #   end
+    # end
 
     def create
       @project = Project.new(project_params)

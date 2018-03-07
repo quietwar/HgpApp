@@ -7,7 +7,7 @@ def create
 
     if @message.save
       respond_to do |format|
-        format.html { redirect_to projects_path(:current_user, roomId: current_room.id) }
+        format.html { redirect_to projects_path(current_user, roomId: current_room.id) }
         format.js { ActionCable.server.broadcast "messages_room_#{current_room.id}",
           render(partial: 'shared/message', object: @message ) }
       end

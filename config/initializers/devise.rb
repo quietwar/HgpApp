@@ -1,7 +1,7 @@
 Devise.setup do |config|
 
-  #config.secret_key = 'cba52b9879adc14a361f8b26e1985ff3e909bd33c273a67ffd4f8d041f98d043f448f9d60952ca5280a539a655203e874f174fcfbd39df83b6050d6b8f'
-  config.secret_key = ENV['config.secret_key'] if Rails.env.production?
+  #config.secret_key = '246ea1cfec18ce56fbad509b4e90540f0bca1af44cf7eb55d0314e5a6cea095cdc854648d26377050ce8607accfe0f12afda9b6ee3604e5875baaf711cfd0e6b'
+  config.secret_key = ENV['devise_secret_key'] if Rails.env.production?
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -29,9 +29,9 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:login]
-
-  config.reset_password_keys = [:login]
+  # config.authentication_keys = [:login]
+  #
+  # config.reset_password_keys = [:login]
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
   # find_for_authentication method and considered in your model lookup. For instance,
@@ -78,7 +78,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  #config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX

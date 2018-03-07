@@ -4,8 +4,8 @@ class AdminUser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
-         attr_accessor :login
-         attr_accessor :username, :email, :password, :password_confirmation, :remember_me, :login
+         # attr_accessor :login
+         # attr_accessor :username, :email, :password, :password_confirmation, :remember_me, :login
 
 
    #with_options presence: true do
@@ -15,8 +15,10 @@ class AdminUser < ApplicationRecord
      validates :first_name, presence: true
      validates :last_name, presence: true
      alias_attribute :Genius_Staff, :admin
-     has_many :active_admin_comments, as: :resource, class_name: 'ActiveAdmin::Comment'
+    has_many :active_admin_comments, as: :resource, class_name: 'ActiveAdmin::Comment'
      alias_method :comments, :active_admin_comments
+       has_many :events
+          accepts_nested_attributes_for :events, allow_destroy: true
 
 
      has_many :cohort, :class_name => 'Admin_user::Cohort'
@@ -46,7 +48,7 @@ class AdminUser < ApplicationRecord
      def has_role?(role)
        roles.include?(role)
      end
-    # Devise override to ignore the password requirement if the user is authenticated
+    #Devise override to ignore the password requirement if the user is authenticated
         # def self.current_admin_user
         #   current_admin_user ==
         # end
@@ -56,6 +58,7 @@ class AdminUser < ApplicationRecord
           super
         end
 
+         end
         class << self
           def from_omniauth(auth)
             admin_user = where(email: auth.info.email).first || where(auth.slice(:provider, :uid).to_h).first || new
@@ -67,5 +70,5 @@ class AdminUser < ApplicationRecord
          login = conditions.delete(:login)
          where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
        end
-    end
-  end
+     end
+   
