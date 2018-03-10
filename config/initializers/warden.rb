@@ -1,53 +1,28 @@
-# Rails.application.config.middleware.use Warden::Manager do |manager|
-#   manager.default_strategies [:omniauth, :params]
-# end
-#
-# Warden::Manager.serialize_into_session do |user|
-#   user.persistence_token
-# end
-#
-# Warden::Manager.serialize_from_session do |id|
-#   User.where(persistence_token: id).first
-# end
-# #
-# module UserCredentialAuthentication
-#   def verify_against_old_credentials( user, password )
-#     Sha512.matches?( user.sha512_password, password, user.sha512_salt )
-#   end
-#
-#   def transition_from_sha512!( user, password )
-#     user.password = password
-#     user.sha512_password = nil
-#     user.sha512_salt = nil
-#     user.save
-#   end
-# end
-#
-# #   def authenticate!
-#     Rails.logger.warn("[AUTH] Authenticating user #{username} from #{medium}")
-#     user = User.find_by_username_or_email(username)
-#
-#     if user.blank?
-#       Rails.logger.warn("[AUTH] No Such User")
-#       fail "Invalid email or password"
-#
-#     elsif user.sha512_password.not.blank? && verify_against_old_credentials( user, password )
-#       Rails.logger.warn("[AUTH] User #{user.email} authenticated with a SHA512 password.")
-#       transition_from_sha512!( user, password )
-#       success! user
-#
-#     elsif user.password_digest && user.authenticate( password )
-#       Rails.logger.warn("[AUTH] User #{user.email} authenticated with a password.")
-#       success! user
-#
-#     else
-#       Rails.logger.warn("[AUTH] Bad Password")
-#       fail "Invalid email or password"
-#
-#     end
-#   end
-# end
+Rails.application.config.middleware.use Warden::Manager do |manager|
+  manager.default_strategies [:omniauth, :params]
+end
 
+Warden::Manager.serialize_into_session do |user|
+  user.persistence_token
+end
+
+Warden::Manager.serialize_from_session do |id|
+  User.where(persistence_token: id).first
+end
+#
+module UserCredentialAuthentication
+  def verify_against_old_credentials( user, password )
+    Sha512.matches?( user.sha512_password, password, user.sha512_salt )
+  end
+
+  def transition_from_sha512!( user, password )
+    user.password = password
+    user.sha512_password = nil
+    user.sha512_salt = nil
+    user.save
+  end
+
+#   def authenticate!
 
 # Warden::Strategies.add(:omniauth) do
 #   include UserCredentialAuthentication
@@ -73,7 +48,7 @@
 #     @omniauth ||= Rack::Auth::Basic::Request.new(env)
 #   end
 # end
-
+#
 # Warden::Strategies.add(:params) do
 #   include UserCredentialAuthentication
 #
@@ -113,5 +88,6 @@
 #     else
 #       {}
 #     end
+#     end
 #   end
-#end
+end

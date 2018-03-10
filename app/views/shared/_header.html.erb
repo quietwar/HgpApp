@@ -12,13 +12,13 @@
                <li class="active"><%= link_to "Staff tap in", new_admin_staff_path %></li>
                <li class="active"><a href="contact">Contact</a></li>
              <% unless current_user %>
-               <li class="active"><%= link_to "My Lab", projects_path(:user_id) %></li>
-               <li class="active"><%= link_to "Tap out",  destroy_user_session_path %></li>
-               <li class="active"><%= link_to "Staff Tap out", destroy_admin_user_session_path %></li>
+                 <li class="active"><%= link_to "Genius sign up", new_user_registration_path %></li>
+                 <li class="active"><%= link_to "Tap in",  new_user_session_path %></li>
+               <% else %>
+                 <li class="active"><%= link_to "My Lab", projects_path(:user_id) %></li>
+                 <li class="active"><%= link_to "Tap out",  destroy_user_session_path %></li>
+                 <li class="active"><%= link_to "Staff Tap out", destroy_admin_user_session_path %></li>
 
-            <% else %>
-                <li class="active"><%= link_to "Genius sign up", new_user_registration_path %></li>
-                <li class="active"><%= link_to "Tap in",  new_user_session_path %></li>
               <div class="navbar-right signed-in-user">
                   <p class="navbar-text">
                     Signed in as <%= "#{current_user.email}" %>

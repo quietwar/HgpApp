@@ -23,8 +23,9 @@ class EventsController < Devise::OmniauthCallbacksController
   end
 
   def new
-    @event = Event.new
+    #@event = Event.new
   end
+
 
   def edit
   end

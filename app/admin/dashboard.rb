@@ -30,7 +30,7 @@ ActiveAdmin.register_page "Dashboard" do
                   # li link_to "Oak 2", admin_hgp_cohorts_path('Oak2')
                   # li link_to "Oak 3", admin_hgp_cohorts_path('Oak3')
                   # li link_to "Oak 4", admin_hgp_cohorts_path('Oak4')
-                  # li link_to "Oak 5", admin_hgp_cohorts_path('Oak5')
+                   #li link_to "Oak 5", admin_cohorts/195_path('Oak5')
                   # li link_to "Oak 6", admin_hgp_cohorts_path('Oak6')
                   # li link_to "Create a new HGP Cohort",   new_admin_hgp_cohort_path
                 end

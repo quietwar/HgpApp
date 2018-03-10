@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
     skip_before_action :verify_authenticity_token
      helper_method :current_user, :logged_in?, :current_room, :authenticate_admin_user!, :authenticate_user!
-     before_action :configure_permitted_parameters, if: :devise_controller?
-#    # rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+    before_action :configure_permitted_parameters, if: :devise_controller?
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 #
 # protected
 #
@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
 #
 #
   def configure_permitted_parameters
-       attributes = [:first_name, :last_name, :username, :email, :avatar, :cohort, :cohort_id, :city, :password, roles: []]
-       devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :password, :password_confirmation])
+       attributes = [:first_name, :last_name, :username, :email, :email2, :cell, :avatar, :cohort, :cohort_id, :city, :password, roles: []]
+       devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :email, :password, :password_confirmation])
        devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
        devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end

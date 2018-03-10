@@ -12,7 +12,7 @@ def create
           render(partial: 'shared/message', object: @message ) }
       end
       flash[:notice] = "Comment has been created"
-      redirect_to projects_path(:current_user, roomId: current_room.id)
+      redirect_to projects_path(current_user, roomId: current_room.id)
     end
   end
 

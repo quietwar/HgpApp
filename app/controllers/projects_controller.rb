@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :project_params, only: [:create, :edit]
   helper_method :set_current_room
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
 

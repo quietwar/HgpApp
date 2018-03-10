@@ -22,10 +22,10 @@ module GeniusLounge
     # config.middleware.use ActionDispatch::Cookies
     # config.middleware.use ActionDispatch::Session::CookieStore
     # config.session_store :cookie_store
-    # config.exceptions_app = self.routes
-    # config.eager_load_paths = Dir.glob("#{Rails.root}/app/*").reject do |path|
-    #   path.include?("admin_user")
-    #end
+    config.exceptions_app = self.routes
+    config.eager_load_paths = Dir.glob("#{Rails.root}/app/*").reject do |path|
+      path.include?("admin_user")
+    end
 
   end
 end

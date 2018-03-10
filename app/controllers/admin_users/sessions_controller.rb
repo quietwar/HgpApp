@@ -1,5 +1,5 @@
 class AdminUsers::SessionsController < Devise::SessionsController
-  permit_params :first_name, :last_name, :city, :email, :email2, :avatar, :username, :cell, :title,
+  #permit_params :first_name, :last_name, :city, :email, :email2, :avatar, :username, :cell, :title,
 
   # #GET /resource/sign_in
   # def new

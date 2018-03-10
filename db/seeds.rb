@@ -39,19 +39,22 @@
 #   end
 # end
 %i[admin].each do |role|
-  AdminUser.find_or_create_by!(email: "#{role}@genius.com") do |admin_user|
+  AdminUser.find_or_create_by!(email = "#{role}@genius.com") do |admin_user|
     admin_user.role = role
-    admin_user.first_name = 'bill'
-    admin_user.last_name = 'spill'
+    admin_user.first_name = 'wpill'
+    admin_user.last_name = 'wpill'
     admin_user.password = 'password'
     admin_user.password_confirmation = 'password'
   end
 end
-#User.create(
-# email: 'hodariAT@hiddengeniusproject',
-# password: 'password',
-# password_confirmation: 'password'
-# admin: 'no'
-# }])
-# end
-#AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(
+  first_name: 'wpill'
+  last_name: 'wpill'
+  email: 'hodariAT@hiddengeniusproject'
+  password: 'password'
+  password_confirmation: 'password'
+  admin: 'yes'
+  )
+end
+
+AdminUser.create!(first_name = 'wpill', last_name = 'wpill', email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

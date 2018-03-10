@@ -38,6 +38,7 @@ ActiveAdmin.register User, as: 'Genius' do
 
   form do |f|
     f.inputs do
+      f.semantic_errors *f.object.errors.keys
       f.input :genius
       f.input :cohort_id
       f.input :city
@@ -53,12 +54,12 @@ ActiveAdmin.register User, as: 'Genius' do
        end
      end
    end
-    f.actions
-        end
 
-      form "Projects" do |a|
-        a.has_many :projects,allow_destroy: true,
-                              new_record: true do |a|
+
+      f.inputs 'Projects' do
+              f.has_many :projects, allow_destroy: true,
+                                    new_record: true do |a|
+
         a.input :app_name
         a.input :coding
         a.input :project_details
@@ -67,20 +68,25 @@ ActiveAdmin.register User, as: 'Genius' do
 
          end
        end
+       f.actions
+           end
+         end
 
-      #a.actions
+   # sidebar :custom, only: :show do
+   #   resource.a_attendance
+   #        f.input :ends_at, as: :datepicker,
+   #                  datepicker_options: {
+   #                    min_date: 3.days.ago.to_date,
+   #                    max_date: "+1W +5D"
+   #                  }
+   #            end
 
-
-      sidebar "Attendance Details", only: :show do
-        attributes_table_for genius, :start_date, :start_date, :created_at
-      end
-
-      sidebar "Project History", only: :show do
-        attributes_table_for genius do
-          #row("Total Projects") { genius.projects.complete.count }
-          row("Total Value") do
-
-        end
-      end
-   end
- end
+      # sidebar project: :show do
+      #   attributes_table_for genius do
+      #     #row("Total Projects") { genius.projects.complete.count }
+      #     row("Total Value") do
+      #     end
+      #   end
+      # end
+   #end
+ #end
