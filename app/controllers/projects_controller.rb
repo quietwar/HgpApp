@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
 
 
   def show
-    @project = Project.find(params[:id])
+    #@project = Project(:project_id)
     #@friendship = Friendship(:user_id, @friends)
   end
 

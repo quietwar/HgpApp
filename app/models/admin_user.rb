@@ -7,7 +7,8 @@ class AdminUser < ApplicationRecord
 
 
    #with_options presence: true do
-      validates :email, format: { with: /\hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
+      #validates :email,
+      validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
      # validates :provider, presence: false
      # validates :uid, uniqueness: false#{ scope: :provider }
       validates :first_name, presence: true

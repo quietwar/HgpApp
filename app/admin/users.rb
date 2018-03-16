@@ -1,7 +1,8 @@
 ActiveAdmin.register User, as: 'Genius' do
-  permit_params :avatar, :first_name, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, avatar_attributes: [:_destroy]
-  menu priority: 4
+  permit_params :avatar, :first_name, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
+  menu priority: 4
+   duplicable?
   #active_admin_importable
 
 
@@ -54,17 +55,18 @@ ActiveAdmin.register User, as: 'Genius' do
        end
      end
    end
-
+   ActiveAdmin.register_page "Project" do
+     belongs_to :genius
 
       f.inputs 'Projects' do
               f.has_many :projects, allow_destroy: true,
-                                    new_record: true do |a|
+                                    new_record: true do |f|
 
-        a.input :app_name
-        a.input :coding
-        a.input :project_details
-        a.input :start_date
-        a.input :github
+        f.input :app_name
+        f.input :coding
+        f.input :project_details
+        f.input :start_date
+        f.input :github
 
          end
        end
@@ -89,4 +91,4 @@ ActiveAdmin.register User, as: 'Genius' do
       #   end
       # end
    #end
- #end
+ end

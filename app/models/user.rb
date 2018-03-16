@@ -1,11 +1,11 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
-      devise :registerable,:database_authenticatable,
+      devise :registerable,:database_authenticatable,:validatable,
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
              validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
               validates :cohort_id, :city, presence: true
-              validates :email, presence: false
+              validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
               validates :password, presence: false #length: {:within => 6..46 }, on: :create
               validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
               has_attached_file :avatar, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
@@ -21,8 +21,8 @@ class User < ApplicationRecord
               has_many :friendships, class_name: "Genius"
               belongs_to :cohort, inverse_of: :users
                 validates_presence_of :cohort_id
+              has_many :attendances
 
-       
 
       def full_name
         "#{first_name} #{last_name}"

@@ -1,8 +1,8 @@
 ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
-
   permit_params :first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend,:project, :benchmark, :projects
   menu priority: 3
   config.batch_actions = true
+    duplicable?
   #active_admin_importable
   #sortable tree: true
 
@@ -16,6 +16,14 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
 
     actions
   end
+
+  # table Attendance do
+  #    column(:genius) { |attendance| }
+  #    column "Session day", :created_at
+  #    column "Present", :important, as: :boolean
+  #    column "Absent",  :important, as: :boolean
+  #    column "halfday", :important, as: :boolean
+  # end
 
     filter :genius
     filter :cohort_id
@@ -48,5 +56,14 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
       end
       f.actions
       end
+
+      # f.input :attendances, as: :nested_select,
+      #             level_1: { attribute: :cohort_id },
+      #             level_2: { attribute: :genuis_id },
+      #             level_3: { attribute: :attendances }
+
+     #  sidebar :help do
+     #  "Need help? Email us at help@example.com"
+     # end
     end
   end

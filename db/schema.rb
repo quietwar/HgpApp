@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180302213014) do
+ActiveRecord::Schema.define(version: 2018_03_13_043333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180302213014) do
     t.integer "utf8"
     t.integer "role", limit: 2, default: 0, null: false
     t.string "login"
+    t.string "city"
     t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
   end
 
@@ -107,6 +108,10 @@ ActiveRecord::Schema.define(version: 20180302213014) do
     t.string "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "present"
+    t.boolean "absent"
+    t.boolean "halfday"
+    t.datetime "class_date"
     t.index ["classroom_id"], name: "index_attendances_on_classroom_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end

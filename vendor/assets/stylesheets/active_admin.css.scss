@@ -18,7 +18,8 @@ $skinBorderWindowColor: #cccccc;
 
 //@import "arctic_admin";
 @import "active_admin/base";
-@import "fullcalendar"
+@import "fullcalendar";
+//@import "index_as_calendar/application"
 
 
 // Overriding any non-variable SASS must be done after the fact.
