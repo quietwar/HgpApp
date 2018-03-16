@@ -6,7 +6,7 @@ gem 'rails' , '>= 5.0.0.rc2', '< 5.2'
 gem 'bundler', '>= 1.8.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-#gem 'taps'
+gem 'forest_liana'
 gem 'arel', '~> 8.0' #git: 'https://github.com/rails/arel.git'
 gem 'retriable', '~> 3.1'
 # Use Puma as the app server
@@ -20,15 +20,15 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 #gem 'kaminari'
-gem 'activeadmin', '~> 1.1'
-gem 'active_admin_theme'
+#gem 'activeadmin', '~> 1.1'
+#gem 'active_admin_theme'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'paperclip', '~> 5.0'
 #gem "active_admin-sortable_tree"
-gem 'active_admin_importable'
+#gem 'active_admin_importable'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
-gem 'activeadmin_addons'
+#gem 'activeadmin_addons'
 gem 'responders', '~> 2.2'
 gem 'gmaps4rails'
 gem 'underscore-rails'
