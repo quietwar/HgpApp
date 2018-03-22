@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails' , '>= 5.0.0.rc2', '< 5.2'
+# Bundle edge Rails instead:
+gem 'rails', '~> 5.2.0.rc1'
+gem 'railties', '~> 5.2.0.rc1'
+
 gem 'bundler', '>= 1.8.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'forest_liana'
-gem 'arel', '~> 8.0' #git: 'https://github.com/rails/arel.git'
-gem 'retriable', '~> 3.1'
+gem 'pg', '0.21.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -20,15 +20,19 @@ gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 #gem 'kaminari'
-#gem 'activeadmin', '~> 1.1'
-#gem 'active_admin_theme'
+gem 'ffi', '1.9.18'
+gem 'activeadmin', '~> 1.2.1'
+gem 'active_admin_theme'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'paperclip', '~> 5.0'
 #gem "active_admin-sortable_tree"
 #gem 'active_admin_importable'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
-#gem 'activeadmin_addons'
+gem 'activeadmin_addons'
+gem 'active_admin_role'
+gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_calendar'
+gem 'active_admin-duplicatable'
 gem 'responders', '~> 2.2'
 gem 'gmaps4rails'
 gem 'underscore-rails'
@@ -37,8 +41,7 @@ gem 'geocoder'
 gem 'google-api-client',  require: 'google/apis/calendar_v3'
 gem 'omniauth'
 gem 'omniauth-google-oauth2', git: 'https://github.com/zquestz/omniauth-google-oauth2.git'
-gem 'omniauth-oauth2'
-#gem 'pundit'
+gem 'omniauth-oauth2', '~> 1.4'
 gem 'activerecord-session_store'
 gem 'figaro'
 gem 'high_voltage', '~> 3.0.0'
@@ -55,17 +58,19 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
+gem 'activemodel'
+gem 'activerecord'
+gem 'actionpack'
+gem "activesupport"
 gem 'bcrypt', '~> 3.1.7'
 gem 'font-awesome-sass'
 gem 'bootstrap-sass', '~>3.3.6'
-gem 'devise', '~>4.2.0'
-gem 'rack-cors', :require => 'rack/cors'
-gem 'cancancan', '~> 1.10'
+gem 'devise', '~> 4.4', '>= 4.4.1'
+gem 'cancancan', '~> 2.1', '>= 2.1.3'
 gem 'd3-rails','4.1.0'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
-gem 'everett'
 gem 'cocoon'
+gem 'rails_layout'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -91,7 +96,6 @@ group :development do
 end
 
 group :production do
-  gem 'pg', '0.21.0'
   # Use Capistrano for deployment
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rails', group: :development

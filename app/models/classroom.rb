@@ -1,4 +1,5 @@
 class Classroom < ApplicationRecord
-  geocoded_by :address
-   after_validation :geocode
+  belongs_to :cohort#, required: false
+  has_many :attendances
+    accepts_nested_attributes_for :attendances, allow_destroy: true
 end

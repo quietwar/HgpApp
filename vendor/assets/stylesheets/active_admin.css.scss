@@ -9,10 +9,22 @@
 
 // Active Admin's got SASS!
 
-// $skinMainFirstColor: #000!default;
-// $skinMainSecondColor: #FFE000!default;
-// $skinBorderWindowColor: #cccccc;
-//
+
+$skinMainFirstColor: #000!default;
+$skinMainSecondColor: #FFE000!default;
+$skinBorderWindowColor: #cccccc;
+
+@import "active_admin/mixins";
+@import "wigu/active_admin_theme";
+
+//@import "arctic_admin";
+@import "active_admin/base";
+@import "fullcalendar";
+//@import "index_as_calendar/application"
+
+
+// Overriding any non-variable SASS must be done after the fact.
+// For example, to cha
 // @import "active_admin/mixins";
 // @import "wigu/active_admin_theme";
 //

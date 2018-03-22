@@ -1,52 +1,68 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery prepend: true, with: :exception
-  skip_before_action :verify_authenticity_token
-  before_action :initialize_omniauth_state
-  helper_method :current_user, :logged_in?, :current_room, :authenticate_admin!, :authenticate_user!
-  #before_action :set_current_user
-   #before_action :configure_permitted_parameters, if: :devise_controller?
-   #require Pundit
 
-  def after_sign_out_path_for(user)
-      root_path
+  protect_from_forgery with: :null_session
+    skip_before_action :verify_authenticity_token
+     helper_method :current_user, :logged_in?, :current_room, :authenticate_admin_user!, :authenticate_user!
+    before_action :configure_permitted_parameters, if: :devise_controller?
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+
+ protected
+#
+#     def not_found_error
+#       render file: 'public/401.html', status: :not_found
+#     end
+#
+#   #  rescue_from CanCan::AccessDenied do |exception|
+#   #   flash[:error] = exception.message
+#   #   redirect_to root_url
+#   # end
+#
+#     #
+#     # def after_sign_out_path_for(user)
+#     #     root_path
+#     # end
+#     #
+#     # def after_sign_in_path_for(admin)
+#     #     admin_dashboard_path
+#     # end
+#     #
+#     # def after_sign_in_path_for(user)
+#     #     root_path
+#     # end
+#     #
+#     # def after_sign_out_path_for(admin)
+#     #     root_path
+#     # end
+#
+#
+#
+  def configure_permitted_parameters
+       attributes = [:first_name, :last_name, :username, :email, :email2, :cell, :avatar, :cohort, :cohort_id, :city, :password, roles: []]
+       devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :email, :password, :password_confirmation])
+       devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
+       devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end
 
-  def after_sign_in_path_for(admin)
-      hgp_staff_dashboard_path
-  end
-
-protected
-    def initialize_omniauth_state
-      session['omniauth.state'] = response.headers['X-CSRF-Token'] = form_authenticity_token
-    end
-
-    def configure_permitted_parameters
-        devise_parameter_sanitizer(:sign_up) { |u| u.permit(:first_name, :last_name, :city, :cohort_id, :avatar, :username, :email, :password, project: [ :app_name, :coding, :project_details, :start_date])}
-
-        devise_parameter_sanitizer(:account_update) { |u| u.permit( :email, :password, :current_password, :avatar) }
-    end
 
 private
 
-    def user_params
-      params.require(:user).permit(:email, :password)
-    end
+  def set_current_user
+    current_user != nil
+  end
 
-    def set_current_user
-      :current_user != nil
-    end
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
 
-    # def current_user
-    #   current_user ||= User.find_by(id: session[:user])
-    # end
-    def current_user
-      @current_user ||= User.find_by(id: session[:user_id])
-    end
+  def logged_in?
+    current_user != nil
+  end
 
-  helper_method :current_user
+  def authenticate_admin_user!
 
-    def logged_in?
-      :current_user != nil
+   unless :current_admin_user
+      flash[:alert] = "Unauthorized Access: Genius, go back!"
+      redirect_to  admin_signup_path
     end
 
     def authenticate_admin!
@@ -65,9 +81,9 @@ private
       @room ||= Room.find(session[:current_room]) if session[:current_room]
     end
 
+  def current_class
+    @class ||= Class.find(session[current_class]) if session[current_class]
+  end
 
-    def current_class
-      @class ||= Class.find(session[:current_class]) if session[:current_class]
-    end
 
 end

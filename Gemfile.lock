@@ -9,6 +9,16 @@ GIT
       responders
 
 GIT
+  remote: git://github.com/bys-control/activeadmin-index_as_calendar.git
+  revision: 3a82c2b48b6223b415a0fa2a90fe0408b6196e62
+  specs:
+    activeadmin-index_as_calendar (0.0.13)
+      activeadmin
+      fullcalendar-rails (~> 3.1)
+      momentjs-rails
+      rails (>= 4)
+
+GIT
   remote: https://github.com/zquestz/omniauth-google-oauth2.git
   revision: 67a46f93f184936f830cc3ef748c2c5073e447eb
   specs:
@@ -21,45 +31,75 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    actioncable (5.1.0.rc2)
-      actionpack (= 5.1.0.rc2)
+    actioncable (5.2.0.rc1)
+      actionpack (= 5.2.0.rc1)
       nio4r (~> 2.0)
-      websocket-driver (~> 0.6.1)
-    actionmailer (5.1.0.rc2)
-      actionpack (= 5.1.0.rc2)
-      actionview (= 5.1.0.rc2)
-      activejob (= 5.1.0.rc2)
+      websocket-driver (>= 0.6.1)
+    actionmailer (5.2.0.rc1)
+      actionpack (= 5.2.0.rc1)
+      actionview (= 5.2.0.rc1)
+      activejob (= 5.2.0.rc1)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.1.0.rc2)
-      actionview (= 5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
+    actionpack (5.2.0.rc1)
+      actionview (= 5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
       rack (~> 2.0)
-      rack-test (~> 0.6.3)
+      rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
+    actionview (5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.3)
-    activejob (5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
+    active_admin-duplicatable (0.3.0)
+      activeadmin
+      amoeba (>= 2.0.0)
+    active_admin_importable (1.1.2)
+    active_admin_role (0.1.1)
+      activeadmin (>= 1.0.0.pre4)
+      cancancan (>= 1.15.0)
+    active_admin_theme (1.0.3)
+    activeadmin (1.2.1)
+      arbre (>= 1.1.1)
+      coffee-rails
+      formtastic (~> 3.1)
+      formtastic_i18n
+      inherited_resources (~> 1.7)
+      jquery-rails (>= 4.2.0)
+      kaminari (>= 0.15, < 2.0)
+      railties (>= 4.2, < 5.2)
+      ransack (~> 1.3)
+      sass (~> 3.1)
+      sprockets (< 4.1)
+    activeadmin_addons (1.4.0)
+      railties
+      require_all (~> 1.5)
+      sass-rails
+      select2-rails (~> 4.0)
+      xdan-datetimepicker-rails (~> 2.5.1)
+    activejob (5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
       globalid (>= 0.3.6)
-    activemodel (5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
-    activerecord (5.1.0.rc2)
-      activemodel (= 5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
-      arel (~> 8.0)
+    activemodel (5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
+    activerecord (5.2.0.rc1)
+      activemodel (= 5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
+      arel (>= 9.0)
     activerecord-session_store (1.1.0)
       actionpack (>= 4.0, < 5.2)
       activerecord (>= 4.0, < 5.2)
       multi_json (~> 1.11, >= 1.11.2)
       rack (>= 1.5.2, < 3)
       railties (>= 4.0, < 5.2)
-    activesupport (5.1.0.rc2)
+    activestorage (5.2.0.rc1)
+      actionpack (= 5.2.0.rc1)
+      activerecord (= 5.2.0.rc1)
+      marcel (~> 0.3.1)
+    activesupport (5.2.0.rc1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
       minitest (~> 5.1)
@@ -68,10 +108,12 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
-    arel (8.0.0)
-    arel-helpers (2.6.1)
-      activerecord (>= 3.1.0, < 6)
-    autoprefixer-rails (8.1.0)
+    amoeba (3.1.0)
+      activerecord (>= 3.2.6)
+    arbre (1.1.1)
+      activesupport (>= 3.0.0)
+    arel (9.0.0)
+    autoprefixer-rails (8.1.0.1)
       execjs
     bcrypt (3.1.11)
     better_errors (2.4.0)
@@ -88,7 +130,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.3)
     byebug (10.0.0)
-    cancancan (1.17.0)
+    cancancan (2.1.3)
     capistrano (3.10.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -108,8 +150,6 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     climate_control (0.2.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
@@ -137,18 +177,14 @@ GEM
     debug_inspector (0.0.3)
     declarative (0.0.10)
     declarative-option (0.1.0)
-    devise (4.2.1)
+    devise (4.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.1)
+      railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
-    dotenv (2.2.1)
-    erubi (1.7.0)
-    everett (0.3.0)
-      activerecord (~> 5.0)
-      railties (~> 5.0)
+    erubi (1.7.1)
     execjs (2.7.0)
     faraday (0.12.2)
       multipart-post (>= 1.2, < 3)
@@ -191,8 +227,6 @@ GEM
       multi_json (~> 1.11)
       os (~> 0.9)
       signet (~> 0.7)
-    groupdate (4.0.0)
-      activesupport (>= 4.2)
     guard (2.14.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -244,6 +278,8 @@ GEM
     lumberjack (1.0.12)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
+    marcel (0.3.1)
+      mimemagic (~> 0.3.2)
     memoist (0.16.0)
     method_source (0.9.0)
     mime-types (3.1)
@@ -283,33 +319,35 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     os (0.9.6)
-    paperclip (5.2.1)
+    paperclip (5.3.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
-      cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
+      terrapin (~> 0.6.0)
     pg (0.21.0)
+    polyamorous (1.3.3)
+      activerecord (>= 3.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
     public_suffix (3.0.2)
-    puma (3.11.2)
+    puma (3.11.3)
     rack (2.0.4)
-    rack-cors (1.0.2)
-    rack-test (0.6.3)
-      rack (>= 1.0)
-    rails (5.1.0.rc2)
-      actioncable (= 5.1.0.rc2)
-      actionmailer (= 5.1.0.rc2)
-      actionpack (= 5.1.0.rc2)
-      actionview (= 5.1.0.rc2)
-      activejob (= 5.1.0.rc2)
-      activemodel (= 5.1.0.rc2)
-      activerecord (= 5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
-      bundler (>= 1.3.0, < 2.0)
-      railties (= 5.1.0.rc2)
+    rack-test (0.8.3)
+      rack (>= 1.0, < 3)
+    rails (5.2.0.rc1)
+      actioncable (= 5.2.0.rc1)
+      actionmailer (= 5.2.0.rc1)
+      actionpack (= 5.2.0.rc1)
+      actionview (= 5.2.0.rc1)
+      activejob (= 5.2.0.rc1)
+      activemodel (= 5.2.0.rc1)
+      activerecord (= 5.2.0.rc1)
+      activestorage (= 5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
+      bundler (>= 1.3.0)
+      railties (= 5.2.0.rc1)
       sprockets-rails (>= 2.0.0)
     rails-assets-datatables (1.10.16)
       rails-assets-jquery (>= 1.7.0)
@@ -319,13 +357,20 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    railties (5.1.0.rc2)
-      actionpack (= 5.1.0.rc2)
-      activesupport (= 5.1.0.rc2)
+    rails_layout (1.0.42)
+    railties (5.2.0.rc1)
+      actionpack (= 5.2.0.rc1)
+      activesupport (= 5.2.0.rc1)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.3.0)
+    ransack (1.8.7)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.3.2)
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
@@ -333,6 +378,7 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
+    require_all (1.5.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -390,6 +436,8 @@ GEM
     sshkit (1.16.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    terrapin (0.6.0)
+      climate_control (>= 0.0.3, < 1.0)
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
@@ -399,7 +447,7 @@ GEM
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uber (0.1.0)
-    uglifier (4.1.6)
+    uglifier (4.1.7)
       execjs (>= 0.3.0, < 3)
     underscore-rails (1.8.3)
     useragent (0.16.10)
@@ -410,7 +458,7 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    websocket-driver (0.6.5)
+    websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     will_paginate (3.1.6)
@@ -423,8 +471,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack
+  active_admin-duplicatable
+  active_admin_importable
+  active_admin_role
+  active_admin_theme
+  activeadmin (~> 1.2.1)
+  activeadmin-index_as_calendar!
+  activeadmin_addons
+  activemodel
+  activerecord
   activerecord-session_store
-  arel (~> 8.0)
+  activesupport
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
@@ -432,16 +490,15 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bundler (>= 1.8.4)
   byebug
-  cancancan (~> 1.10)
+  cancancan (~> 2.1, >= 2.1.3)
   capistrano (~> 3.6)
   capistrano-rails
   capybara (= 2.7.1)
   cocoon
   coffee-rails (~> 4.2)
   d3-rails (= 4.1.0)
-  devise (~> 4.2.0)
-  dotenv (~> 2.2.1)
-  everett
+  devise (~> 4.4, >= 4.4.1)
+  ffi (= 1.9.18)
   figaro
   font-awesome-sass
   forest_liana
@@ -465,10 +522,11 @@ DEPENDENCIES
   paperclip (~> 5.0)
   pg (= 0.21.0)
   puma (~> 3.0)
-  rack-cors
-  rails (>= 5.0.0.rc2, < 5.2)
+  rails (~> 5.2.0.rc1)
   rails-assets-datatables!
   rails-assets-jquery!
+  rails_layout
+  railties (~> 5.2.0.rc1)
   responders (~> 2.2)
   retriable (~> 3.1)
   rspec-rails (= 3.5.1)

@@ -22,8 +22,9 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def new
-
+    #@event = Event.new
   end
+
 
   def edit
 
@@ -81,8 +82,8 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def redirect
     client = Signet::OAuth2::Client.new({
-      client_id: '81909937110-9qkbu78955ge23fhinrkkv1ih2cl13sh.apps.googleusercontent.com',
-      client_secret: "6raMG_ql1d-EwxAOnwbMP1B3",
+      client_id: '1006347326565-e30jdl53gig8s97mss8c606o0db865qu.apps.googleusercontent.com',
+      client_secret: 'uJ9YgUrDhROhQQt9hhVpjJJc',
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
       redirect_uri: ["http://localhost:3000/users/auth/google_oauth2/callback"]#url_for(:action => :callback)
@@ -155,7 +156,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     def client_options
       {
-        client_id: '81909937110-9qkbu78955ge23fhinrkkv1ih2cl13sh.apps.googleusercontent.com',
+        client_id: 'Figaro.env.GOOGLE_CLIENT_ID!',
         client_secret: Figaro.env.GOOGLE_CLIENT_SECRET!,
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token',

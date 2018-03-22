@@ -1,76 +1,78 @@
 class UsersController < Devise::RegistrationsController
-  #skip_before_action :verify_authenticity_token
-  # before_action :authenticate_user!
-  # before_action user_params:
-#permit_params :first_name, :last_name, :city, :cohort, :email, :email2, :avatar, :username, :project
 # require 'google/api_client'
 # require 'google/api_client/client_secrets'
- def index
-   @users = User.all
-   # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
-   #    marker.lat user.latitude
-   #    marker.lng user.longitude
-   #    marker.title user.title
-   # end
+
+
+  def new
+    @user = User.new
   end
 
- def new
-   @user = User.new
- end
-
- def create
-   # byebug
-   # @user = User.from_omniauth(request.env["omniauth.auth"])
-   # session[:user_id] = user.id
-   # redirect_to root_path
-   #  if @user.save!
-   #    redirect_to root_path
-   #  else
-   #    @user = User.new(set_user_params)
-   #     respond_to do |format|
-   #     format.html { redirect_to @user }
-   #     format.js
-   #     create.js.erb
-   #     destroy.js.erb
-   #     user_password = params[:session][:password]
-   #     user_email = params[:session][:email]
-   #     user = user_email.present? && User.find_by(email: :user_email)
-
-       # user && valid_password? user_password
-       # sign_in user, store: false
-       # user.generate_authentication_token!
-       # user.save
-       # render json: user, status: 200, location: [:api, :user]
-     # else
-     #   render json: { errors: "Invalid email or password" }, status: 422
-     #end
-   #end
+  def create
+    @user = User.new(params[:user])
+    if @user.save
+      flash[:notice] = "Successfully created User."
+      redirect_to root_path
+    else
+      render :action => 'new'
+    end
   end
 
- def show
-   @users = User.find_by(params[:id])
- end
+  def edit
+    @user = User.find(params[:id])
+  end
 
- def destroy
-   session[:user_id] = nil
-   redirect_to root_path
- end
+
+  def show
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to :back, :alert => "Access denied."
+    end
+  end
+  def index
+     @users = User.excludes(:id => current_user.id)
+     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+        marker.lat user.latitude
+        marker.lng user.longitude
+        marker.title user.title
+     end
+  end
+
+  def update
+    authorize! :assign_roles, @user if params[:user][:assign_roles]
+    # ...
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      flash[:notice] = "Successfully deleted User."
+      redirect_to root_path
+    end
+  end
 
 
 
  private
-#params[:product][:data].try(:keys))
 
- def user_params
-   params.require(:user).permit(:first_name, :last_name, :city, :cohort, :email, :avatar, :username, project: [ :app_name, :coding, :project_details, :start_date])
-   #params.permit(user: [ :first_name, :last_name, :city, :cohort, :email, :avatar, :username { projects: :app_name, :coding, :project_details, :start_date } ])
- end
+ def create_login
+    email = self.email.split(/@/)
+    login_taken = User.where(login: email[0]).first
+    self.login =
+    if login_taken
+      self.email
+    else
+      email[0]
+    end
+  end
 
- def authenticate_user!
-    unless current_user
-       flash[:alert] = "Unauthorized Access: Genius, try again!"
-       redirect_to root_path
-     end
-  #end
- end
+  def self.find_for_database_authentication conditions
+      where(login: conditions[:email]).first || where(email: conditions[:email]).first
+  end
+
+   def authenticate_user!
+      unless current_user
+         flash[:alert] = "Unauthorized Access: Genius, try again!"
+         redirect_to root_path
+       end
+    end
 end
