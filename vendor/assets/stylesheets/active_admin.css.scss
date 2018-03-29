@@ -8,6 +8,9 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
+//= require activeadmin_addons/all
+//= require jquery-ui
+
 
 $skinMainFirstColor: #000!default;
 $skinMainSecondColor: #FFE000!default;
@@ -15,6 +18,7 @@ $skinBorderWindowColor: #cccccc;
 
 @import "active_admin/mixins";
 @import "wigu/active_admin_theme";
+@import "jquery.xdan.datetimepicker";
 
 //@import "arctic_admin";
 @import "active_admin/base";

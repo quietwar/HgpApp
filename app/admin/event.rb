@@ -5,6 +5,12 @@ ActiveAdmin.register Event do
 #
  permit_params :event, :notes, :location
  menu priority: 5
+
+ # index as: :map do
+ #   column  :longitude
+ #   column  :latitude
+ #  end
+ #
  index do
    selectable_column
    id_column

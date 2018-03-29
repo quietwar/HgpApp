@@ -30,15 +30,15 @@ class UsersController < Devise::RegistrationsController
   end
   def index
      @users = User.excludes(:id => current_user.id)
-     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
-        marker.lat user.latitude
-        marker.lng user.longitude
-        marker.title user.title
-     end
+     # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+     #    marker.lat user.latitude
+     #    marker.lng user.longitude
+     #    marker.title user.title
+     # end
   end
 
   def update
-    authorize! :assign_roles, @user if params[:user][:assign_roles]
+    authorize! :assign_roles, @user if params[:user] 
     # ...
   end
 

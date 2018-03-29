@@ -11,8 +11,8 @@
                <!-- <li class="active"><%= link_to "HGP Classroom", classroom_attendances_path(:classroom_id) %></li> -->
                <li class="active"><%= link_to "Classroom", new_classroom_attendance_path(:classroom_id) %></li>
                <li class="active"><%= link_to "Staff tap in", new_admin_staff_path %></li>
-               <li class="active"><a href="contact">Contact</a></li>
-             <% unless logged_in? %>
+
+             <% unless current_user %>
                  <li class="active"><%= link_to "Genius sign up", new_user_registration_path %></li>
                  <li class="active"><%= link_to "Tap in",  new_user_session_path %></li>
                <% else %>

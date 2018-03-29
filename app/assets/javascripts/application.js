@@ -10,17 +10,19 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
 //= require jquery-ui
+//= require jquery_ujs
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/gcal
 //= require d3
-// require turbolinks
+//= require turbolinks
 // require underscore
 //= require gmaps/google
+//= require active_admin_map_index
 //= require_tree .
 
 

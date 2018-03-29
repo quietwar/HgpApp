@@ -26,10 +26,11 @@ gem 'active_admin_theme'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'paperclip', '~> 5.0'
-#gem "active_admin-sortable_tree"
+gem "active_admin-sortable_tree"
 gem 'active_admin_importable'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'activeadmin_addons'
+gem 'active_admin_datetimepicker'
 gem 'active_admin_role'
 gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_calendar'
 gem 'active_admin-duplicatable'
@@ -70,6 +71,7 @@ gem 'd3-rails','4.1.0'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'cocoon'
 gem 'rails_layout'
+gem 'ransack', github: 'activerecord-hackery/ransack'
 
 
 group :development, :test do
