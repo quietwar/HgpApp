@@ -22,7 +22,20 @@ class CohortsController < ApplicationController
 
     def create
       @cohort = Cohort.new(cohort_params)
-      @cohort = save!
+      respond_to do |format|
+      if @cohort.save
+        format.html { redirect_to @cohort, notice: 'Cohort was successfully created.' }
+        format.json { render :show, status: :created, location: @cohort }
+      else
+        format.html { render :new }
+        format.json { render json: @cohort.errors, status: :unprocessable_entity }
+      end
+     end
+    end
+
+    def edit
+      @cohort = Cohort.find(params[:id])
+      @user = @cohort.build_cohort
     end
 
     def destroy

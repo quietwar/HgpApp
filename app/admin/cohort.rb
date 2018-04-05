@@ -1,32 +1,24 @@
 ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
-  permit_params :first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend,:project, :benchmark, :projects
+  permit_params :first_name, :class_date, :attendance_id, :last_name, :users_id, :cohort, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend,:project, :benchmark, :projects
   menu priority: 3
   config.batch_actions = true
     duplicable?
   #active_admin_importable
-  #sortable tree: true
+  sortable tree: true
 
 
   index do
     selectable_column
     id_column
-    column :cohort_id
     column :city
+    column :cohort
 
 
     actions
   end
 
-  # table Attendance do
-  #    column(:genius) { |attendance| }
-  #    column "Session day", :created_at
-  #    column "Present", :important, as: :boolean
-  #    column "Absent",  :important, as: :boolean
-  #    column "halfday", :important, as: :boolean
-  # end
-
     filter :genius
-    filter :cohort_id
+    filter :cohort
     filter :city
     filter :username
 
@@ -58,13 +50,16 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
     f.actions
       end
 
-      # f.input :attendances, as: :nested_select,
-      #             level_1: { attribute: :cohort_id },
-      #             level_2: { attribute: :genuis_id },
-      #             level_3: { attribute: :attendances }
-
-     #  sidebar :help do
-     #  "Need help? Email us at help@example.com"
-     # end
-    end
+  controller do
+    def create
+      @cohort = Cohort.find(params[:user][:cohort])
+      @user = User.find(params[:cohort][:user])
+      #params[:cohort][:level] = @level
+      params[:cohort][:user] = @user.cohort
+      @cohort = Cohort.new(params[:cohort])
+      super
+    #end
+   end
   end
+#end
+end  ### Declare here the form for the child model, using the "has_many" method:

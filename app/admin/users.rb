@@ -1,6 +1,5 @@
 ActiveAdmin.register User, as: 'Genius' do
-  belongs_to :cohort
-  permit_params :avatar, :first_name, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+  permit_params :avatar, :name, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
    duplicable?
@@ -28,7 +27,7 @@ ActiveAdmin.register User, as: 'Genius' do
 
 
   filter :genius
-  filter :cohort_id
+  filter :cohort
   filter :city
   filter :stipend
   filter :benchmarks
@@ -53,27 +52,26 @@ ActiveAdmin.register User, as: 'Genius' do
       if f.object.avatar.present?
         f.semantic_fields_for :avatar_attributes do |avatar_fields|
          avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
-       end
+       #end
      end
    end
-   ActiveAdmin.register_page "Project" do
-     belongs_to :genius
-
-      f.inputs 'Projects' do
-              f.has_many :projects, allow_destroy: true,
-                                    new_record: true do |f|
-
-        f.input :app_name
-        f.input :coding
-        f.input :project_details
-        f.input :start_date
-        f.input :github
-
-         end
-       end
+# ActiveAdmin.register_page "Project" do
+   #   belongs_to :genius
+    f.inputs 'Projects' do
+        f.has_many :projects, allow_destroy: true,
+                                  new_record: true do |u|
+            u.input :app_name
+            u.input :coding
+            u.input :project_details
+            u.input :start_date
+            u.input :github
+            #end
+           end
        f.actions
+            end
            end
          end
+       end
 
    # sidebar :custom, only: :show do
    #   resource.a_attendance
@@ -92,4 +90,4 @@ ActiveAdmin.register User, as: 'Genius' do
       #   end
       # end
    #end
- end
+ #end

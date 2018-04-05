@@ -1,7 +1,7 @@
-<%= form_with(model: genius, local: true) do |form| %>
-  <% if genius.errors.any? %>
+<%= form_with(model: cohort, local: true) do |form| %>
+  <% if cohort_id.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this Genius from being saved:</h2>
+      <h2><%= pluralize(cohort.errors.count, "error") %> prohibited this Genius from being saved:</h2>
 
       <ul>
       <% cohort.errors.full_messages.each do |message| %>
@@ -33,5 +33,34 @@
 
   <div class="actions">
     <%= form.submit %>
+  </div>
+<% end %>
+<%= f.fields_for :genius do |ff| %>
+  <div>
+    <%= ff.label :city %>
+    <%= ff.text_field :city %>
+  </div>
+<% end %>
+<%= form_for(setup_cohort(cohort)) do |f| %>
+<h2>Tasks</h2>
+<%= f.fields_for :projects do |ff| %>
+  <div>
+    <%= ff.label :name %>
+    <%= ff.text_field :name %>
+
+    <% if ff.object.persisted? %>
+      <%= ff.check_box :_destroy %>
+      <%= ff.label :_destroy, "Destroy" %>
+    <% end %>
+  </div>
+<% end %>
+<%= f.fields_for :attendances do |ff| %>
+  <div>
+    <%= ff.check_box :_destroy,
+          {:checked => ff.object.persisted?},
+          '0', '1'
+    %>
+    <%= ff.label :_destroy, ff.object.interest.name %>
+    <%= ff.hidden_field :interest_id %>
   </div>
 <% end %>

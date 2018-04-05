@@ -13,7 +13,10 @@ class AttendancesController < ApplicationController
 
   def create
     @attendance = attendance.new(attendance_params)
-    #@message.room = :current_room
+    #@message.room = :current_room@attendances = Attendance.new(attendance_params)
+    # student = Student.find(attendance_params[:student_id])
+    # redirect_to new_attendances_path, notice: "#{student.name} attended class today."
+
 
     if @attendance.save
       respond_to do |format|
@@ -37,7 +40,7 @@ class AttendancesController < ApplicationController
 #private
 
   def configure_permitted_parameters
-       attributes = [:first_name, :last_name, :username, :email, :email2, :cell, :avatar, :cohort, :cohort_id, :city, :password, roles: []]
+       attributes = [:first_name, :last_name, :username, :users_id, :class_date, :cohort, :cohort_id, :city_id, :present, :absent, :halfday]
        devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :email, :password, :password_confirmation])
        devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
        devise_parameter_sanitizer.permit(:account_update, keys: attributes)

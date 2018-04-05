@@ -1,24 +1,24 @@
 <h1>Geniuses</h1>
-<div class="col-md-8">
+<div class="col-md-10">
   <table class="table table-striped">
     <thead>
       <tbody>
           <% @users.each do |user| %>
-<% @users = User.all %>
+  <% @users = User.all %>
 
-<%= form_for(:attendances, url: '/admin/attendances/') do |f| %>
-  <table>
-  <%= @today %>
-  <th>Name</th><th>Present</th><th>Absent</th><th>halfday</th>
-    <%- @users.each do |user| %>
-      <tr>
-        <td><%= user.first_name %></td>
-        <td><%= check_box_tag "attendances[#{user.id}][present]" %></td>
-        <td><%= check_box_tag "attendances[#{user.id}][absent]" %></td>
-        <td><%= check_box_tag "attendances[#{user.id}][tardy]" %></td>
-      </tr>
-    <% end %>
-  </table>
+  <%= form_for(:attendances, url: '/admin/attendances/') do |f| %>
+    <table>
+    <%= @today %>
+    <th>Name</th><th>Present</th><th>Absent</th><th>halfday</th>
+      <%- @users.each do |user| %>
+        <tr>
+          <td><%= user.first_name %></td>
+          <td><%= check_box_tag "attendances[#{user.id}][present]" %></td>
+          <td><%= check_box_tag "attendances[#{user.id}][absent]" %></td>
+          <td><%= check_box_tag "attendances[#{user.id}][tardy]" %></td>
+        </tr>
+      <% end %>
+    </table>
 
   <%= f.submit %>
 <% end %>

@@ -8,17 +8,23 @@ class UsersController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.new(params[:user])
-    if @user.save
-      flash[:notice] = "Successfully created User."
-      redirect_to root_path
-    else
-      render :action => 'new'
+    @user = User.new(user_params)
+    respond_to do |format|
+      if @user.save!
+        format.html { redirect_to
+        edit_user_first_path(@user),
+        notice: "User created! Now select or create a cohort."}
+      else
+        format.html { render :new }
+        format.json { render json: @user.errors, status:
+          :unprocessable_entity}
+      end
     end
   end
 
   def edit
     @user = User.find(params[:id])
+    @cohort = @user.build_cohort
   end
 
 
@@ -28,18 +34,29 @@ class UsersController < Devise::RegistrationsController
       redirect_to :back, :alert => "Access denied."
     end
   end
+
   def index
      @users = User.excludes(:id => current_user.id)
-     @hash = Gmaps4rails.build_markers(@users) do |user, marker|
-        marker.lat user.latitude
-        marker.lng user.longitude
-        marker.title user.title
-     end
+     # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
+     #    marker.lat user.latitude
+     #    marker.lng user.longitude
+     #    marker.title user.title
+     # end
   end
 
   def update
-    authorize! :assign_roles, @user if params[:user][:assign_roles]
-    # ...
+    @user = User.find(params[:id])
+    respond_to do |format|
+      if @user.update!(user_params)
+        @cohort = @user.cohort
+        format.html { redirect_to @cohort,
+        notice: "User updated!"}
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status:
+          :unprocessable_entity}
+      end
+    end
   end
 
   def destroy
@@ -63,6 +80,10 @@ class UsersController < Devise::RegistrationsController
     else
       email[0]
     end
+  end
+
+  def user_params
+    params.require(:user).permit(:genius, :email, :password, :avatar, :email2, cohort_attributes: [:city, :cohort_id])
   end
 
   def self.find_for_database_authentication conditions

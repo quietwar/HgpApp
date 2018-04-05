@@ -47,7 +47,7 @@ Rails.application.routes.draw do
 
 
       resources :features,only: [:create]
-      resources :cohorts, only: [:index, :show]
+      resources :cohorts, only: [:create, :new, :index, :show]
       resources :classrooms  do
         resources :attendances
         collection do

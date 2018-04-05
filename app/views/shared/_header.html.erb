@@ -1,6 +1,6 @@
 <header>
-  <!-- <body>
-    <div class=page> -->
+  
+    <div class=page>
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
 
@@ -11,8 +11,8 @@
                <!-- <li class="active"><%= link_to "HGP Classroom", classroom_attendances_path(:classroom_id) %></li> -->
                <li class="active"><%= link_to "Classroom", new_classroom_attendance_path(:classroom_id) %></li>
                <li class="active"><%= link_to "Staff tap in", new_admin_staff_path %></li>
-               <li class="active"><a href="contact">Contact</a></li>
-             <% unless logged_in? %>
+
+             <% unless current_user %>
                  <li class="active"><%= link_to "Genius sign up", new_user_registration_path %></li>
                  <li class="active"><%= link_to "Tap in",  new_user_session_path %></li>
                <% else %>
@@ -48,13 +48,12 @@
                <%= submit_tag "Search", class: 'btn btn-default' %>
              <% end %>
              <div class="logo"><a href="http://www.hiddengeniusproject.org">
-               <img border="0" alt="HGP Website" src="/assets/HGPAssets_Emblem_Black.png" width="100" height="100">
+               <img border="0" alt="HGP Website" src="/assets/HGPAssets_Emblem_Black.png" width="100" height="100"></a>
             </div>
 
              <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-
-           </div>
+             </div>
 
              <br>
              <div class="navbar-header">
@@ -63,5 +62,5 @@
            </ul>
      </nav>
    </header>
- <!-- </div>
-</body> -->
+ </div>
+<!-- </head> -->

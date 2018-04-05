@@ -1,4 +1,4 @@
-//= require index_as_calendar/application
+//=require jquery-ui
 
 $(document).ready(function() {
   jQuery('input.hasDatetimePicker').datetimepicker({
@@ -11,4 +11,8 @@ $(document).ready(function() {
       );
     }
   });
+});
+
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
 });
