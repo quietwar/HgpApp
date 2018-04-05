@@ -3,7 +3,7 @@
 
 body {
   background-color: black;
-  margin-top: 250px;
+  margin-top: 350px;
 }
 
 .page {
@@ -16,24 +16,17 @@ body {
     position:absolute;
     left:0;
     right:0;
+
    }
-//
-//    .g-signin2 {
-//      margin-top: 400px;
-//    }
-//
-//    .genius {
-//      margin-top: 250px;
-//      padding: 500px;
-//      background-image: url('claremont2.jpg');
-//      background-repeat: no-repeat;
-//      background-size: 100%;
-//    }
-//
-// <<<<<<< HEAD
+
    .g-signin2 {
-     margin-top: 250px;
+     margin-top: 400px;
    }
+
+   .field{
+     margin-top: 200px;
+   }
+
    .genius {
      margin-top: 250px;
      padding: 500px;
@@ -58,9 +51,10 @@ body {
 //   padding-bottom: 10px;
 //
 // }
-// .col-md-12 {
-//   margin-top: 260px;
-// }
+.col-md-12 {
+  padding-top: 200px;
+  margin-top: 260px;
+}
 
 .intro {
   margin-top: 500px;
@@ -165,13 +159,11 @@ body {
     background-color: red !important;
 }
 
-
 .logo {
   position: absolute;
     right: 0px;
     top: 0px;
 }
-
 
 .footer {
   position: fixed;
@@ -239,13 +231,8 @@ text-align: left;
  font-size: 150%;
 }
 
-
-.signed-in-user {
-  padding-top: 10px;
-
 .signed-in-user .navbar-text{
   padding-top: 80px;
- 
   padding-right: 20px;
   color: red;
 }

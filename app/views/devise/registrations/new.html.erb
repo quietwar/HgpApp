@@ -1,6 +1,6 @@
 <h2 class='text-center'>Sign up</h2>
-<!-- <div class='row'> -->
-  <!-- <div class='col-md-12'>
+<div class='row'>
+  <div class='col-md-12'>
     <%= form_for(resource, as: resource_name,
         :html => {class: "form-horizontal", role: "form"},
         url: registration_path(resource_name)) do |f| %>
@@ -92,12 +92,6 @@
         </div>
       </div>
 
-      <% for role in User::ROLES %>
-       <%= check_box_tag "user[roles][#{role}]", role, @user.roles.include?(role), {:name => "user[roles][]"}%>
-       <%= label_tag "user_roles_#{role}", role.to_s.humanize %><br />
-      <% end %>
-      <%= hidden_field_tag "user[roles][]", "" %>
-
       <div class='form-group'>
         <div class='col-md-offset-3 col-md-9'>
           <%= f.submit "Sign up", class: 'btn btn-success btn-lg' %>
@@ -111,8 +105,8 @@
       </div>
     </div>
   </div>
-</div> -->
-<div class='page'>
+</div>
+<!-- <div class='page'>
           <%= form_with model: @admin_user, class: 'form-box' do |form|  %><br>
             <%= form.label :first_name, class: 'control-label col-md-2' %>
             <%= form.text_field :first_name, class: 'col-md-10' %><br>
@@ -146,4 +140,5 @@
                 <%= render "devise/shared/links" %>
 
           <% end %>
-</div>
+        <% end %>
+</div> -->

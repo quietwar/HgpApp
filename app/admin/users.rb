@@ -1,4 +1,5 @@
 ActiveAdmin.register User, as: 'Genius' do
+  belongs_to :cohort
   permit_params :avatar, :first_name, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
@@ -8,7 +9,7 @@ ActiveAdmin.register User, as: 'Genius' do
 
       index do
         selectable_column
-        id_column
+        id_column :cohort_id
         column :first_name
         column :last_name
         column :email

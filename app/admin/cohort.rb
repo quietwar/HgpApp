@@ -38,23 +38,24 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
       f.input :cohort_id, label: "Cohort Number"
     end
       ### Declare here the form for the child model, using the "has_many" method:
+
       f.inputs "Geniuses" do
         f.has_many :users,allow_destroy: true,
-                              new_record: true do |u|
-          u.input :genius
-          u.input :cell
-          u.input :email
-          u.input :password, input_html: { autocomplete: "new-password" }
-          u.input :email2
-          u.input :username
-          u.input :avatar, as: :file
-          if u.object.avatar.present?
-            u.semantic_fields_for :avatar_attributes do |avatar_fields|
+                              new_record: true do |user|
+          user.input :genius
+          user.input :cell
+          user.input :email
+          user.input :password, input_html: { autocomplete: "new-password" }
+          user.input :email2
+          user.input :username
+          user.input :avatar, as: :file
+          if user.object.avatar.present?
+            uuser.semantic_fields_for :avatar_attributes do |avatar_fields|
              avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
-           end
+          end
        end
       end
-      f.actions
+    f.actions
       end
 
       # f.input :attendances, as: :nested_select,

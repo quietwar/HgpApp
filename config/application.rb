@@ -14,19 +14,14 @@ module GeniusLounge
 
 
     config.load_defaults 5.1
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-       origins '*'
-       resource '*', :headers => :any, :methods => [:get, :post, :options, :patch]
-      end
-    end
+
     #config.middleware.use Rack::MethodOverride
     config.app_generators.scaffold_controller :responders_controller
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
 
     #config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore
+    #config.middleware.use ActionDispatch::Session::CookieStore
     config.assets.precompile += ['application-print.css']
 
     # config.middleware.use ActionDispatch::Cookies
@@ -36,6 +31,6 @@ module GeniusLounge
     config.eager_load_paths = Dir.glob("#{Rails.root}/app/*").reject do |path|
       path.include?("admin_user")
     end
- 
+
   end
 end

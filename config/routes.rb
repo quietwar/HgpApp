@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       end
 
       devise_scope :user do
+          post '/admin/permissions/reload', to: 'admin/permissions#reload'
           # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
           # post 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
           get '/users/:user_id/projects', to: 'projects#index', as: 'projects'

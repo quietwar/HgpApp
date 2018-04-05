@@ -26,8 +26,8 @@ gem 'active_admin_theme'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'paperclip', '~> 5.0'
-#gem "active_admin-sortable_tree"
-#gem 'active_admin_importable'
+gem "active_admin-sortable_tree"
+gem 'active_admin_importable'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'activeadmin_addons'
 gem 'active_admin_role'

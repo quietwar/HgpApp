@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_13_043333) do
+ActiveRecord::Schema.define(version: 2018_03_29_171458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,9 +73,9 @@ ActiveRecord::Schema.define(version: 2018_03_13_043333) do
     t.string "username"
     t.boolean "superadmin"
     t.integer "utf8"
-    t.integer "role", limit: 2, default: 0, null: false
     t.string "login"
     t.string "city"
+    t.integer "role", limit: 2, default: 0, null: false
     t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
   end
 
@@ -103,17 +103,15 @@ ActiveRecord::Schema.define(version: 2018_03_13_043333) do
   end
 
   create_table "attendances", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "classroom_id", null: false
-    t.string "status", null: false
+    t.string "user_id"
+    t.string "cohort_id"
+    t.string "attendance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "datepicker"
     t.boolean "present"
     t.boolean "absent"
     t.boolean "halfday"
-    t.datetime "class_date"
-    t.index ["classroom_id"], name: "index_attendances_on_classroom_id"
-    t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
   create_table "classrooms", id: :serial, force: :cascade do |t|
@@ -125,11 +123,6 @@ ActiveRecord::Schema.define(version: 2018_03_13_043333) do
     t.boolean "completed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "meeting", null: false
-    t.datetime "end_time", null: false
-    t.string "subject", limit: 40, null: false
-    t.integer "cohort_id"
-    t.index ["cohort_id"], name: "index_classrooms_on_cohort_id"
   end
 
   create_table "cohorts", id: :serial, force: :cascade do |t|
@@ -149,11 +142,6 @@ ActiveRecord::Schema.define(version: 2018_03_13_043333) do
     t.string "first_name"
     t.string "last_name"
     t.bigint "cohort"
-    t.string "name"
-    t.string "section"
-    t.text "description"
-    t.date "start_date"
-    t.date "end_date"
   end
 
   create_table "events", force: :cascade do |t|
@@ -209,7 +197,6 @@ ActiveRecord::Schema.define(version: 2018_03_13_043333) do
     t.string "authenticity_token"
     t.string "commit"
     t.string "locale"
-    t.string "github"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -282,7 +269,6 @@ ActiveRecord::Schema.define(version: 2018_03_13_043333) do
     t.string "user"
     t.string "name"
     t.integer "roles_mask"
-    t.string "github"
     t.string "login"
     t.index ["access_token"], name: "index_users_on_access_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

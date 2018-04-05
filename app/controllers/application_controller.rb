@@ -85,5 +85,5 @@ private
     @class ||= Class.find(session[current_class]) if session[current_class]
   end
 
-
+ end
 end

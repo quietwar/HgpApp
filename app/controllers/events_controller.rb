@@ -1,4 +1,4 @@
-class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class EventsController < ApplicationController
   protect_from_forgery prepend: true, with: :exception
   skip_before_action :verify_authenticity_token
 
