@@ -20,16 +20,6 @@ GIT
       polyamorous (~> 1.3.2)
 
 GIT
-  remote: git://github.com/bys-control/activeadmin-index_as_calendar.git
-  revision: 3a82c2b48b6223b415a0fa2a90fe0408b6196e62
-  specs:
-    activeadmin-index_as_calendar (0.0.13)
-      activeadmin
-      fullcalendar-rails (~> 3.1)
-      momentjs-rails
-      rails (>= 4)
-
-GIT
   remote: https://github.com/zquestz/omniauth-google-oauth2.git
   revision: e1f0b0cdd7538b6fd4595ce0dfa29514b88a4e8d
   specs:
@@ -42,25 +32,25 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
-    actioncable (5.2.0.rc2)
-      actionpack (= 5.2.0.rc2)
+    actioncable (5.1.6)
+      actionpack (= 5.1.6)
       nio4r (~> 2.0)
-      websocket-driver (>= 0.6.1)
-    actionmailer (5.2.0.rc2)
-      actionpack (= 5.2.0.rc2)
-      actionview (= 5.2.0.rc2)
-      activejob (= 5.2.0.rc2)
+      websocket-driver (~> 0.6.1)
+    actionmailer (5.1.6)
+      actionpack (= 5.1.6)
+      actionview (= 5.1.6)
+      activejob (= 5.1.6)
       mail (~> 2.5, >= 2.5.4)
       rails-dom-testing (~> 2.0)
-    actionpack (5.2.0.rc2)
-      actionview (= 5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
+    actionpack (5.1.6)
+      actionview (= 5.1.6)
+      activesupport (= 5.1.6)
       rack (~> 2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
-    actionview (5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
+    actionview (5.1.6)
+      activesupport (= 5.1.6)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
@@ -73,7 +63,8 @@ GEM
       coffee-rails
       jquery-rails
       sass (~> 3.1)
-    active_admin_datetimepicker (0.5.0)
+    active_admin_datetimepicker (0.6.2)
+      activeadmin (~> 1.1)
       xdan-datetimepicker-rails (~> 2.5.1)
     active_admin_importable (1.1.2)
     active_admin_role (0.1.1)
@@ -98,26 +89,22 @@ GEM
       sass-rails
       select2-rails (~> 4.0)
       xdan-datetimepicker-rails (~> 2.5.1)
-    activejob (5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
+    activejob (5.1.6)
+      activesupport (= 5.1.6)
       globalid (>= 0.3.6)
-    activemodel (5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
-    activerecord (5.2.0.rc2)
-      activemodel (= 5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
-      arel (>= 9.0)
+    activemodel (5.1.6)
+      activesupport (= 5.1.6)
+    activerecord (5.1.6)
+      activemodel (= 5.1.6)
+      activesupport (= 5.1.6)
+      arel (~> 8.0)
     activerecord-session_store (1.1.1)
       actionpack (>= 4.0)
       activerecord (>= 4.0)
       multi_json (~> 1.11, >= 1.11.2)
       rack (>= 1.5.2, < 3)
       railties (>= 4.0)
-    activestorage (5.2.0.rc2)
-      actionpack (= 5.2.0.rc2)
-      activerecord (= 5.2.0.rc2)
-      marcel (~> 0.3.1)
-    activesupport (5.2.0.rc2)
+    activesupport (5.1.6)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
@@ -130,7 +117,7 @@ GEM
       activerecord (>= 3.2.6)
     arbre (1.1.1)
       activesupport (>= 3.0.0)
-    arel (9.0.0)
+    arel (8.0.0)
     autoprefixer-rails (8.2.0)
       execjs
     bcrypt (3.1.11)
@@ -144,13 +131,13 @@ GEM
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootstrap-datepicker-rails (1.7.1.1)
+    bootstrap-datepicker-rails (1.8.0.1)
       railties (>= 3.0)
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
-    byebug (10.0.1)
+    byebug (10.0.2)
     cancancan (2.1.3)
     capistrano (3.10.1)
       airbrussh (>= 1.0.0)
@@ -216,7 +203,7 @@ GEM
     ffi (1.9.18-x86-mingw32)
     figaro (1.1.1)
       thor (~> 0.14)
-    font-awesome-sass (5.0.6.2)
+    font-awesome-sass (5.0.9)
       sass (>= 3.2)
     formatador (0.2.5)
     formtastic (3.1.5)
@@ -279,7 +266,7 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.5)
+    jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     jwt (1.5.6)
     kaminari (1.1.1)
@@ -304,11 +291,9 @@ GEM
     loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lumberjack (1.0.12)
+    lumberjack (1.0.13)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    marcel (0.3.2)
-      mimemagic (~> 0.3.2)
     memoist (0.16.0)
     method_source (0.9.0)
     mime-types (3.1)
@@ -354,7 +339,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     os (0.9.6)
-    paperclip (5.3.0)
+    paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       mime-types
@@ -378,18 +363,17 @@ GEM
     rack (2.0.4)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
-    rails (5.2.0.rc2)
-      actioncable (= 5.2.0.rc2)
-      actionmailer (= 5.2.0.rc2)
-      actionpack (= 5.2.0.rc2)
-      actionview (= 5.2.0.rc2)
-      activejob (= 5.2.0.rc2)
-      activemodel (= 5.2.0.rc2)
-      activerecord (= 5.2.0.rc2)
-      activestorage (= 5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
+    rails (5.1.6)
+      actioncable (= 5.1.6)
+      actionmailer (= 5.1.6)
+      actionpack (= 5.1.6)
+      actionview (= 5.1.6)
+      activejob (= 5.1.6)
+      activemodel (= 5.1.6)
+      activerecord (= 5.1.6)
+      activesupport (= 5.1.6)
       bundler (>= 1.3.0)
-      railties (= 5.2.0.rc2)
+      railties (= 5.1.6)
       sprockets-rails (>= 2.0.0)
     rails-assets-datatables (1.10.16)
       rails-assets-jquery (>= 1.7.0)
@@ -400,9 +384,9 @@ GEM
     rails-html-sanitizer (1.0.4)
       loofah (~> 2.2, >= 2.2.2)
     rails_layout (1.0.42)
-    railties (5.2.0.rc2)
-      actionpack (= 5.2.0.rc2)
-      activesupport (= 5.2.0.rc2)
+    railties (5.1.6)
+      actionpack (= 5.1.6)
+      activesupport (= 5.1.6)
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
@@ -500,9 +484,9 @@ GEM
       activemodel (>= 5.0)
       bindex (>= 0.4.0)
       railties (>= 5.0)
-    websocket-driver (0.7.0)
+    websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
-    websocket-driver (0.7.0-java)
+    websocket-driver (0.6.5-java)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     will_paginate (3.1.6)
@@ -529,8 +513,7 @@ DEPENDENCIES
   active_admin_importable
   active_admin_role
   active_admin_theme
-  activeadmin (~> 1.2.1)
-  activeadmin-index_as_calendar!
+  activeadmin
   activeadmin_addons
   activemodel
   activerecord
@@ -540,17 +523,17 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-datepicker-rails
-  bootstrap-sass (~> 3.3.6)
+  bootstrap-sass
   bundler (>= 1.8.4)
   byebug
-  cancancan (~> 2.1, >= 2.1.3)
+  cancancan
   capistrano (~> 3.6)
   capistrano-rails
   capybara (= 2.7.1)
   cocoon
-  coffee-rails (~> 4.2)
+  coffee-rails
   d3-rails (= 4.1.0)
-  devise (~> 4.4, >= 4.4.1)
+  devise
   ffi (= 1.9.18)
   figaro
   font-awesome-sass
@@ -565,24 +548,24 @@ DEPENDENCIES
   inherited_resources!
   jbuilder (~> 2.5)
   jquery-rails
-  jquery-ui-rails (= 5.0.5)
+  jquery-ui-rails
   listen (~> 3.0.5)
   momentjs-rails
   omniauth
   omniauth-google-oauth2!
-  omniauth-oauth2 (~> 1.4)
-  paperclip (~> 5.0)
+  omniauth-oauth2
+  paperclip
   pg (= 0.21.0)
   puma (~> 3.0)
-  rails (~> 5.2.0.rc1)
+  rails
   rails-assets-datatables!
   rails-assets-jquery!
   rails_layout
-  railties (~> 5.2.0.rc1)
+  railties
   ransack!
   responders (~> 2.2)
   rspec-rails (= 3.5.1)
-  sass-rails (~> 5.0)
+  sass-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

@@ -22,16 +22,16 @@
 //= require turbolinks
 // require underscore
 //= require gmaps/google
-//= require active_admin_map_index
+// require active_admin_map_index
 //= require_tree .
 
 
 $(document).ready(function() {
    $("#calendar").fullCalendar({
      header:
-     left: "prev,next today",
+     left: "prev, next, today",
      center: "title",
-     right: "month,agendaWeek,agendaDay"
+     right: "month,agendaWeek,agendaDay",
      defaultView: "month",
      height: 500,
      slotMinutes: 15,

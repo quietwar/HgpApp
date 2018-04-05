@@ -1,4 +1,4 @@
-//= require index_as_calendar/application
+// require index_as_calendar/application
 //=require jquery-ui
 
 $(document).ready(function() {

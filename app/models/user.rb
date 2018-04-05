@@ -11,6 +11,7 @@ class User < ApplicationRecord
               has_attached_file :avatar, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
                 validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
               after_create :create_room
+              after_create :create_cohort
               #attr_accessor :login
               has_one :room, dependent: :destroy
               has_one :cohort, inverse_of: :user
@@ -19,10 +20,10 @@ class User < ApplicationRecord
               has_many :messages, dependent: :destroy
                 accepts_nested_attributes_for :cohort, :room, :projects, :allow_destroy => true
               has_many :friendships, class_name: "Genius"
-              belongs_to :cohort, inverse_of: :users
-                validates_presence_of :cohort_id
-              belongs_to :classroom, inverse_of: :users
-                validates_presence_of :cohort_id
+              belongs_to :cohort, optional: true#, inverse_of: :users
+                #validates_presence_of :cohort_id
+              # belongs_to :classroom, inverse_of: :users
+              #   validates_presence_of :cohort_id
               has_many :attendances
                 accepts_nested_attributes_for :attendances, allow_destroy: true
 
@@ -170,9 +171,14 @@ class User < ApplicationRecord
 
     private
 
-      def create_room
-        hyphenated_username = self.full_name.split.join('-')
-        Room.create(name: hyphenated_username, user_id: self.id)
-      end
+    # def create_cohort
+    #   hyphenated_username = self.full_name.split.join('-')
+    #   Cohort.create(name: hyphenated_username, user_id: self.id)
+    # end
+
+    # def create_room
+    #     hyphenated_username = self.full_name.split.join('-')
+    #     Room.create(name: hyphenated_username, user_id: self.id)
+    #   end
     end
 end
