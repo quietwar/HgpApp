@@ -1,9 +1,14 @@
-ActiveAdmin.register User, as: 'Genius' do
-  permit_params :avatar, :name, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+ActiveAdmin.register User do
+  belongs_to :cohort, optional: true
+  scope :all, default: true
+
+  permit_params :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohorts_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
    duplicable?
   #active_admin_importable
+
+
 
 
       index do
@@ -38,7 +43,7 @@ ActiveAdmin.register User, as: 'Genius' do
 
 
   form do |f|
-    f.inputs do
+    f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
       f.input :genius
       f.input :cohort_id
@@ -55,23 +60,48 @@ ActiveAdmin.register User, as: 'Genius' do
        #end
      end
    end
-# ActiveAdmin.register_page "Project" do
-   #   belongs_to :genius
-    f.inputs 'Projects' do
-        f.has_many :projects, allow_destroy: true,
-                                  new_record: true do |u|
-            u.input :app_name
-            u.input :coding
-            u.input :project_details
-            u.input :start_date
-            u.input :github
-            #end
-           end
+ end
+
+    f.inputs 'Projects'
+    f.inputs do
+      f.has_many :projects, allow_destroy: true,
+                                new_record: false do |u|
+          u.input :app_name
+          u.input :coding
+          u.input :project_details
+          u.input :start_date
+          u.input :github
+      end
+     end
        f.actions
+     #end
+   end
+
+     controller do
+       # Instruct Inherited Resources to use `parent.scorecards` to find the related records.
+         defaults :collection_name => "Genius"
+
+         #belongs_to :cohort#, polymorphic: true
+
+         def update
+            if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+              params[:user].delete('password')
+              params[:user].delete('password_confirmation')
             end
-           end
+            super
          end
+
+       def create
+             @cohort = Cohort.find(params[:geniuses][:cohort])
+             @genius = Genius.find(params[:cohort][:geniuses])
+             params[:genius][:cohort] = @cohort.genius
+             params[:cohort][:genius] = @genius.cohort
+             @cohort = Cohort.new(params[:cohort])
+           super
        end
+     end
+     #end
+   end
 
    # sidebar :custom, only: :show do
    #   resource.a_attendance

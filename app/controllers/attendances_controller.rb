@@ -1,7 +1,8 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_admin_user!
   before_action :attendance_params, only: [:create, :edit]
-  before_action :configure_permitted_parameters, if: :devise_controller? #:present, :absent, :user_id, :halfday, :class_date
+  permit_params :genius, :city, :cohort, :attendance, :class_date
+
 
 
   def new
@@ -37,17 +38,17 @@ class AttendancesController < ApplicationController
   def update
   end
 
-#private
+private
 
-  def configure_permitted_parameters
-       attributes = [:first_name, :last_name, :username, :users_id, :class_date, :cohort, :cohort_id, :city_id, :present, :absent, :halfday]
-       devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :email, :password, :password_confirmation])
-       devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
-       devise_parameter_sanitizer.permit(:account_update, keys: attributes)
-  end
+  # def configure_permitted_parameters
+  #      attributes = [:genius, :users_id, :class_date, :cohort, :cohort_id, :city_id, :present, :absent, :halfday]
+  #      devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :email, :password, :password_confirmation])
+  #      devise_parameter_sanitizer.permit(:sign_up, keys: attributes)
+  #      devise_parameter_sanitizer.permit(:account_update, keys: attributes)
+  # end
 
   def project_params
-    params.permit(:present, :absent, :user_id, :halfday, :class_date)
+    params.permit(:genius, :users_id, :class_date, :cohort, :cohort_id, :present, :absent, :user_id, :halfday)
   end
 end
 end

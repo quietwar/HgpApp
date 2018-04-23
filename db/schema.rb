@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_24_211748) do
+ActiveRecord::Schema.define(version: 20180416011426) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.datetime "class_date"
     t.integer "attendance_id"
     t.string "cohort_id"
+    t.string "city_id"
     t.index ["classroom_id"], name: "index_attendances_on_classroom_id"
     t.index ["user_id"], name: "index_attendances_on_user_id"
   end
@@ -142,19 +143,11 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.string "genius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "admin_id"
     t.string "city"
     t.integer "cohort_id"
-    t.string "email"
-    t.string "email2"
-    t.integer "stipend"
-    t.string "benchmark"
-    t.string "projects"
-    t.bigint "cell"
-    t.integer "user_id"
-    t.string "first_name"
-    t.string "last_name"
     t.bigint "cohort"
+    t.string "city_id"
+    t.string "user"
     t.string "name"
   end
 

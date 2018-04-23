@@ -54,5 +54,13 @@ ActiveAdmin.register AdminUser, :as => 'Staff' do
   #   ['admin', 'admin_users']
   #   para "Hello World"
   #   end
+  def update
+      if params[:adminuser][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:adminuser].delete('password')
+        params[:adminuser].delete('password_confirmation')
+      end
+      super
+    end
   end
-end
+  end
+#end

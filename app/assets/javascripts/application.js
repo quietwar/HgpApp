@@ -20,7 +20,7 @@
 //= require fullcalendar/gcal
 //= require d3
 //= require turbolinks
-// require underscore
+//= require underscore
 //= require gmaps/google
 // require active_admin_map_index
 //= require_tree .

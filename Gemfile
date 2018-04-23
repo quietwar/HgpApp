@@ -103,7 +103,7 @@ group :production do
 end
 
 group :test do
-  gem 'capybara', '2.7.1'
+  gem 'capybara' 
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

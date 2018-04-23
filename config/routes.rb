@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+    resources :cohorts
+      resources :attendances
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
       resources :users do
         resources :projects
@@ -45,16 +48,12 @@ Rails.application.routes.draw do
 
 
       resources :features,only: [:create]
-      resources :cohorts, only: [:create, :new, :index, :show]
-      resources :classrooms  do
-        resources :attendances
-        collection do
-          post :search, to: 'classrooms#search'
-        end
-      end
-
       resources :friendships, only: [:show, :create, :destroy] do
       resources :messages, only: [:create]
+      resources :classrooms
+        collection do
+        post :search, to: 'classrooms#search'
+          end
         end
       root to: "classrooms#index"
     mount ActionCable.server => '/cable'

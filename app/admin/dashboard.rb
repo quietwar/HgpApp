@@ -57,7 +57,7 @@ ActiveAdmin.register_page "Dashboard" do
                      li link_to "Isaiah", page_path('isaiah')
                      li link_to "George", page_path('george')
                      li link_to "Malik",  page_path('malik')
-                     li link_to "Create a new Hidden Genius", new_admin_geniu_path
+                     li link_to "Create a new Hidden Genius", new_admin_user_path
                    end
                 end
               end
