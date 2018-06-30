@@ -1,50 +1,106 @@
+br />
+<div class="link_back">
+  <%= link_to "Back", classroom_attendance_path, class: "btn-sm btn-primary"  %>
+</div>
+<br />
+<%= render 'errors' %>
+<p>
+  <%=link_to 'Create Event', new_event_url(cohort_id: params["meeting_room_id"]), :id => 'new_event' %>
+</p>
+<br />
+<!-- <div>
+  <div class='calendar'></div>
+</div> -->
+<div>
+  <div id='calendar'>
+  </div>
+</div>
+<div id = "desc_dialog" class="dialog" style ="display:none;">
+  <div id = "event_desc">
+  </div>
+  <br/>
+  <br/>
+  <div id = "event_actions">
+    <span id = "edit_event"></span>
+    <span id = "delete_event"></span>
+  </div>
+</div>
+<div id = "create_event_dialog" class="dialog" style ="display:none;">
+  <div id = "create_event">
+  </div>
+</div>
 
-<script type=”text/javascript”>
+<script>
+      // page is now ready, initialize the calendar...
+      $('#new_event').click(function(event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        $.ajax({
+          url: url,
+          beforeSend: function() {
+            $('#loading').show();
+          },
+          complete: function() {
+            $('#loading').hide();
+          },
+          success: function(data) {
+            $('#create_event').replaceWith(data['form']);
+            $('#create_event_dialog').dialog({
+              title: 'New Event',
+              modal: true,
+              width: 500,
+              close: function(event, ui) { $('#create_event_dialog').dialog('destroy') }
+            });
+          }
+        });
+      });
 
-$(‘#calendar’).fullCalendar({
+      $('#calendar').fullCalendar({
+          editable: true,
+          header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+          },
+          //defaultView: 'agendaWeek',
+          defaultView: 'month',
+          height: 500,
+          slotMinutes: 15,
+          loading: function(bool){
+              if (bool)
+                  $('#loading').show();
+              else
+                  $('#loading').hide();
+          },
+          events: "/events/get_events?meeting_room_id=<%= params[:meeting_room_id]%>",
+          timeFormat: 'h:mm t{ - h:mm t} ',
+          dragOpacity: "0.5",
+          eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc){
+//              if (confirm("Are you sure about this change?")) {
+                  moveEvent(event, dayDelta, minuteDelta, allDay);
+//              }
+//              else {
+//                  revertFunc();
+//              }
+          },
 
-events: function(start, end, timezone, callback) {
+          eventResize: function(event, dayDelta, minuteDelta, revertFunc){
+//              if (confirm("Are you sure about this change?")) {
+                  resizeEvent(event, dayDelta, minuteDelta);
+//              }
+//              else {
+//                  revertFunc();
+//              }
+          },
 
-   $.ajax({
+          eventClick: function(event, jsEvent, view){
+            if ((<%= current_user.id %>) == event.user_id){
+              showEventDetails(event);
+            }
+          },
 
-        url: ‘myxmlfeed.php’,
 
-        dataType: ‘xml’,
 
-        data: {
 
-                        // our hypothetical feed requires UNIX timestamps
-
-                       start: start.unix(),
-
-                       end: end.unix()
-
-       },
-
-       success: function(doc) {
-
-            var events = [];
-
-                       $(doc).find(‘event’).each(function() {
-
-                            events.push({
-
-                                 title: $(this).attr(‘title’),
-
-                                 start: $(this).attr(‘start’) // will be parsed
-
-                 });
-
-                     });
-
-                    callback(events);
-
-                 }
-
- });
-
-}
-
-});
-
+      });
 </script>

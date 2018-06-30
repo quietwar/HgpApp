@@ -1,29 +1,32 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
-      devise :registerable,:database_authenticatable, :confirmable,
-             :recoverable, :rememberable, :trackable, :omniauthable #, omniauth_providers: [:google_oauth2]
-             #validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+      devise :registerable,:database_authenticatable,:validatable,
+             :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
+             validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
               validates :cohort_id, :city, presence: true
-              validates :email, presence: true
+              validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
               validates :password, presence: false #length: {:within => 6..46 }, on: :create
               validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
               has_attached_file :avatar, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
                 validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
               after_create :create_room
-              geocoded_by :address
-                after_validation :geocode
-
-              has_one :room, inverse_of: :user
+              after_create :create_cohort
+              #attr_accessor :login
+              has_one :room, dependent: :destroy
               has_one :cohort, inverse_of: :user
               has_many :projects, inverse_of: :user
-              has_many :messages, inverse_of: :user
+                accepts_nested_attributes_for :projects, allow_destroy: true
+              has_many :messages, dependent: :destroy
                 accepts_nested_attributes_for :cohort, :room, :projects, :allow_destroy => true
               has_many :friendships, class_name: "Genius"
-              has_many :active_admin_comments, as: :resource, class_name: 'Hgp_staffStaff::Comment'
-              alias_method :comments, :active_admin_comments
-              # belongs_to :cohort, inverse_of: :users
-              #   validates_presence_of :cohort
+              belongs_to :cohort, optional: true#, inverse_of: :users
+                #validates_presence_of :cohort_id
+              # belongs_to :classroom, inverse_of: :users
+              #   validates_presence_of :cohort_id
+              has_many :attendances
+                accepts_nested_attributes_for :attendances, allow_destroy: true
+
 
       def full_name
         "#{first_name} #{last_name}"
@@ -73,6 +76,44 @@ class User < ApplicationRecord
         friendships.where(friend: friend).first
       end
 
+      def self.from_omniauth(auth)
+        byebug
+        user.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+          user.email = auth.info.email
+          user.password = Devise.friendly_token[0,20]
+          user.provider = auth.provider
+          user.uid = auth.uid
+          user.name = auth.info.name   # assuming the user model has a name
+          user.image = auth.info.image # assuming the user model has an image
+        end
+      end
+
+
+
+        def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
+            #byebug
+            data = access_token.info
+            user = User.where(:google_oauth2 => access_token.provider, :uid =>     access_token.uid ).first
+
+            unless user
+              #registered_user = User.where(:email => access_token.info.email).first
+
+              #if registered_user
+              #  return registered_user
+              #else
+                user = User.create(
+                  name: data["genius"],
+                  provider: access_token.provider,
+                  email: data["email"],
+                  uid: access_token.uid ,
+                  password: Devise.friendly_token[0,20],
+                )
+              #end
+
+           end
+
+           user
+        end
 
       def refresh_token_if_expired
         if token_expired?
@@ -111,30 +152,55 @@ class User < ApplicationRecord
        end
 
 
-      private
+    protected
 
-      def sign_up_params
-        params.require(:user).permit(:cohort, :avatar, :first_name, :last_name, :username, :genius, :city, :email, :email2, :cell, :password, :password_confirmation,)
+        def self.send_reset_password_instructions attributes = {}
+          recoverable = find_recoverable_or_initialize_with_errors(reset_password_keys, attributes, :not_found)
+          recoverable.send_reset_password_instructions if recoverable.persisted?
+          recoverable
+        end
 
-      def account_update_params
-        params.require(:user).permit(:avatar, :first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :password, :password_confirmation, :stipend, :benchmark, :projects, :project, :project_ids
-        )
-      end
+        def self.find_recoverable_or_initialize_with_errors required_attributes, attributes, error = :invalid
+          (case_insensitive_keys || []).each {|k| attributes[k].try(:downcase!)}
 
+          attributes = attributes.slice(*required_attributes)
+          attributes.delete_if {|_key, value| value.blank?}
 
-      def configure_permitted_parameters
-        devise_parameter_sanitizer.for(:sign_up) << :first_name << :last_name
-      end
+          if attributes.size == required_attributes.size
+            if attributes.key?(:login)
+              login = attributes.delete(:login)
+              record = find_record(login)
+            else
+              record = where(attributes).first
+            end
+          end
 
-      def create_room
-       hyphenated_username = self.full_name.split.join('-')
-       Room.create(name: hyphenated_username, user_id: self.id)
-      end
+          unless record
+            record = new
 
-        # def create_room
-        #   @user = :current_user
-        #   @room = @user.create_room(params[:room].permit(:genius, :username))
-        #   hyphenated_username = self.full_name.split.join('-')
-        #   room.create(name: hyphenated_username, user_id: self.id)
-  end
+            required_attributes.each do |key|
+              value = attributes[key]
+              record.send("#{key}=", value)
+              record.errors.add(key, value.present? ? error : :blank)
+            #end
+          end
+          record
+        end
+
+        def self.find_record login
+          where(["username = :value OR email = :value", {value: login}]).first
+        end
+
+    private
+
+    # def create_cohort
+    #   hyphenated_username = self.full_name.split.join('-')
+    #   Cohort.create(name: hyphenated_username, user_id: self.id)
+    # end
+
+    # def create_room
+    #     hyphenated_username = self.full_name.split.join('-')
+    #     Room.create(name: hyphenated_username, user_id: self.id)
+    #   end
+    end
 end

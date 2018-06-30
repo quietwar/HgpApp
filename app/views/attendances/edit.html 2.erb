@@ -1,0 +1,14 @@
+<%= form_for(@classroom, url: '/attendances/:id', method: :put) do |f| %>
+  <table>
+    <%- @classroom.users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= checkbox_tag "attendances[#{user.id}][present]" %></td>
+        <td><%= checkbox_tag "attendances[#{user.id}][absent]" %></td>
+        <td><%= checkbox_tag "attendances[#{user.id}][halfday]" %></td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= f.submit %>
+<% end %>

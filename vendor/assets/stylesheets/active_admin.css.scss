@@ -8,17 +8,23 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
+//= require activeadmin_addons/all
+//= require jquery-ui
 
-// $skinMainFirstColor: #000!default;
-// $skinMainSecondColor: #FFE000!default;
-// $skinBorderWindowColor: #cccccc;
-//
-// @import "active_admin/mixins";
-// @import "wigu/active_admin_theme";
-//
-// //@import "arctic_admin";
-// @import "active_admin/base";
-//
+
+
+$skinMainFirstColor: #000!default;
+$skinMainSecondColor: #FFE000!default;
+$skinBorderWindowColor: #cccccc;
+
+@import "active_admin/mixins";
+@import "wigu/active_admin_theme";
+@import "jquery.xdan.datetimepicker";
+
+//@import "arctic_admin";
+@import "active_admin/base";
+
+
 // // Overriding any non-variable SASS must be done after the fact.
 // // For example, to change the default status-tag color:
 // //

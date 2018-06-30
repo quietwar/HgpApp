@@ -1,16 +1,15 @@
 class CohortsController < ApplicationController
-  #before_action :authenticate_admin!
-  before_action :set_cohort#, only: [:show, :edit, :update, :destroy]
-  permit_params :genius, :city, :cohort_id, :cell, :email, :email2
-Rails.logger.info(@cohorts.errors.inspect)
+  before_action :set_cohort
+  #permit_params :genius, :city, :cohort_id, :cell, :email, :email2
+
     def index
       @cohort = Cohort.all
-      @cohorts = current_admin.cohorts
-
-        respond_to do |format|
-      format.html
-      format.json { render json: UsersDatatable.new(view_context) }
-      end
+      # @cohorts = current_admin.cohorts
+      #
+      #   respond_to do |format|
+      # format.html
+      # format.json { render json: UsersDatatable.new(view_context) }
+      # end
     end
 
     def show
@@ -23,7 +22,20 @@ Rails.logger.info(@cohorts.errors.inspect)
 
     def create
       @cohort = Cohort.new(cohort_params)
-      @cohort = save!
+      respond_to do |format|
+      if @cohort.save
+        format.html { redirect_to @cohort, notice: 'Cohort was successfully created.' }
+        format.json { render :show, status: :created, location: @cohort }
+      else
+        format.html { render :new }
+        format.json { render json: @cohort.errors, status: :unprocessable_entity }
+      end
+     end
+    end
+
+    def edit
+      @cohort = Cohort.find(params[:id])
+      @user = @cohort.build_cohort
     end
 
     def destroy

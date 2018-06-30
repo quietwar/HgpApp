@@ -1,69 +1,45 @@
-ActiveAdmin.register User, :as => 'Genius' do
-  permit_params :avatar, :first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :password, :password_confirmation, :stipend, :benchmarks, avatar_attributes: [:_destroy]
-  menu priority: 4
-  config.batch_actions = true
-  #active_admin_importable
-
-  # index do
-  #
-  # end
-
-  # sidebar "Genius Details", only: => [:show, :edit] do
-  #   ul do
-  #     li link_to "Goals",  admin_genius_goals_path(genius)
-  #     li link_to "Features", admin_genius_features_path(genius)
-  #   end
-  # end
-
-  #sortable tree: true
-
-
-  index do
-    selectable_column
-    id_column
-    #image_column :avatar, style: :thumb
-    column :cohort_id
-    column :genius
-    column :email
-    column :email2
-    column :username
-    column :city
-    column :cell
-    column :projects
-    column :sign_in_count
-    column :created_at
-    image_column :avatar, style: :thumb
-
-    actions
-  end
-
-  filter :genius
-  filter :cohort_id
-  filter :city
-  filter :stipend
-  filter :benchmarks
-  filter :username
-  filter :feature
-  filter :sign_in_count
-  filter :created_at
-
+ActiveAdmin.register User do#, as: 'Genius' do
+# ActiveAdmin.register_page "Project" do
+permit_params projects_attributes: [:app_name, :coding, :project_details, :start_date, :github],
+                attendances_attributes: [ :id, :start_time, :end_time, :_destroy ]
 
   form do |f|
-    f.inputs do
-      f.input :genius
-      f.input :cohort_id
-      f.input :city
-      f.input :cell
-      f.input :email
-      f.input :email2
-      f.input :username
-      f.input :avatar, as: :file
-      if f.object.avatar.present?
-        f.semantic_fields_for :avatar_attributes do |avatar_fields|
-         avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
-       end
-     end
-   end
-    f.actions
-  end
-end
+   #   belongs_to :genius
+    f.inputs 'Projects' do
+      f.input :app_name
+        f.has_many :projects, allow_destroy: true,
+                                  new_record: true do |u|
+            u.input :app_name
+            u.input :coding
+            u.input :project_details
+            u.input :start_date
+            u.input :github
+            #end
+           end
+       f.actions
+            end
+           end
+         end
+       #end
+
+
+
+
+   # sidebar :custom, only: :show do
+   #   resource.a_attendance
+   #        f.input :ends_at, as: :datepicker,
+   #                  datepicker_options: {
+   #                    min_date: 3.days.ago.to_date,
+   #                    max_date: "+1W +5D"
+   #                  }
+   #            end
+
+      # sidebar project: :show do
+      #   attributes_table_for genius do
+      #     #row("Total Projects") { genius.projects.complete.count }
+      #     row("Total Value") do
+      #     end
+      #   end
+      # end
+   #end
+ #end

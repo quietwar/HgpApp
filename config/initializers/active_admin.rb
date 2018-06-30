@@ -1,7 +1,7 @@
 ActiveAdmin.setup do |config|
-  config.before_action do
-    params.permit!
-  end
+  # config.before_action do
+  #   permitted params!
+  # end
 
   # == Site Title
   require 'active_admin'
@@ -20,7 +20,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Aim for an image that's 21px high so it fits in the header.
   #
-   config.site_title_image = "/assets/HGPAssets_Emblem_Yellow.png"
+   config.site_title_image = "/assets/HGP_Yellow_small.png"
 
   # == Default Namespace
   #
@@ -37,52 +37,21 @@ ActiveAdmin.setup do |config|
   #   config.default_namespace = false
   #
   # Default:
-  # If you wanted to add a static menu item to the default menu provided:
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :default do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #     end
-  #   end
-
-  # == Download Links
+  # config.namespace :admin do |admin|
+  #    admin.build_menu :utility_navigation do |menu|
+  #      menu.add  :label  => proc{ display_name current_active_admin_user },
+  #                #:url    =>  proc{ edit_admin admin_path(current_active_admin_user) }  ,#link_to current_active_admin_user,
+  #                :id     => 'current_admin_user',
+  #                :if     => proc{ current_active_admin_user? }
+  #      admin.add_logout_button_to_menu menu
+  #      menu.add label: "HGP Website", url: "http://www.hiddengeniusproject.org",
+  #                                          html_options: { target: :blank }
   #
-  # You can disable download links on resource listing pages,
-  # or customize the formats shown per namespace/globally
-  #
-  # To disable/customize for the :admin namespace:
-  #
-  #   config.namespace :admin do |admin|
-    # admin_user.build_menu do |menu|
-    #   menu.add :label => "Ad", :priority => 1
-    #   menu.add :label => "Second Item", :priority => 2
-    #   menu.add :label => "Third Item", :priority => 3
-    # end
-  #end
-  #     # Disable the links entirely
-  #     admin.download_links = false
-  #
-  #     # Only show XML & PDF options
-  #     admin.download_links = [:xml, :pdf]
-  #
-  #     # Enable/disable the links based on block
-  #     #   (for example, with cancan)
-  #     admin.download_links = proc { can?(:view_download_links) }
-  #
-  #   end
+  #    end
+  #  end
 
 
-  config.default_namespace = :Hgp_staff
-    config.namespace :Hgp_staff do |hgp_staff|
-      hgp_staff.build_menu :utility_navigation do |menu|
-        menu.add label: "HGP Webpage", url: "http://www.hiddengeniusproject.org",
-                                            html_options: { target: :blank }
-      #  menu.add  add_current_user_to_menu menu :priority => 5,
-        #menu.add_logout_button_to_menu
-        # hgp_staff.add_current_user_to_menu  menu
-        #  hgp_staff.add_logout_button_to_menu menu
-      #end
-    #end
 
   # You can customize the settings for each namespace by using
   # a namespace block. For example, to change the site title
@@ -104,39 +73,40 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # within the application controller.
 
-  config.authentication_method = false #:authenticate_admin!
-
-  # == User Authorization
+   config.authentication_method = :authenticate_admin_user!
   #
-  # Active Admin will automatically call an authorization
-  # method in a before filter of all controller actions to
-  # ensure that there is a user with proper rights. You can use
-  # CanCanAdapter or make your own. Please refer to documentation.
-  #config.authorization_adapter = ActiveAdmin::CanCanAdapter
-
-  # In case you prefer Pundit over other solutions you can here pass
-  # the name of default policy class. This policy will be used in every
-  # case when Pundit is unable to find suitable policy.
-   #config.pundit_default_policy = "MyDefaultPunditPolicy"
-
-  # You can customize your CanCan Ability class name here.
-   #config.cancan_ability_class = "Ability"
+  #
+  #
+  # # == User Authorization
+  # #
+  # # Active Admin will automatically call an authorization
+  # # method in a before filter of all controller actions to
+  # # ensure that there is a user with proper rights. You can use
+  # # CanCanAdapter or make your own. Please refer to documentation.
+  config.authorization_adapter = ActiveAdmin::CanCanAdapter
+  #
+  # # In case you prefer Pundit over other solutions you can here pass
+  # # the name of default policy class. This policy will be used in every
+  # # case when Pundit is unable to find suitable policy.
+  #  #config.pundit_default_policy = "MyDefaultPunditPolicy"
+  #
+  # # You can customize your CanCan Ability class name here.
+  # config.cancan_ability_class = "Ability"
 
   # You can specify a method to be called on unauthorized access.
   # This is necessary in order to prevent a redirect loop which happens
   # because, by default, user gets redirected to Dashboard. If user
   # doesn't have access to Dashboard, he'll end up in a redirect loop.
   # Method provided here should be defined in application_controller.rb.
-   config.on_unauthorized_access = :access_denied
+   #config.on_unauthorized_access = :access_denied
 
   # == Current User
-  #config.authorization_adapter = :OnlyHgpAuthorization
   # Active Admin will associate actions with the current
   # user performing them.
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  config.current_user_method = :current_user
+  config.current_user_method = :current_admin_user
 
   # == Logging Out
   #
@@ -148,7 +118,7 @@ ActiveAdmin.setup do |config|
   # will call the method to return the path.
   #
   # Default:
-  config.logout_link_path = :destroy_admin_session_path
+  config.logout_link_path = :destroy_admin_user_session_path
 
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
@@ -162,7 +132,7 @@ ActiveAdmin.setup do |config|
   # roots for each namespace.
   #
   # Default:
-   config.root_to = 'classrooms#index'
+  # config.root_to = 'classrooms#index'
 
   # == Admin Comments
   #
@@ -172,7 +142,7 @@ ActiveAdmin.setup do |config|
   config.comments = true
   # #
   # # You can change the name under which comments are registered:
-  config.comments_registration_name = 'staff-comments'
+  config.comments_registration_name = 'staffs-comments'
   # #
   # # You can change the order for the comments and you can change the column
   # # to be used for ordering:
@@ -182,22 +152,22 @@ ActiveAdmin.setup do |config|
    config.comments_menu = true
   # #
   # # You can customize the comment menu:
-   config.comments_menu = { parent: 'Staff', priority: 5 }
+   config.comments_menu = { parent: 'Staffs', priority: 5 }
   #module ActiveAdmin
     #class ResourceDSL < DSL
-      def permit_params#(*args, &block)
-        resource_sym = config.resource_name.singular.to_sym
-        controller do
-          define_method :permitted_params do
-            params.permit :email, :utf8, :authenticity_token, :commit
-          #                 resource_sym =>
-          #                 block? instance_exec(&block) : args do
-          #
-          # end
-         #end
-        end
-      end
-    end
+    #   def permit_params#(*args, &block)
+    #     resource_sym = config.resource_name.singular.to_sym
+    #     controller do
+    #       define_method :permitted_params do
+    #         params.permit :utf8, :authenticity_token, :commit
+    #       #                 resource_sym =>
+    #       #                 block? instance_exec(&block) : args do
+    #       #
+    #       # end
+    #      #end
+    #     end
+    #   end
+    # end
   # == Batch Actions
   #
   # Enable and disable Batch Actions
@@ -279,6 +249,27 @@ ActiveAdmin.setup do |config|
   # You can add a navigation menu to be used in your application, or configure a provided menu
   #
   # To change the default utility navigation to show a link to your website & a logout btn
+  #
+
+  # == Download Links
+  #
+  # You can disable download links on resource listing pages,
+  # or customize the formats shown per namespace/globally
+  #
+  # To disable/customize for the :admin namespace:
+  #
+  #     # Disable the links entirely
+  #     admin.download_links = false
+  #
+  #     # Only show XML & PDF options
+  #     admin.download_links = [:xml, :pdf]
+  #
+  #     # Enable/disable the links based on block
+  #     #   (for example, with cancan)
+  #     admin.download_links = proc { can?(:view_download_links) }
+  #
+  #   end
+
   # == Pagination
   #
   # Pagination is enabled by default for all resources.
@@ -319,6 +310,6 @@ ActiveAdmin.setup do |config|
   #
   #config.order_clause = MyOrderClause
 # end
-   end
- end
+   #end
+ #end
 end

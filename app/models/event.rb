@@ -1,18 +1,12 @@
 class Event < ApplicationRecord
-  #acts_as_gmappable
+  has_many :schedules
+  accepts_nested_attributes_for :schedules, :allow_destroy => true
 
-belongs_to :user
-
-validates :location, :address, :city, :state, :latitude, :longitude, presence: true
-
-
-geocoded_by :full_address
-after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
-
-def full_address
- [street, city, state].compact.join(', ')
-end
+  validates :location, :address, :city, :state, :latitude, :longitude, presence: true
 
 
 
+  def full_address
+   [street, city, state].compact.join(', ')
+  end
 end

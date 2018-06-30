@@ -15,11 +15,6 @@
  *= require jquery-ui/sortable
  *= require jquery-ui/datepicker
  *= require bootstrap-datepicker
- *= require fullcalendar
  *= require_tree .
  *= require_self
  */
- 
- //@import "font-awesome-sprockets";
- //@import "font-awesome";
- @import 'fullcalendar'

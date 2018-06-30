@@ -1,54 +1,71 @@
-ActiveAdmin.register Cohort, :as => 'Hgp-cohorts'  do
+ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
+  permit_params :city, :cohort_id, :genius, users_attributes: [:last_name, :users_id, :cohort, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:present, :absent, :halfday, :class_date], classroom_attributes: [:id, :body, :_destroy]
 
-  permit_params :first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend,:project, :benchmark, :projects
   menu priority: 3
   config.batch_actions = true
-  active_admin_importable
-  #sortable tree: true
+    duplicable?
+  #active_admin_importable
+  sortable tree: true
 
-  # sidebar  only: => [:show, :edit] do
-  #   ul "Genius Details" do
-  #     li link_to "Goals",  admin_genius_goals_path(genius)
-  #     li link_to "Features", admin_genius_features_path(genius)
-  #   end
-
-  #  end
+    form do |f|
+      f.inputs 'Hgp Cohorts', :body
+      f.inputs do
+        f.input :city, label: "Office Location"
+        f.input :cohort, label: "Cohort Number"
+      end
+      f.inputs "Geniuses" do
+        f.has_many :users,allow_destroy: true,
+                              new_record: false do |a|
+          a.input :genius
+          a.input :cell
+          a.input :email
+          a.input :password, input_html: { autocomplete: "new-password" }
+          a.input :email2
+          a.input :username
+          a.input :avatar, as: :file
+          if user.object.avatar.present?
+            uuser.semantic_fields_for :avatar_attributes do |avatar_fields|
+             avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
+          end
+       end
+      end
+    end
+      f.actions
+    end
 
   index do
     selectable_column
     id_column
-    column :cohort_id
-    column :genius
-    column :username
     column :city
-    column :email
-    column :email2
-    column :cell
-    column :password
-    column :password_confirmation
+    column :cohort
+
 
     actions
   end
 
-  filter :genius
-  filter :cohort_id
-  filter :city
-  filter :username
+    filter :genius
+    filter :cohort
+    filter :city
+    filter :username
 
 
-  form do |f|
-    f.inputs "Hgp Geniuses" do
-      f.input :genius
-      f.input :cohort_id
-      f.input :city
-      f.input :cell
-      f.input :email
-      f.input :email2
-      f.input :password
-      f.input :password_confirmation
+    form do |f|
+        ### Declare here the model's own form fields:
 
-    end
-    f.actions
+        ### Declare here the form for the child model, using the "has_many" method:
 
-	end
+
+
+  controller do
+    def create
+      @cohort = Cohort.find(params[:user][:cohort])
+      @user = User.find(params[:cohort][:user])
+      params[:user][:cohort] = @cohort.user
+      params[:cohort][:user] = @user.cohort
+      @cohort = Cohort.new(params[:cohort])
+      super
+    #end
+   end
   end
+ end
+end  ### Declare here the form for the child model, using the "has_many" method:

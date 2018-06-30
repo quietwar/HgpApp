@@ -1,4 +1,6 @@
 Rails.application.configure do
+  # Verifies that versions and hashed value of the package contents in the project's package.json
+    config.webpacker.check_yarn_integrity = false
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => ‘sitename.com’ }
@@ -105,6 +107,7 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
+end 
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

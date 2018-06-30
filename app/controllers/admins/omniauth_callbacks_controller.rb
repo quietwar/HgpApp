@@ -22,8 +22,13 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def new
+<<<<<<< HEAD:app/controllers/admins/omniauth_callbacks_controller.rb
 
+=======
+    #@event = Event.new
+>>>>>>> 2b61b96e3274c184e53349ba14f5b043801eea6a:app/controllers/events_controller.rb
   end
+
 
   def edit
 
@@ -81,8 +86,13 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def redirect
     client = Signet::OAuth2::Client.new({
+<<<<<<< HEAD:app/controllers/admins/omniauth_callbacks_controller.rb
       client_id: '81909937110-9qkbu78955ge23fhinrkkv1ih2cl13sh.apps.googleusercontent.com',
       client_secret: "6raMG_ql1d-EwxAOnwbMP1B3",
+=======
+      client_id: '1006347326565-e30jdl53gig8s97mss8c606o0db865qu.apps.googleusercontent.com',
+      client_secret: 'uJ9YgUrDhROhQQt9hhVpjJJc',
+>>>>>>> 2b61b96e3274c184e53349ba14f5b043801eea6a:app/controllers/events_controller.rb
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
       scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
       redirect_uri: ["http://localhost:3000/users/auth/google_oauth2/callback"]#url_for(:action => :callback)

@@ -8,7 +8,6 @@
           <div class="container">
               <div class="row">
                   <div class="col-md-8 col-md-offset-2">
-                    <li class="active"><%= link_to "Currently signed up Geniuses", users_path %></li>
                     <li class="active"><%= link_to "Our Geniuses", users_path %></li>
                   </div>
               </div>
@@ -17,16 +16,16 @@
     </header>
   <div class="container-fluid">
     <table role='datatable responsive no-wrap'>
-    <%= content_tag :table, role: :datatable, data: { url: admin_panel_dashboard_path(format: :json)} do %>
+    <%= content_tag :table, role: :datatable, data: { url: admin_dashboard_path(format: :json)} do %>
 
       <thead>
         <tr>
+          <th>City</th>
           <th>Cohort</th>
           <th>Genius</th>
-          <th>Benchmarks</th>
-          <th>Stipend</th>
+          <th>Github</th>
           <th>Web Site</th>
-          <th>App</th>
+          <th>Project</th>
         </tr>
       </thead>
        <tbody>

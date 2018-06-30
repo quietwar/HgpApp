@@ -1,24 +1,33 @@
 <h1>Geniuses</h1>
-<div class="col-md-8">
+<div class="col-md-10">
   <table class="table table-striped">
     <thead>
-      <tr>
-        <% @users = User.all %>
-        <% @users.each do |user| %>
-        <th> Genuius </th><br/>
-        <th> user  </th><br/>
-      <% end %>
-      </tr>
-    </thead>
+      <tbody>
+          <% @users.each do |user| %>
+  <% @users = User.all %>
 
-    <tbody>
-      <% @users.each do |user| %>
+  <%= form_for(:attendances, url: '/admin/attendances/') do |f| %>
+    <table>
+    <%= @today %>
+    <th>Name</th><th>Present</th><th>Absent</th><th>halfday</th>
+      <%- @users.each do |user| %>
         <tr>
-          <td><%= user.username %></td>
-          <td><%= user.email %></td>
+          <td><%= user.first_name %></td>
+          <td><%= check_box_tag "attendances[#{user.id}][present]" %></td>
+          <td><%= check_box_tag "attendances[#{user.id}][absent]" %></td>
+          <td><%= check_box_tag "attendances[#{user.id}][tardy]" %></td>
         </tr>
       <% end %>
-    </tbody>
+    </table>
+
+  <%= f.submit %>
+<% end %>
+            <!-- <tr>
+              <%= render user %>
+            </tr> -->
+          <% end %>
+        </tbody>
+    </thead>
   </table>
 
 

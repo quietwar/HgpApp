@@ -5,8 +5,8 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
 
-  #config.secret_key = 'cba52b9879adc14a361f8b26e1985ff3e909bd33c273a67ffd4f8d041f98d043f448f9d60952ca5280a539a655203e874f174fcfbd39df83b6050d6b8f'
-  config.secret_key = ENV['config.secret_key'] if Rails.env.production?
+  #config.secret_key = '246ea1cfec18ce56fbad509b4e90540f0bca1af44cf7eb55d0314e5a6cea095cdc854648d26377050ce8607accfe0f12afda9b6ee3604e5875baaf711cfd0e6b'
+  config.secret_key = ENV['devise_secret_key'] if Rails.env.production?
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
@@ -25,6 +25,7 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
+
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for
@@ -33,8 +34,9 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  config.authentication_keys = [:email, :password]
-
+  # config.authentication_keys = [:login]
+  #
+  # config.reset_password_keys = [:login]
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
   # find_for_authentication method and considered in your model lookup. For instance,
@@ -135,7 +137,7 @@ Devise.setup do |config|
   config.reconfirmable = true
 
   # Defines which key will be used when confirming an account
-   config.confirmation_keys = [:email]
+   #config.confirmation_keys = [:email]
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
@@ -187,7 +189,6 @@ Devise.setup do |config|
 
   # Time interval to unlock the account if :time is enabled as unlock_strategy.
   # config.unlock_in = 1.hour
-  #config.authentication_keys = [ :sign_in]
   # Warn on the last attempt before the account is locked.
   # config.last_attempt_warning = true
 
@@ -219,11 +220,11 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-   config.scoped_views = true
+   #config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
-   config.default_scope = :user
+  # config.default_scope = :user
 
   # Set this configuration to false if you want /users/sign_out to sign out
   # only the current scope. By default, Devise signs out all scopes.
@@ -266,11 +267,17 @@ Devise.setup do |config|
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
-  #
   # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  #   config.failure_app = FailureApp
+  #end
+#   Warden::Manager do |config|
+#   config.failure_app = FailureApp
+#   config.oauth(:google) do |google|
+#     Figaro.env.google_client_id,
+#     Figaro.env.google_client_secret
+#   end
+#   config.default_strategies(:google_oauth2, :password, :other)
+# end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
@@ -284,16 +291,7 @@ Devise.setup do |config|
 
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-  # config.omniauth_path_prefix = '/users/auth'
-  # module OmniAuth
-  #   module Strategies
-  #     class GoogleAuth < OmniAuth::Strategies::GoogleOauth2
-  #       option :name, 'google_auth'
-  #       option :callback_path, '/callbacks/google'
-  #     end
-  #   end
-  # end
-  #
+
   # require 'omniauth-google-oauth2'
   config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH_CLIENT_ID"], ENV["GOOGLE_OAUTH_SECRET"], {
    scope: 'email, profile, plus.me, calendar'
@@ -325,4 +323,25 @@ Devise.setup do |config|
       # }
     #end
 
+
+
+  require 'omniauth-google-oauth2'
+
+
+  Rails.application.config.app_middleware.use OmniAuth::Builder do
+    config.omniauth :google_oauth2,
+     Figaro.env.google_client_id,
+     Figaro.env.google_client_secret
+     #google_oauth2_options
+      {
+        scope: 'email, calendar',
+        prompt: 'select_account',
+        image_aspect_ratio: 'original',
+        name: 'google',
+        access_type: 'offline',
+        provider_ignores_state: true
+      }
+    #end
+   end
+ 
   end
