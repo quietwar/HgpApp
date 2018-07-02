@@ -24,21 +24,21 @@ class UsersController < Devise::RegistrationsController
 
   def edit
     @user = User.find(params[:id])
-    @cohort = @user.build_cohort[:id]
+    @cohort = @user.build_cohort
   end
 
 
   def show
     @user = User.find(params[:id])
+    @cohort = @user.cohort
     unless @user == current_user
       redirect_to :back, :alert => "Access denied."
     end
   end
 
   def index
-     @users = User.excludes(:id => current_user.id)
-     @user = User.find(params[:id])
-     @cohort = @user.build_cohort[:id]
+     @users = User.cohort.where(params[:cohort_id])
+     #@users = User.find(params[:cohort_id])
      # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
      #    marker.lat user.latitude
      #    marker.lng user.longitude

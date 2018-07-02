@@ -7,12 +7,10 @@
 // For example, to change the sidebar width:
 // $sidebar-width: 242px;
 
-<<<<<<< HEAD
-=======
+
 // Active Admin's got SASS!
 //= require activeadmin_addons/all
 //= require jquery-ui
->>>>>>> 2b61b96e3274c184e53349ba14f5b043801eea6a
 
 
 $skinMainFirstColor: #000!default;
@@ -21,19 +19,18 @@ $skinBorderWindowColor: #cccccc;
 
 @import "active_admin/mixins";
 @import "wigu/active_admin_theme";
-<<<<<<< HEAD
+
 
 //@import "arctic_admin";
 @import "active_admin/base";
-=======
 @import "jquery.xdan.datetimepicker";
 
 //@import "arctic_admin";
 @import "active_admin/base";
-@import "fullcalendar";
+//@import "fullcalendar";
 //@import "index_as_calendar/application"
 
->>>>>>> 2b61b96e3274c184e53349ba14f5b043801eea6a
+
 
 // Overriding any non-variable SASS must be done after the fact.
 // For example, to change the default status-tag color:

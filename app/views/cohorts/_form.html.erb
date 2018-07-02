@@ -45,8 +45,8 @@
 <h2>Tasks</h2>
 <%= f.fields_for :projects do |ff| %>
   <div>
-    <%= ff.label :name %>
-    <%= ff.text_field :name %>
+    <%= ff.label :app_name %>
+    <%= ff.text_field :app_name %>
 
     <% if ff.object.persisted? %>
       <%= ff.check_box :_destroy %>

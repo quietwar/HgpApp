@@ -291,39 +291,15 @@ Devise.setup do |config|
 
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
-
-  # require 'omniauth-google-oauth2'
-  config.omniauth :google_oauth2, ENV["GOOGLE_OAUTH_CLIENT_ID"], ENV["GOOGLE_OAUTH_SECRET"], {
-   scope: 'email, profile, plus.me, calendar'
- }
-  # Rails.application.config.middleware.use OmniAuth::Builder do
-  #   provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
-  #     {
-  #       name: 'google',
-  #       scope: 'email, profile, plus.me, calendar',
-  #       prompt: 'select_account',
-  #       image_aspect_ratio: 'square',
-  #       image_size: 50
-  #     }
+  # config.omniauth_path_prefix = '/my_engine/users/auth'
+  # module OmniAuth
+  #   module Strategies
+  #     class GoogleAuth < OmniAuth::Strategies::GoogleOauth2
+  #       option :name, 'google_auth'
+  #       option :callback_path, '/callbacks/google'
+  #     end
+  #   end
   # end
-  #   #def google_oauth2_options
-
-  #config.omniauth :google_oauth2, '81909937110-9qkbu78955ge23fhinrkkv1ih2cl13sh.apps.googleusercontent.com', '6raMG_ql1d-EwxAOnwbMP1B3', scope: 'user, calendars, email, maps'
-     # Figaro.env.google_client_id,
-     # Figaro.env.google_client_secret,
-     #google_oauth2_options
-      # {
-      #   scope: 'email, calendar',
-      #   provider_ignores_state: true,
-      #   redirect_uri: 'http://localhost:3000/users/auth/google_oauth2/callback/',
-      #   prompt: 'select_account',
-      #   image_aspect_ratio: 'original',
-      #   name: 'google',
-      #   access_type: 'offline'
-      # }
-    #end
-
-
 
   require 'omniauth-google-oauth2'
 
@@ -343,5 +319,4 @@ Devise.setup do |config|
       }
     #end
    end
- 
   end

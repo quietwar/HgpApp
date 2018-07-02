@@ -1,6 +1,7 @@
 class CohortsController < ApplicationController
   before_action :set_cohort
-  #permit_params :genius, :city, :cohort_id, :cell, :email, :email2
+  params.require(:cohorts).permit(:genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
+
 
     def index
       @cohort = Cohort.all
@@ -13,7 +14,8 @@ class CohortsController < ApplicationController
     end
 
     def show
-      @cohort = Cohort.find(params[:id])
+      @cohort = Cohort.find_by_id(params[:cohort_id])
+
     end
 
     def new
@@ -49,7 +51,9 @@ class CohortsController < ApplicationController
     end
 
     def cohort_params
-      params.require(:cohorts).permit(:cohort, :genius, :city, :cohort )
+      params.require(:cohorts).permit(:genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
+
+      #params.require(:cohorts).permit(:cohort, :genius, :city, :cohort )
     end
 
     def set_current_room

@@ -1,5 +1,5 @@
 #require 'devise/orm/:active_record'
-#require 'kaminari'
+require 'kaminari'
 require_relative 'boot'
 require 'rails/all'
 
@@ -14,16 +14,11 @@ module GeniusLounge
 
 
     config.load_defaults 5.1
-
     #config.middleware.use Rack::MethodOverride
     config.app_generators.scaffold_controller :responders_controller
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
-
-    #config.middleware.use ActionDispatch::Cookies
-    #config.middleware.use ActionDispatch::Session::CookieStore
-    config.assets.precompile += ['application-print.css']
-
+    # -- all .rb files in that directory are automatically loaded.
     # config.middleware.use ActionDispatch::Cookies
     # config.middleware.use ActionDispatch::Session::CookieStore
     # config.session_store :cookie_store

@@ -90,7 +90,6 @@ private
     @project = user_projects_path(:user_id)
   end
 
-
   def project_params
     params.permit(:app_name, :title, :user_id, :coding, :project_details, :start_date, :utf8, :authenticity_token, :commit, :locale)
   end

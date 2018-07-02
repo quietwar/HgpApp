@@ -23,6 +23,8 @@ gem 'coffee-rails'
 gem 'ffi', '1.9.18'
 gem 'activeadmin'
 gem 'active_admin_theme'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 gem 'paperclip'
 gem "active_admin-sortable_tree"
 gem 'active_admin_importable'
@@ -30,8 +32,12 @@ gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'activeadmin_addons'
 gem 'active_admin_datetimepicker'
 gem 'active_admin_role'
+#gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_calendar'
 gem 'active_admin-duplicatable'
 gem 'responders', '~> 2.2'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+gem 'geocoder'
 #gem 'sinatra-google-auth'
 gem 'google-api-client',  require: 'google/apis/calendar_v3'
 gem 'omniauth'
@@ -67,13 +73,11 @@ gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'cocoon'
 gem 'rails_layout'
 gem 'ransack', github: 'activerecord-hackery/ransack'
-gem 'redis'
-gem 'webpacker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'rspec-rails'
+  gem 'rspec-rails', '3.5.1'
 end
 
 group :development do
@@ -88,9 +92,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'guard'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
+  gem 'guard', '~>2.14.0'
+  gem 'guard-rspec', '~> 4.7.2'
+  gem 'guard-cucumber', '~> 2.1.2'
 end
 
 group :production do

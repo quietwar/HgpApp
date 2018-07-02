@@ -18,7 +18,7 @@ module ApplicationHelper
     avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
     link_to(image_tag(avatar_url, image_options), profile_path(user.profile_name), html_options)
   end
-  end
+end
   def bootstrap_class_for(flash_type)
     {
         success: "alert-success",
@@ -36,4 +36,5 @@ module ApplicationHelper
         notice: "glyphicon-info-sign"
     }[flash_type.to_sym] || 'glyphicon-screenshot'
   end
+
 end

@@ -9,5 +9,7 @@ class Cohort < ApplicationRecord
   #   belongs_to :user, presence: true
   #   validates :user, presence: true
 
-   
+  # def to_s
+  #    self.name
+  # end
 end

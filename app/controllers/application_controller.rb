@@ -64,26 +64,16 @@ private
       flash[:alert] = "Unauthorized Access: Genius, go back!"
       redirect_to  admin_signup_path
     end
+  end
 
-    def authenticate_admin!
 
-     unless current_admin
-        flash[:alert] = "Unauthorized Access: Genius, go back!"
-        redirect_to root_path
-      end
-    end
-
-    def access_denied(exception)
-        redirect_to root_path, alert: exception.message
-    end
-
-    def current_room
-      @room ||= Room.find(session[:current_room]) if session[:current_room]
-    end
+  def current_room
+    @room ||= Room.find(session[:current_room]) if session[:current_room]
+  end
 
   def current_class
     @class ||= Class.find(session[current_class]) if session[current_class]
   end
 
- end
+
 end
