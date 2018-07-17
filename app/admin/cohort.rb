@@ -24,13 +24,13 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
      selectable_column
      id_column
      column :city
-     column :cohort
+     column :cohort_id
 
      actions
    end
 
      filter :genius
-     filter :cohort
+     filter :cohort_id
      filter :city
      filter :username
 

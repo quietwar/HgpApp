@@ -25,7 +25,8 @@ gem 'activeadmin'
 gem 'active_admin_theme'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-gem 'paperclip'
+gem 'mini_magick'
+gem "google-cloud-storage", "~> 1.8", require: false
 gem "active_admin-sortable_tree"
 gem 'active_admin_importable'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
@@ -103,7 +104,7 @@ group :production do
 end
 
 group :test do
-  gem 'capybara' 
+  gem 'capybara'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

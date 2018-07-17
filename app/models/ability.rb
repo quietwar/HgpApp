@@ -14,6 +14,6 @@ class Ability
     # NOTE: Everyone can read the page of Permission Deny
     can :read, ActiveAdmin::Page, name: "Dashboard"
 
-    
+
   end
 end

@@ -5,7 +5,10 @@ class AdminUser < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+        # Setup accessible (or protected) attributes for your model
+        attr_accessor :email, :login, :password, :password_confirmation, :remember_me
 
+        attr_accessor :login
    #with_options presence: true do
       #validates :email,
       validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
@@ -20,5 +23,11 @@ class AdminUser < ApplicationRecord
     #  has_many :classrooms
 
 
+       protected
 
+       def self.find_for_database_authentication(warden_conditions)
+         conditions = warden_conditions.dup
+         login = conditions.delete(:login)
+         where(conditions).where(["lower(email) = :value", { :value => login.strip.downcase }]).first
+       end
      end
