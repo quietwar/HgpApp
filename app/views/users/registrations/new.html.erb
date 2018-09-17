@@ -1,9 +1,10 @@
 <h2 class='text-center'>Sign up</h2>
 <div class='row'>
   <div class='col-md-12'>
-    <%= form_with model: @users, class: 'form-box' do |form|  %><br>
-
-      <%= devise_error_messages! %>
+    <%= form_for(resource, as: resource_name,
+        :html => {class: "form-horizontal", role: "form"},
+        url: genius_signup_path, remote: true) do |form| %>
+          <%= devise_error_messages! %>
 
       <div class="form-group">
         <%= form.label :avatar, class: 'col-sm-2 control-label'  %>

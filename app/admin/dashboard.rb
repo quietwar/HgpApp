@@ -16,8 +16,7 @@ ActiveAdmin.register_page "Dashboard" do
             small I18n.t("active_admin.dashboard_welcome.call_to_action")
           end
       end
-        # Here is an example of a simple dashboard with columns and panels.
-        #
+         
         columns do
           column do
             panel "Cohorts" do
@@ -41,8 +40,8 @@ ActiveAdmin.register_page "Dashboard" do
           column do
             panel "Staff" do
                 ul link_to "Staffs sign in", new_admin_user_session_path
-                # ul link_to "Staff sign in",  new_admin_staff_path
-                 ul link_to "Staff sign up", admin_staffs_path
+                ul link_to "Staff sign out",  destroy_user_session_path
+                 ul link_to "Admin sign out",  destroy_admin_user_session_path
                 ul link_to "Staffs sign up", new_admin_staff_path
             end
           end

@@ -1,16 +1,32 @@
 module ApplicationHelper
 
-  # def resource_name
-  #   :user
-  # end
-  #
-  # def resource
-  #   @resource ||= User.new
-  # end
-  #
-  # def devise_mapping
-  #    @devise_mapping ||= Devise.mappings[:user]
-  # end
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+     @devise_mapping ||= Devise.mappings[:user]
+  end
+  
+  def admin_user_signed_in?
+    current_admin_user != nil
+  end
+
+  def resource_name
+     :user
+ end
+
+ def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
 
   def avatar_profile_link(user, image_options={}, html_options={})
   avatar_url = nil
@@ -35,6 +51,22 @@ end
         alert: "glyphicon-warning-sign",
         notice: "glyphicon-info-sign"
     }[flash_type.to_sym] || 'glyphicon-screenshot'
+  end
+
+  def gravatar_for(user, options = { size: 80 })
+    gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+    size = options[:size]
+    gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
+    image_tag(gravatar_url, alt: user.username, class: "img-circle")
+  end
+
+  def current_user
+     @current_user ||= User.find_by_id(session[:user])
+  end
+
+  def prefered_color
+    return current_user.color if (current_user && current_user.color.present?)
+    '#fff'
   end
 
 end

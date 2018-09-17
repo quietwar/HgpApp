@@ -1,4 +1,5 @@
 class UsersController < Devise::RegistrationsController
+  respond_to :html, :json
 # require 'google/api_client'
 # require 'google/api_client/client_secrets'
 
@@ -9,27 +10,36 @@ class UsersController < Devise::RegistrationsController
 
   def create
     @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save!
-        format.html { redirect_to
-        edit_user_first_path(@user),
-        notice: "User created! Now select or create a cohort."}
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status:
-          :unprocessable_entity}
-      end
-    end
+  flash[:notice] = "User was successfully created." if @user.save
+  respond_with(@user)
+  # def create
+  #   @user = User.new(params)
+  #    respond_to do |format|
+  #     if @user.save
+  #       format.html do#{ render html: }
+  #       #format.json { render json: @user.to_json }
+  #          redirect_to
+  #         edit_user_path(current_user)
+  #        end
+  #        format.json { render json: @user.to_json }
+  #        notice: "%{@user] was Successfully created! Now select or create a new cohort."
+  #     else
+  #       render 'new'
+  #       # format.html { render :new }
+  #       # format.json { render json: @user.errors, status:
+  #       #   :unprocessable_entity }
+  #      end
+  #   end
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @cohort = @user.build_cohort
   end
 
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @cohort = @user.cohort
     unless @user == current_user
       redirect_to :back, :alert => "Access denied."
@@ -85,7 +95,11 @@ class UsersController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:genius, :email, :password, :avatar, :email2, cohort_attributes: [:city, :cohort_id])
+    params.require(:user).permit(:avatar, :cohort_id, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
+  end
+
+  def project_params
+    params.require(:project).permit(:authenticity_token, :github, :locale)
   end
 
   def self.find_for_database_authentication conditions

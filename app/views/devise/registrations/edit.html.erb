@@ -4,6 +4,41 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :avatar, class: 'col-sm-2 control-label'  %>
+    <div class="col-sm-6">
+        <%= f.file_field :avatar %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='control-label col-md-3'>
+      <%= f.label :cohort_id %>
+    </div>
+    <div class='col-md-9'>
+      <%= f.number_field :cohort_id %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='control-label col-md-3'>
+      <%= f.label :city %>
+    </div>
+    <div class='col-md-9'>
+      <%= f.text_field :city, class: 'form-control',
+        autofocus: true %>
+    </div>
+  </div>
+
+  <div class='field'>
+    <div class='control-label col-md-3'>
+      <%= f.label :username %>
+    </div>
+    <div class='col-md-9'>
+      <%= f.text_field :username %>
+    </div>
+ </div>
+
+ <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
@@ -15,10 +50,7 @@
   <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
+     
   </div>
 
   <div class="field">

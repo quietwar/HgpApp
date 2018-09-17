@@ -1,4 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+  protect_from_forgery prepend: true, with: :exception
+  skip_before_action :verify_authenticity_token
 
   def google_oauth2
      @user = User.from_omniauth(request.env["omniauth.auth"])
@@ -11,7 +13,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
        redirect_to new_user_registration_url
      end
    end
-  
+
 
 
 
@@ -36,17 +38,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #
   # GET|POST /users/auth/google/callback
   def failure
-      redirect_to root_path
-      return
-    super
+    flash[:error] = 'There was a problem signing you in. Please register or try signing in later.'
+    redirect_to new_user_registration_url
   end
 
-  protected
-
-  # #The path used when OmniAuth fails
-   def after_omniauth_failure_path_for(scope)
-        redirect_to root_path
-        return
-     super(:user)
-    end
-  end
+end

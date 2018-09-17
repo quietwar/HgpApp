@@ -1,20 +1,21 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :lockable, :timeoutable
-      devise :registerable,:database_authenticatable,:validatable,
+
+      devise :database_authenticatable, :registerable,
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
              validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
               validates :cohort_id, :city, presence: true
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
               validates :password, presence: false #length: {:within => 6..46 }, on: :create
               validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
-              has_attached_file :avatar, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
-                validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
+              has_one_attached :avatar#, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png'
+                #validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
               after_create :create_room
               after_create :create_cohort
-              #attr_accessor :login
+              attr_accessor :login
               has_one :room, dependent: :destroy
               has_one :cohort, inverse_of: :user
+              has_many :user_projects
               has_many :projects, inverse_of: :user
                 accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
@@ -32,7 +33,29 @@ class User < ApplicationRecord
         "#{first_name} #{last_name}"
       end
 
-      def self.search_by_name(name)
+      def self.from_omniauth(access_token)
+          data = access_token.info
+          user = User.where(email: data['email']).first
+          #Uncomment the section below if you want users to be created if they don't exist
+          unless user
+              user = User.create(name: data['name'],
+                 email: data['email'],
+                 password: Devise.friendly_token[0,20]
+              )
+          end
+          user
+      end
+
+    def self.create_from_provider_data(provider_data)
+       where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
+         user.email = provider_data.info.email
+         user.password = Devise.friendly_token[0, 20]
+         user.skip_confirmation!
+
+       end
+     end
+
+     def self.search_by_name(name)
         names_array = name.split(' ')
 
         if names_array.size == 1
@@ -93,7 +116,7 @@ class User < ApplicationRecord
            user
         end
 
-        def refresh_token_if_expired
+      def refresh_token_if_expired
         if token_expired?
           response = RestClient.post "https://accounts.google.com/o/oauth2/token", :grant_type => 'refresh_token', :refresh_token => self.refresh_token, :client_id => ENV['GOOGLE_CLIENT_ID'], :client_secret => ENV['GOOGLE_CLIENT_SECRET']
           refreshhash = JSON.parse(response.body)
@@ -118,16 +141,16 @@ class User < ApplicationRecord
       end
 
 
-        def after_sign_up_path_for(user)
-          '/root_path/'
-        end
+      def after_sign_up_path_for(user)
+        '/root_path/'
+      end
 
-        def avatar_attributes=(attributes)
-           # Marks the attachment for destruction on next save,
-           # if the attributes hash contains a _destroy flag
-           # and a new avatar was not uploaded at the same time:
-           avatar.clear if has_destroy_flag?(attributes) && !avatar.dirty?
-         end
+      def avatar_attributes=(attributes)
+         # Marks the attachment for destruction on next save,
+         # if the attributes hash contains a _destroy flag
+         # and a new avatar was not uploaded at the same time:
+         avatar.clear if has_destroy_flag?(attributes) && !avatar.dirty?
+       end
 
 
     protected

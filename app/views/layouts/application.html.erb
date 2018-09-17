@@ -6,9 +6,6 @@
     <%= action_cable_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-    <!-- <%= stylesheet_link_tag "application", :media => "all" %> -->
-    <!-- <%= javascript_include_tag 'application' %> -->
     <%= stylesheet_link_tag "application-print", :media => "print" %>
 
     <!-- <meta name="google-signin-client_id" content='1006347326565-e30jdl53gig8s97mss8c606o0db865qu.apps.googleusercontent.com'>
@@ -49,14 +46,15 @@
     </head>
     <body>
 
-       <%= yield %>
-
 
       <%= render 'shared/header' %>
+      <%= render 'classrooms/flash' %>
+      <%= render 'shared/main' %>
+       
+        <%= yield %>
 
-      <!-- <%= render 'shared/main' %>
+      <%= render 'shared/footer' %>
 
-      <%= render 'shared/footer' %> -->
 
     </body>
 </html>

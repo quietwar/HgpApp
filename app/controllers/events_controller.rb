@@ -1,11 +1,10 @@
-class EventsController < Devise::OmniauthCallbacksController
-  #before_action :set_event #, only: [:show, :edit, :update, :destroy]
+class EventsController < ApplicationController
+  protect_from_forgery prepend: true, with: :exception
+  skip_before_action :verify_authenticity_token
 
   respond_to :html
 
-  def index
-    @events = Event.where(start: params[:start] && params[:end])
-  end
+
 
   respond_to :json
 
@@ -16,42 +15,73 @@ class EventsController < Devise::OmniauthCallbacksController
     #     events << {:id => task.id, :title => "#{task.taskable.try(:name)} : #{task.task}", :start => "#{task.planned_start_date}",:end => "#{task.planned_end_date}" }
     #   end
     #   render :text => events.to_json
-    # end
+  #  end
 
   def show
-    @events = Event.find_by(params[:id])
+
   end
 
   def new
     #@event = Event.new
   end
 
+def index
+  @event = Event.new(schedule_params)
+  @events = Event.all[:schedule_id]
+end
+
 
   def edit
+
   end
+
 
   def create
-    byebug
-    @event = Event.new(event_params)
-    flash[:notice] = 'Event was successfully created' if @event.save
-    respond_with(@event)
+    @event = Event.new
+    @event.schedule = params[:event][:schedule]
     @event.save
-  end
 
-  def destroy
-    session[:user_id] = nil
-    redirect_to root_path
+      redirect_to events_path
   end
 
   def update
-    flash[:notice] = 'Event was successfully updated' if @event.update(event_params)
-    respond_with(@event)
+    # flash[:notice] = 'Event was successfully updated' if @event.update(event_params)
+    # respond_with(@event)
   end
 
   def destroy
     @event.destroy
     respond_with(@event)
   end
+
+  def google_oauth2
+      # You need to implement the method below in your model (e.g. app/models/user.rb)
+      @user = User.from_omniauth(request.env['omniauth.auth'])
+
+      if @user.persisted?
+        flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'
+        sign_in_and_redirect @user, event: :authentication
+      else
+        session['devise.google_data'] = request.env['omniauth.auth'].except(:extra) # Removing extra as it can overflow some session stores
+        redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
+      end
+  end
+#end
+ #  # GET|POST /resource/auth/google
+  # def passthru
+  #   super
+  #   render status: 404, plain: "Not found. Authentication passthru."
+  # end
+   def passthru
+     render :layout => false
+   end #
+  # GET|POST /users/auth/google/callback
+  def failure
+    flash[:error] = 'There was a problem signing you in. Please register or try signing in later.'
+    redirect_to new_user_registration_url
+  end
+
+
 
   # def redirect
   #   client = Signet::OAuth2::Client.new(client_options)
@@ -64,8 +94,8 @@ class EventsController < Devise::OmniauthCallbacksController
       client_id: '1006347326565-e30jdl53gig8s97mss8c606o0db865qu.apps.googleusercontent.com',
       client_secret: 'uJ9YgUrDhROhQQt9hhVpjJJc',
       authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
-      scope: Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY,
-      redirect_uri: url_for(:action => :callback)
+      scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+      redirect_uri: ["http://localhost:3000/users/auth/google_oauth2/callback"]#url_for(:action => :callback)
     })
 
     redirect_to client.authorization_uri.to_s
@@ -79,7 +109,7 @@ class EventsController < Devise::OmniauthCallbacksController
 
     session[:authorization] = response
 
-    redirect_to events_path
+    redirect_to calendars_url
   end
 
 
@@ -100,17 +130,18 @@ class EventsController < Devise::OmniauthCallbacksController
     retry
   end
 
-  def hgp_events
+  def events
+    byebug
     client = Signet::OAuth2::Client.new(client_options)
     client.update!(session[:authorization])
 
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
 
-    @hgp_event_list = service.list_events(params[:calendar_id])
+    @event_list = service.list_events(params[:calendar_id])
   end
 
-  def new_hgp_event
+  def new_event
      client = Signet::OAuth2::Client.new(client_options)
      client.update!(session[:authorization])
 
@@ -125,16 +156,16 @@ class EventsController < Devise::OmniauthCallbacksController
        summary: 'New HGP event!'
      })
 
-     service.insert_hgp_event(params[:calendar_id], event)
+     service.insert_event(params[:calendar_id], event)
 
-     redirect_to hpg_event_url(calendar_id: params[:calendar_id])
+     redirect_to event_url(calendar_id: params[:calendar_id])
    end
 
   private
 
     def client_options
       {
-        client_id: Figaro.env.GOOGLE_CLIENT_ID!,
+        client_id: 'Figaro.env.GOOGLE_CLIENT_ID!',
         client_secret: Figaro.env.GOOGLE_CLIENT_SECRET!,
         authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
         token_credential_uri: 'https://accounts.google.com/o/oauth2/token',

@@ -4,34 +4,36 @@ Rails.application.routes.draw do
     resources :cohorts
       resources :attendances
 
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-      resources :users do
-        resources :projects
+  devise_for :users#, :only => :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
+  resources :users do
+    resources :projects, controller: 'users/projects'
+    collection do
+      get 'search'
       end
+  end
+
 
       devise_scope :user do
-          # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
-          # post 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
-          get '/users/:user_id/projects', to: 'projects#index', as: 'projects'
-          get '/users/:user_id/projects/new', to: 'projects#new', as: 'new_project'
-          post '/users/:user_id/projects/new', to: 'projects#new'
-          post '/users/:user_id/projects', to: 'projects#create'
-          get '/users/:user_id/projects/:id', to: 'projects#show', as: 'project'
-          get '/users/:user_id/projects/:id/edit', to: 'projects#edit', as: 'edit_project'
-          patch '/users/:user_id/projects/:id', to: 'projects#update'
-          put    '/users/:user_id/projects/:id', to: 'projects#update'
-          delete '/users/:user_id/projects/:id', to: 'projects#destroy', as: 'delete_project'
-          get 'user_google_oauth2_omniauth_authorize_path', to: 'events#calendars', as: 'calendars'
+          #get 'sign_in', to: 'devise/sessions#new'
+          # post '/users/sign_in', to: 'devise/sessions#create'
+          #get  '/users/sign_out', to: 'devise/sessions#destroy'
+          get '/user_google_oauth2_omniauth_authorize_path', to: 'events#calendars', as: 'calendars'
           get '/redirect', to: 'events#redirect', as: 'redirect'
           get '/callback', to: 'events#callback', as: 'callback'
-
+          get "/admin/logout",to: 'active_admin/devise/sessions#destroy', via: 'destroy'
+          post 'admin/logout', to: 'classrooms#index'
           get '/events/:calendar_id', to: 'events#events', as: 'event', calendar_id: /[^\/]+/
           post '/events/:calendar_id', to: 'events#new_event', as: 'new_event', calendar_id: /[^\/]+/
-          get 'tap_in', to: 'devise/sessions#new'
+          # get '/users/:id', to: 'devise/sessions#new', as: 'tap_in'
+          # post 'tap_in', to: 'classrooms#index', as: 'redirect'
+          #get 'users/:id', to: 'users#show'
           get 'genius_signup', to: 'devise/registrations#new'
-          get 'auth/google_oauth2/callback', to: 'users#create', as: 'google_signin'
-          delete 'signout', to: 'sessions#destroy', via: 'destroy'
-          post 'signout', to: 'classrooms#index'
+          post 'genius_signup', to: 'classrooms#index'
+          # get 'auth/google_oauth2/callback', to: 'users#create', as: 'google_signin'
+          # get 'signout', to: 'devise/sessions#destroy', via: 'destroy'
+          # #get "tap_out",  destroy_user_/users/:idsession_path
+          # post 'signout', to: 'classrooms#index'
+          #delete 'delete'users/:id => 'users#destroy',
       #end
     end
   # scope :api do
@@ -48,13 +50,11 @@ Rails.application.routes.draw do
 
 
       resources :features,only: [:create]
-      resources :friendships, only: [:show, :create, :destroy] do
+      resources :friendships, only: [:show, :create, :destroy]
       resources :messages, only: [:create]
       resources :classrooms
-        collection do
-        post :search, to: 'classrooms#search'
-          end
-        end
+
+
       root to: "classrooms#index"
     mount ActionCable.server => '/cable'
 

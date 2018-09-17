@@ -17,8 +17,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require moment
-//= require fullcalendar
-//= require fullcalendar/gcal
+// require gcal
 //= require d3
 //= require turbolinks
 //= require underscore
@@ -27,17 +26,17 @@
 //= require_tree .
 
 
-$(document).ready(function() {
-   $("#calendar").fullCalendar({
-     header:
-     left: "prev, next, today",
-     center: "title",
-     right: "month,agendaWeek,agendaDay",
-     defaultView: "month",
-     height: 500,
-     slotMinutes: 15,
-     eventSources: ["/events/info"],
-     timeFormat: "h:mm t{ - h:mm t} ",
-     dragOpacity: "0.5"
-  });
-});
+// $(document).ready(function() {
+//    $("#calendar")({
+//      header:
+//      left: "prev, next, today",
+//      center: "title",
+//      right: "month,agendaWeek,agendaDay",
+//      defaultView: "month",
+//      height: 500,
+//      slotMinutes: 15,
+//      eventSources: ["/events/info"],
+//      timeFormat: "h:mm t{ - h:mm t} ",
+//      dragOpacity: "0.5"
+//   });
+// });

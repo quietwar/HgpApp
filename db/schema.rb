@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_16_222626) do
+ActiveRecord::Schema.define(version: 2018_09_06_182155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "adminpack"
@@ -95,6 +95,11 @@ ActiveRecord::Schema.define(version: 2018_07_16_222626) do
     t.string "login"
     t.string "city"
     t.bigint "role", default: 0, null: false
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.bigint "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.boolean "admin"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
   end
@@ -137,11 +142,13 @@ ActiveRecord::Schema.define(version: 2018_07_16_222626) do
     t.index ["user_id"], name: "index_features_on_user_id", unique: true
   end
 
-  create_table "friendships", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "friend_id"
+  create_table "friendships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friendships_on_friend_id"
+    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "messages", id: :serial, force: :cascade do |t|
@@ -150,6 +157,7 @@ ActiveRecord::Schema.define(version: 2018_07_16_222626) do
     t.integer "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "friend_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -166,6 +174,8 @@ ActiveRecord::Schema.define(version: 2018_07_16_222626) do
     t.string "authenticity_token"
     t.string "commit"
     t.string "locale"
+    t.string "github"
+    t.string "url"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -236,6 +246,12 @@ ActiveRecord::Schema.define(version: 2018_07_16_222626) do
     t.integer "attendance_id"
     t.string "ancestry"
     t.string "username"
+    t.string "avatar_file_name"
+    t.string "avatar_content_type"
+    t.bigint "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string "color"
+    t.boolean "admin"
     t.index ["access_token"], name: "index_users_on_access_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -243,6 +259,11 @@ ActiveRecord::Schema.define(version: 2018_07_16_222626) do
     t.index ["project"], name: "index_users_on_project", unique: true
     t.index ["refresh_token"], name: "index_users_on_refresh_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "welcomes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "messages", "rooms"

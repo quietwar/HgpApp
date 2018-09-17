@@ -22,6 +22,7 @@ module UserCredentialAuthentication
     user.save
   end
 
+
 #   def authenticate!
 
 # Warden::Strategies.add(:omniauth) do

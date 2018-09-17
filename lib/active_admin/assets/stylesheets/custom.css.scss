@@ -1,0 +1,283 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+  background-color: black;
+  margin-top: 250px;
+}
+
+.page {
+  background-color: black;
+}
+
+.container {
+    background-color: black;
+    color: #4040a1 !important;
+    position:absolute;
+    left:0;
+    right:0;
+
+   }
+
+
+   .genius {
+     margin: 05cm 0cm;
+     padding: 600px;
+     background-image: url('claremont2.jpg');
+     background-repeat: no-repeat;
+     background-size: 100%;
+   }
+
+
+// home page styling
+// .col-md-8 {
+//   margin-top: 250px;
+//   text-align: center;
+//   background-color: black;
+//   overflow-x: visible;
+// }
+//
+.intro {
+  margin-top: 50px;
+  text-align: center;
+  color: #cccccc;
+
+}
+
+// navbar styling
+.navbar {
+  background: #808080;
+  opacity: 0.5;
+
+}
+
+.navbar-header a.navbar-brand {
+  color: #4040a1;
+  padding-top: 25px;
+  padding-bottom: 350px;
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.navbar-header a.navbar-brand:hover {
+  color: #1900ff;
+}
+
+.nav > li > a {
+  padding-top: 25px;
+  padding-bottom: 30px;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background: #4040a1;
+  color: #ffffff;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background: #4040a1;
+  color: #ff0000;
+}
+
+.navbar-default .navbar-nav > li > a {
+  color: #4040a1;
+  font-size: 130%;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #ff0000;
+}
+
+.navbar-header {
+   text-align: center;
+}
+
+.google {
+  text-align: right;
+  margin-top: 350px;
+}
+
+//carosel pics on home page
+
+.carousel-inner img {
+   -webkit-filter: grayscale(90%);
+   filter: grayscale(90%); /* make all photos black and white */
+   width: 100%; /* Set width to 100% */
+   margin: auto;
+}
+.carousel-caption h3 {
+   color: #4040a1 !important;
+}
+@media (max-width: 600px) {
+ .carousel-caption {
+   display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+ }
+}
+
+.open .dropdown-toggle {
+    color: #fff;
+    background-color: #555 !important;
+}
+
+.dropdown-menu li a {
+    color: #000 !important;
+}
+
+.dropdown-menu li a:hover {
+    background-color: red !important;
+}
+
+//project form styling
+
+
+.col-md-10 {
+  color: purple;
+  text-align: left;
+  padding: 10px;
+
+}
+
+// .col-md-2 {
+//   box-sizing: content-box;
+//   width: 250px;
+//   height: 50px;
+//   padding-bottom: 10px;
+//
+// }
+
+.form-group {
+color: green;
+text-align: left;
+}
+
+.form-control {
+color: green;
+text-align: left;
+}
+
+.table {
+  color: red;
+}
+
+.col-md-3 {
+  color: green;
+  text-align: left;
+}
+
+
+//About Section
+.col-lg-8 {
+   background-color: black;
+   background-size: cover;
+   //padding: 180px;
+   color: #4040a1 !important;
+   text-align: center;
+   //margin-bottom: 25px;
+   width: 100%;
+   height: 100%;
+   //opacity: 80%;
+}
+
+// Devise Error Messages
+#error_explanation {
+ background-color: #f2dede;
+ color: #a94442;
+ text-align: left;
+ padding: 5px 20px;
+ margin-bottom: 30px;
+}
+
+#error_explanation h2 {
+ font-size: 150%;
+}
+
+.col-md-12 {
+  margin-top: 260px;
+}
+.signed-in-user {
+  padding-top: 10px;
+  padding-right: 20px;
+}
+
+.signed-in-user .navbar-text {
+  color: #ffffff;
+}
+
+// Link styling
+.link {
+  margin-bottom: 5px;
+}
+
+#back-btn {
+  margin-left: -10px;
+  margin-top: 30px;
+}
+
+#submit-btn {
+  margin-left: 10px;
+  margin-top: 30px;
+}
+
+.destroy-btn:hover {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+//chat-box styling
+#chat-window {
+  border: 1px solid #76C95B;
+  margin-top: 50px;
+  margin-bottom: 30px;
+
+}
+
+#chat-window header {
+  background: #76C95B;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #fff;
+  font-size: 120%;
+}
+
+#chat-box {
+  min-height: 100px;
+}
+
+#message-field {
+  width: 96%;
+}
+
+.message-body {
+  margin-bottom: 2px;
+}
+
+#show-header {
+  color: blue;
+  padding-top: 350px;
+  padding-bottom: 350px;
+}
+
+hr.msg {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#followers {
+  border-right: 1px solid #76C95B;
+}
+
+.followers {
+  margin-left: -15px;
+}
+
+#form-box {
+  margin-left: -15px;
+  color: blue;
+  padding-right: 50px;
+}
+
+#post-btn {
+  margin-right: -35px;
+}
