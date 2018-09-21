@@ -1,26 +1,28 @@
-Rails.application.config.middleware.use Warden::Manager do |manager|
-  manager.default_strategies [:omniauth, :params]
-end
-
-Warden::Manager.serialize_into_session do |user|
-  user.persistence_token
-end
-
-Warden::Manager.serialize_from_session do |id|
-  User.where(persistence_token: id).first
-end
+# Rails.application.config.middleware.use Warden::Manager do |manager|
+#   manager.default_strategies [:omniauth, :params]
+# end
 #
-module UserCredentialAuthentication
-  def verify_against_old_credentials( user, password )
-    Sha512.matches?( user.sha512_password, password, user.sha512_salt )
-  end
+# Warden::Manager.serialize_into_session do |user|
+#   user.persistence_token
+# end
+#
+# Warden::Manager.serialize_from_session do |id|
+#   User.where(persistence_token: id).first
+# end
+# #
+# module UserCredentialAuthentication
+#   def verify_against_old_credentials( user, password )
+#     Sha512.matches?( user.sha512_password, password, user.sha512_salt )
+#   end
+#
+#   def transition_from_sha512!( user, password )
+#     user.password = password
+#     user.sha512_password = nil
+#     user.sha512_salt = nil
+#     user.save
+#   end
 
-  def transition_from_sha512!( user, password )
-    user.password = password
-    user.sha512_password = nil
-    user.sha512_salt = nil
-    user.save
-  end
+
 
 
 #   def authenticate!
@@ -91,4 +93,4 @@ module UserCredentialAuthentication
 #     end
 #     end
 #   end
-end
+#end

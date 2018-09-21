@@ -6,9 +6,9 @@ class AdminUser < ApplicationRecord
          :recoverable, :rememberable, :trackable
 
         # Setup accessible (or protected) attributes for your model
-        attr_accessor :email, :password, :password_confirmation, :remember_me
+        #attr_accessor :email, :password, :password_confirmation, :remember_me
 
-        attr_accessor :login
+        #attr_accessor :login
       #
       # validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
       # validates :first_name, presence: false
@@ -26,9 +26,9 @@ class AdminUser < ApplicationRecord
 
        protected
 
-       def self.find_for_database_authentication(warden_conditions)
-         conditions = warden_conditions.dup
-         login = conditions.delete(:login)
-         where(conditions).where(["lower(email) = :value", { :value => login }]).first
-       end
+     #   def self.find_for_database_authentication(warden_conditions)
+     #     conditions = warden_conditions.dup
+     #     login = conditions.delete(:login)
+     #     where(conditions).where(["lower(email) = :value", { :value => login }]).first
+     #   end
      end

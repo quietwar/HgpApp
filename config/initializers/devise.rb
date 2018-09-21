@@ -6,11 +6,11 @@ Devise.setup do |config|
   config.mailer = 'Devise::Mailer'
   config.parent_mailer = 'ActionMailer::Base'
 
-  # config.authentication_keys = [ :email ]
-  #
+   config.authentication_keys = [ :email ]
+  #config.validate_on_invite = true
   # config.reset_password_keys = [:email ]
-  # config.case_insensitive_keys = [ :email, :username ]
-  # config.strip_whitespace_keys = [:email, :username ]
+   config.case_insensitive_keys = [ :email, :username ]
+   config.strip_whitespace_keys = [:email, :username ]
   # config.default_scope = :user
   # config.scoped_views = true
   # config.params_authenticatable = true
