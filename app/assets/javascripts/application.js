@@ -19,6 +19,7 @@
 //= require fullcalendar
 //= require fullcalendar/gcal
 // require gcal
+//= require cocoon
 //= require d3
 //= require turbolinks
 //= require underscore

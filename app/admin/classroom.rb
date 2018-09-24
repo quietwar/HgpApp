@@ -29,10 +29,10 @@ ActiveAdmin.register Classroom do
 
 
     form do |f|
-        ### Declare here the model's own form fields:
+    f.semantic_errors    ### Declare here the model's own form fields:
     f.inputs "Hgp Cohorts" do
       f.input :city, label: "Office Location"
-      f.input :cohort, label: "Cohort Number"
+      #f.input :classroom, label: "Cohort Number"
     end
       ### Declare here the form for the child model, using the "has_many" method:
       f.inputs "Geniuses" do

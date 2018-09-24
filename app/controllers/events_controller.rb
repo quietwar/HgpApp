@@ -178,7 +178,10 @@ end
       @event = Event.find(params[:id])
     end
 
+    # def event_params
+    #   params.require[:event].permit(:event, :title, :notes, :dates)
+    # end
     def event_params
-      params.require[:event].permit(:event, :title, :notes, :dates)
+      params.require(:event).permit(:name, schedule_attributes: Schedulable::ScheduleSupport.param_names)
     end
 end

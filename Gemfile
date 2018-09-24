@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
+source 'http://gems.github.com'
 
 
 # Bundle edge Rails instead:
@@ -8,7 +9,7 @@ gem 'railties'
 gem 'bundler', '>= 1.8.4'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'pg', '0.21.0'
+gem 'pg', '~> 0.21.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -59,6 +60,8 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
+gem 'ice_cube'
+gem 'schedulable'
 gem 'activemodel'
 gem 'activerecord'
 gem 'actionpack'
@@ -99,6 +102,7 @@ end
 
 group :production do
   # Use Capistrano for deployment
+  #gem 'pg', '0.21.0'
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rails', group: :development
 end

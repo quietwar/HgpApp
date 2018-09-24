@@ -24,8 +24,8 @@ class User < ApplicationRecord
                 #validates_presence_of :cohort_id
               # belongs_to :classroom, inverse_of: :users
               #   validates_presence_of :cohort_id
-              has_many :attendances
-                accepts_nested_attributes_for :attendances, allow_destroy: true
+              has_many :attendances, inverse_of: :user
+              accepts_nested_attributes_for :attendances, reject_if: :all_blank, allow_destroy: true
 
 
       def full_name

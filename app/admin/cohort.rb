@@ -1,30 +1,30 @@
 ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
-  permit_params :genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday]
+  permit_params :name, :genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday]
   menu priority: 3
   config.batch_actions = true
     duplicable?
   #active_admin_importable
   sortable tree: true
 
-  controller do
-    def create
-        # @cohort = Cohort.find(params)
-        # @user = User.find(params)
-        # #params[:genius][:cohort] = @cohort.genius
-        # params[:cohort][:user] = @user.cohort
-        @cohort = Cohort.new(params[:cohort_id])
-      super
-    end
-    def show
-      @cohort = Cohort.find_by_id(params[:cohort_id])
-    end
-   end
+  # controller do
+  #   def create
+  #       # @cohort = Cohort.find(params)
+  #       # @user = User.find(params)
+  #       # #params[:genius][:cohort] = @cohort.genius
+  #       # params[:cohort][:user] = @user.cohort
+  #       @cohort = Cohort.new(params[:cohort_id])
+  #     super
+  #   end
+  #   def show
+  #     @cohort = Cohort.find_by_id(params[:cohort_id])
+  #   end
+  #  end
 
    index do
      selectable_column
      id_column
      column :city
-     column :cohort
+     column :cohort_id
 
      actions
    end
@@ -34,35 +34,40 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
      filter :city
      filter :username
 
-  form do |f|
-    f.inputs "HGP Cohorts" do
-     f.input :city
-     f.input :cohort_id
-     #f.input :users
-       end
-    # end
 
-     f.inputs "Geniuses"
-     f.inputs do #:users
-       f.has_many :users,allow_destroy: true,
-                             new_record: false do |ff|
-         ff.input :genius
-         ff.input :cell
-         ff.input :email
-         ff.input :password, input_html: { autocomplete: "new-password" }
-         ff.input :email2
-         ff.input :username
-         ff.input :avatar, as: :file
-         if ff.object.avatar.present?
-           ff.semantic_fields_for :avatar_attributes do |avatar_fields|
-            avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
-        end
-      end
+  form do |f|
+    f.semantic_errors
+    ### Declare here the model's own form fields:
+    f.inputs "HGP Cohorts" do
+       f.input :city, label: "HGP Site"
+       f.input :cohort_id, label: "Cohort Number"
     end
-   f.actions
-   end
+
+    ### Declare here the form for the child model, using the "has_many" method:
+
+
+    f.inputs "Geniuses" do
+      f.has_many :users, allow_destroy: true,
+                            new_record: true do |ff|
+          ff.input :user, label: "Genius"
+          # u.input :cell
+          # u.input :email
+          # u.input :password, input_html: { autocomplete: "new-password" }
+          # u.input :email2
+          # u.input :username
+          # u.input :avatar, as: :file
+          # if f.object.avatar.present?
+          #   f.semantic_fields_for :avatar_attributes do |avatar_fields|
+          #    avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
+       end
+
+     end
+     f.actions
+    end
+
   end
- end
+
+
 #end
 
 
