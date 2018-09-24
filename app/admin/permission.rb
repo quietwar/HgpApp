@@ -27,7 +27,7 @@ ActiveAdmin.register ::ActiveAdmin::Permission, as: "Permission" do
     end
   end
 
-  collection_action :reload, method: :post do
+  collection_action :reload, method: :get do
     ::ActiveAdmin::ManagedResource.reload
     redirect_back(fallback_location: admin_root_url, notice: t("views.permission.notice.reloaded"))
   end

@@ -1,9 +1,13 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html{
+  background-color: black;
+}
+
 body {
   background-color: black;
-  margin-top: 250px;
+  //margin-top: 250px;
 }
 
 .page {
@@ -14,7 +18,8 @@ body {
     background-color: black;
     color: #4040a1 !important;
     position: relative;
-    margin-top: auto;
+    margin-top: 50px;
+    width: 100%;
 
    }
 
@@ -22,13 +27,17 @@ body {
      margin-top: 400px;
    }
 
-   .genius {
+   .field{
      margin-top: 200px;
-     padding: 400px;
-     background-image: url('claremont2.jpg');
+   }
+
+   .genius {
+     position: relative;
+     z-index: 1;
      background-repeat: no-repeat;
      background-size: 100%;
    }
+
 
 
 // home page styling
@@ -64,7 +73,7 @@ body {
 
 // navbar styling
 .navbar {
-  background: #808080;
+  background: black;
   opacity: 0.5;
 
 }
@@ -221,6 +230,11 @@ text-align: left;
 }
 
 // Devise Error Messages
+
+.alert-dismissible{
+   padding-top: 250px;
+ }
+
 #error_explanation {
  background-color: #f2dede;
  color: #a94442;

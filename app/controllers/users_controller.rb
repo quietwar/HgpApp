@@ -83,7 +83,11 @@ class UsersController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:genius, :email, :password, :avatar, :email2, cohort_attributes: [:city, :cohort_id])
+    params.require(:user).permit(:avatar, :cohort_id, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
+  end
+
+  def project_params
+    params.require(:project).permit(:authenticity_token, :github, :locale)
   end
 
   def self.find_for_database_authentication conditions

@@ -19,7 +19,7 @@ ActiveAdmin.register User, as: 'Genius' do
         column :projects
         column :sign_in_count
         column :created_at
-        image_column :avatar, style: :thumb
+        #image_column :avatar, style: :thumb
 
         actions
       end

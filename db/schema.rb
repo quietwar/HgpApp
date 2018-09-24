@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_03_24_211748) do
+ActiveRecord::Schema.define(version: 2018_09_24_031310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "active_admin_managed_permissions", force: :cascade do |t|
+  end
+
   create_table "active_admin_managed_resources", force: :cascade do |t|
     t.string "class_name", null: false
     t.string "action", null: false
@@ -41,6 +44,27 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.integer "role", limit: 2, default: 0, null: false
     t.integer "state", limit: 2, default: 0, null: false
     t.index ["managed_resource_id", "role"], name: "active_admin_permissions_index", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -62,10 +86,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email2"
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.integer "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.bigint "cell"
     t.string "provider"
     t.string "uid"
@@ -73,89 +93,24 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.string "username"
     t.boolean "superadmin"
     t.integer "utf8"
-    t.integer "role", limit: 2, default: 0, null: false
     t.string "login"
     t.string "city"
-    t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
-  end
-
-  create_table "admins", id: :serial, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+    t.integer "admin_users", limit: 2, default: 0, null: false
+    t.integer "role", limit: 2, default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "username"
-    t.string "login"
-    t.string "title"
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_admins_on_username", unique: true
-  end
-
-  create_table "attendances", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "classroom_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "present"
-    t.boolean "absent"
-    t.boolean "halfday"
-    t.datetime "class_date"
-    t.integer "attendance_id"
-    t.string "cohort_id"
-    t.index ["classroom_id"], name: "index_attendances_on_classroom_id"
-    t.index ["user_id"], name: "index_attendances_on_user_id"
-  end
-
-  create_table "classrooms", id: :serial, force: :cascade do |t|
-    t.string "genius"
-    t.integer "cohorts"
-    t.string "email"
-    t.integer "cell"
-    t.integer "stipend"
-    t.boolean "completed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "meeting", null: false
-    t.datetime "end_time", null: false
-    t.string "subject", limit: 40, null: false
-    t.integer "cohort_id"
-    t.integer "users_id"
-    t.integer "classroom_id"
-    t.integer "attendance_id"
-    t.string "names"
-    t.string "city"
-    t.index ["cohort_id"], name: "index_classrooms_on_cohort_id"
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
   create_table "cohorts", id: :serial, force: :cascade do |t|
     t.string "genius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "admin_id"
     t.string "city"
     t.integer "cohort_id"
-    t.string "email"
-    t.string "email2"
-    t.integer "stipend"
-    t.string "benchmark"
-    t.string "projects"
-    t.bigint "cell"
-    t.integer "user_id"
-    t.string "first_name"
-    t.string "last_name"
     t.bigint "cohort"
-    t.string "name"
   end
 
   create_table "events", force: :cascade do |t|
@@ -191,16 +146,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "places", force: :cascade do |t|
-    t.string "title"
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
-    t.string "visited_by"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "projects", id: :serial, force: :cascade do |t|
     t.string "app_name"
     t.string "coding"
@@ -213,6 +158,7 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.string "authenticity_token"
     t.string "commit"
     t.string "locale"
+    t.string "url"
     t.string "github"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -249,9 +195,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.boolean "admin", default: false
-    t.string "username"
-    t.boolean "superadmin", default: false, null: false
     t.string "title"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
@@ -268,10 +211,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.date "start_date"
     t.integer "user_id"
     t.string "genius"
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.integer "avatar_file_size"
-    t.datetime "avatar_updated_at"
     t.string "access_token"
     t.string "refresh_token"
     t.integer "project_id"
@@ -285,10 +224,11 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.string "google_oauth2"
     t.string "user"
     t.string "name"
-    t.string "github"
     t.string "login"
     t.integer "classroom_id"
     t.integer "attendance_id"
+    t.string "username"
+    t.string "password"
     t.index ["access_token"], name: "index_users_on_access_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -296,7 +236,6 @@ ActiveRecord::Schema.define(version: 2018_03_24_211748) do
     t.index ["project"], name: "index_users_on_project", unique: true
     t.index ["refresh_token"], name: "index_users_on_refresh_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "messages", "rooms"
