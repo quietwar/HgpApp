@@ -1,5 +1,5 @@
 Rails.application.configure do
-  Rails.application.configure do
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   config.action_cable.url = 'ws://localhost:3000/cable'
@@ -43,7 +43,7 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-
+  config.active_storage.service = :local
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
@@ -116,7 +116,7 @@ Rails.application.configure do
   BetterErrors.editor = proc { |file, line|
     "atom://core/open/file?filename=#{CGI.escape(file)}&line=#{line}"
   }
-  end
+  #end
 end#
   # # Raises error for missing translations
   # # config.action_view.raise_on_missing_translations = true

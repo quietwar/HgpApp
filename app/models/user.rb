@@ -8,8 +8,8 @@ class User < ApplicationRecord
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
               validates :password, presence: false #length: {:within => 6..46 }, on: :create
               validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
-              has_attached_file :avatar, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
-                validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
+              has_one_attached :avatar#, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
+                #validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
               after_create :create_room
               after_create :create_cohort
               #attr_accessor :login

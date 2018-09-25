@@ -1,4 +1,4 @@
-class CreateEventOccurrences < ActiveRecord::Migration
+class CreateEventOccurrences < ActiveRecord::Migration[5.2]
   def self.up
     create_table :event_occurrences do |t|
 
@@ -6,7 +6,7 @@ class CreateEventOccurrences < ActiveRecord::Migration
       t.datetime :date
 
       t.timestamps
-      
+
     end
   end
 

@@ -1,5 +1,8 @@
 <header>
+<<<<<<< HEAD
 
+=======
+>>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
     <div class=page>
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container-fluid">
@@ -8,22 +11,35 @@
            <ul class="nav navbar-nav">
                <li class="active"><%= link_to "Home", root_path %></li>
                <li class="active"><%= link_to "Genius Lounge - Staff only", admin_dashboard_path %></li>
+<<<<<<< HEAD
+=======
+               <li class="active"><%= link_to "Classroom", new_classroom_attendance_path(:classroom_id) %></li>
+>>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
                <li class="active"><%= link_to "Staff tap in", new_admin_staff_path %></li>
 
-             <% unless current_user %>
-                 <li class="active"><%= link_to "Genius sign up", new_user_registration_path %></li>
-                 <li class="active"><%= link_to "Tap in",  new_user_session_path %></li>
-               <% else %>
-                 <li class="active"><%= link_to "My Lab", projects_path(:user_id) %></li>
-                 <li class="active"><%= link_to "Tap out",  destroy_user_session_path %></li>
-                 <li class="active"><%= link_to "Staff Tap out", destroy_admin_user_session_path %></li>
+          <% if logged_in? %>
+             <li class="active"><%= link_to "My Lab", user_projects_path(:user_id) %></li>
+             <li class="active"><%= link_to "Tap out",  destroy_user_session_path %></li>
+             <li class="active"><%= link_to "Staff Tap out", destroy_admin_user_session_path %></li>
+             <li class="active">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Your Profile <span class="caret"></span></a>
+               <ul class="dropdown-menu">
+                 <li><%= link_to "Edit your profile", edit_user_path(:id) %></li>
+                 <li><%= link_to "View your profile", user_path(:id) %></li>
+                 <li><%= link_to "delete your profile", user_path(:id) %></li>
+                 <li><a href="#">Something else here</a></li>
+                 <li role="separator" class="divider"></li>
+               </ui>
 
-              <div class="navbar-right signed-in-user">
-                  <p class="navbar-text">
-                    Signed in as <%= "#{current_user.email}" %>
-                  </p>
-                </div>
-              <% end %>
+           <div class="navbar-right signed-in-user">
+               <p class="navbar-text">
+                 Signed in as <%= "#{current_user}" %>
+               </p>
+           </div>
+       <% else %>
+           <li class="active"><%= link_to "Genius sign up", genius_signup_path %></li>
+           <li class="active"><%= link_to "Tap in", new_user_session_path %></li>
+        <% end %>
 
              <li class="active">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Featured Geniuses
@@ -36,9 +52,34 @@
               </li>
            </ul>
          </div>
+<<<<<<< HEAD
             
+=======
+           <%= form_tag(search_classrooms_path,
+                           class: "navbar-form navbar-left",
+                           role: "search") do %>
+               <div class="form-group">
+                 <%= text_field_tag :search_name, nil, placeholder:
+                         "Search for Geniuses", class: "form-control"  %>
+               </div>
+               <%= submit_tag "Search", class: 'btn btn-default' %>
+             <% end %>
+             <ul class="nav navbar-nav navbar-right">
+        <!-- <% if logged_in? %>
+          <li><%= link_to "Log out", logout_path, method: :delete %></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Your Profile <%= "(admin)" if current_user.admin? %><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Edit your profile", edit_user_path(current_user) %></li>
+              <li><%= link_to "View your profile", user_path(current_user) %></li>
+              <li><a href="#">Something else here</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+            </ul>
+            <% end %> -->
+>>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
              <div class="logo"><a href="http://www.hiddengeniusproject.org">
-               <img border="0" alt="HGP Website" src="/assets/HGPAssets_Emblem_Black.png" width="100" height="100"></a>
+               <img border="0" alt="HGP Website" src="/assets/HGPAssets_Emblem_Yellow.png" width="100" height="100"></a>
             </div>
 
              <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
@@ -53,4 +94,3 @@
      </nav>
    </header>
  </div>
-<!-- </head> -->

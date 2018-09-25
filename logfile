@@ -2,3 +2,7 @@ LOG:  database system was shut down at 2017-09-21 14:13:08 PDT
 LOG:  MultiXact member wraparound protections are now enabled
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
+2018-09-24 19:23:38.243 PDT [31984] FATAL:  data directory "/Applications/Desktop/coding/hgpapp/new" has group or world access
+2018-09-24 19:23:38.243 PDT [31984] DETAIL:  Permissions should be u=rwx (0700).
+2018-09-24 19:24:59.474 PDT [32169] FATAL:  data directory "/Applications/Desktop/coding/hgpapp/new" has group or world access
+2018-09-24 19:24:59.474 PDT [32169] DETAIL:  Permissions should be u=rwx (0700).

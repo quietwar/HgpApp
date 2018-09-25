@@ -12,15 +12,10 @@ Rails.application.routes.draw do
       devise_scope :user do
           # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
           # post 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
-          get '/users/:user_id/projects', to: 'projects#index', as: 'projects'
-          get '/users/:user_id/projects/new', to: 'projects#new', as: 'new_project'
-          post '/users/:user_id/projects/new', to: 'projects#new'
-          post '/users/:user_id/projects', to: 'projects#create'
-          get '/users/:user_id/projects/:id', to: 'projects#show', as: 'project'
-          get '/users/:user_id/projects/:id/edit', to: 'projects#edit', as: 'edit_project'
-          patch '/users/:user_id/projects/:id', to: 'projects#update'
-          put    '/users/:user_id/projects/:id', to: 'projects#update'
-          delete '/users/:user_id/projects/:id', to: 'projects#destroy', as: 'delete_project'
+          get "/admin/logout",to: 'active_admin/devise/sessions#destroy', via: 'destroy'
+          post 'admin/logout', to: 'classrooms#index'
+          get 'genius_signup', to: 'devise/registrations#new'
+          post 'genius_signup', to: 'classrooms#index'
           get 'user_google_oauth2_omniauth_authorize_path', to: 'events#calendars', as: 'calendars'
           get '/redirect', to: 'events#redirect', as: 'redirect'
           get '/callback', to: 'events#callback', as: 'callback'
@@ -32,6 +27,7 @@ Rails.application.routes.draw do
           get 'auth/google_oauth2/callback', to: 'users#create', as: 'google_signin'
           delete 'signout', to: 'sessions#destroy', via: 'destroy'
           post 'signout', to: 'classrooms#index'
+
       #end
     end
   # scope :api do

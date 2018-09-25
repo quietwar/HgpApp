@@ -9,8 +9,8 @@ development:
   encoding: unicode
   database: HgpApp_development
   pool: 5
-  username: #hodaritoure
-  password:
+  username: hodaritoure
+  password: wanjiri22
 
 
 test:
