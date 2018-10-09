@@ -7,16 +7,16 @@ class ApplicationController < ActionController::Base
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
  protected
-#
-#     def not_found_error
-#       render file: 'public/401.html', status: :not_found
-#     end
-#
-#   #  rescue_from CanCan::AccessDenied do |exception|
-#   #   flash[:error] = exception.message
-#   #   redirect_to root_url
-#   # end
-#
+
+    def not_found_error
+      render file: 'public/401.html', status: :not_found
+    end
+
+   rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = exception.message
+    redirect_to root_url
+  end
+
 #     #
 #     # def after_sign_out_path_for(user)
 #     #     root_path

@@ -14,31 +14,29 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require bootstrap-datepicker
+// require bootstrap-datepicker
 //= require moment
-<<<<<<< HEAD
-//= require fullcalendar
-//= require fullcalendar/gcal
+// require fullcalendar
+// require fullcalendar/gcal
 // require gcal
 //= require cocoon
 //= require d3
 //= require turbolinks
 //= require underscore
-//= require gmaps/google
-=======
+// require gmaps/google
 // require fullcalendar
 // require fullcalendar/gcal
 //= require d3
 //= require turbolinks
 // require underscore
 // require gmaps/google
->>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
 // require active_admin_map_index
 //= require_tree .
 
 
 $(document).ready(function() {
-   $("#calendar").fullCalendar({
+   $("#calendar")
+   {
      header:
      left: "prev, next, today",
      center: "title",

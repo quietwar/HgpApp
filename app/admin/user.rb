@@ -6,7 +6,7 @@ ActiveAdmin.register User do
   config.batch_actions = true
   menu priority: 4
    duplicable?
-  #active_admin_importable
+  active_admin_importable
 
 
 

@@ -32,11 +32,7 @@ ActiveAdmin.setup do |config|
   #
   # This will create resources in the HelloWorld module and
   # will namespace routes to /hello_world/*
-  #
-  # To set no namespace by default, use:
-  #   config.default_namespace = false
-  #
-  # Default:
+  
   #
   # config.namespace :admin do |admin|
   #    admin.build_menu :utility_navigation do |menu|
@@ -91,7 +87,7 @@ ActiveAdmin.setup do |config|
   #  #config.pundit_default_policy = "MyDefaultPunditPolicy"
   #
   # # You can customize your CanCan Ability class name here.
-  # config.cancan_ability_class = "Ability"
+   config.cancan_ability_class = "Ability"
 
   # You can specify a method to be called on unauthorized access.
   # This is necessary in order to prevent a redirect loop which happens

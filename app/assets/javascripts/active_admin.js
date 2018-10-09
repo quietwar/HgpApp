@@ -1,5 +1,5 @@
 // require index_as_calendar/application
-//=require jquery-ui
+//require jquery-ui
 
 $(document).ready(function() {
   jQuery('input.hasDatetimePicker').datetimepicker({
