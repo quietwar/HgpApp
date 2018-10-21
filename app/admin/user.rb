@@ -14,8 +14,7 @@ ActiveAdmin.register User do
       index do
         selectable_column
         id_column
-        column :first_name
-        column :last_name
+        column :genius
         column :email
         column :email2
         column :username
@@ -32,7 +31,7 @@ ActiveAdmin.register User do
 
 
   filter :genius
-  filter :cohort
+  filter :cohort_id
   filter :city
   filter :stipend
   filter :benchmarks
@@ -45,8 +44,8 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
-      f.input :genius
       f.input :cohort_id
+      f.input :genius
       f.input :city
       f.input :cell
       f.input :email
@@ -58,18 +57,6 @@ ActiveAdmin.register User do
         f.semantic_fields_for :avatar_attributes do |avatar_fields|
          avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
        end
-     end
-
-    f.inputs 'Projects'
-      f.inputs do
-        f.has_many :projects, allow_destroy: true,
-                                  new_record: false do |u|
-            u.input :app_name
-            u.input :coding
-            u.input :project_details
-            u.input :start_date
-            u.input :github
-        end
      end
        f.actions
      end

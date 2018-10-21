@@ -30,9 +30,9 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
    end
 
      filter :genius
-     filter :cohort
+     filter :cohort_id
      filter :city
-     filter :username
+     #filter :username
 
 
    form do |f|

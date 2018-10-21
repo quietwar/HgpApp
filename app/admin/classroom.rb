@@ -34,35 +34,20 @@ ActiveAdmin.register Classroom do
       f.input :city, label: "Office Location"
       #f.input :classroom, label: "Cohort Number"
     end
-      ### Declare here the form for the child model, using the "has_many" method:
-      f.inputs "Geniuses" do
-        f.has_many :users,allow_destroy: true,
-                              new_record: true do |f|
-          f.input :genius
-          f.input :cell
-          f.input :email
-          f.input :password, input_html: { autocomplete: "new-password" }
-          f.input :email2
-          f.input :username
-          f.input :avatar, as: :file
-          if f.object.avatar.present?
-            f.semantic_fields_for :avatar_attributes do |avatar_fields|
-             avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
-           end
-       end
 
-      f.actions
-      end
 
-      # f.input :attendances, as: :nested_select,
-      #             level_1: { attribute: :cohort_id },
-      #             level_2: { attribute: :genuis_id },
-      #             level_3: { attribute: :attendances }
+      f.input :attendances, as: :nested_select,
+                  level_1: { attribute: :cohort_id },
+                  level_2: { attribute: :genuis_id },
+                  level_3: { attribute: :attendances }
 
-     #  sidebar :help do
-     #  "Need help? Email us at help@example.com"
-     # end
-    end
+      sidebar :help do
+      "Need help? Email us at help@example.com"
+   end
+
+
+  f.actions
+  
   end
 
   #content do
