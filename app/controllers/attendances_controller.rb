@@ -1,7 +1,7 @@
 class AttendancesController < ApplicationController
   before_action :authenticate_admin_user!
   before_action :attendance_params, only: [:create, :edit]
-  permit_params :genius, :city, :cohort, :attendance, :class_date
+  #permit_params :genius, :city, :cohort, :attendance, :class_date
 
 
 

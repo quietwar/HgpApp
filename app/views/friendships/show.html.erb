@@ -1,0 +1,31 @@
+<div class="col-md-8">
+  <p id="notice"><%= notice %></p>
+
+  <h1><%= @friend.full_name %>'s projects</h1>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>App name</th>
+        <th>Coding language</th>
+        <th>Start date</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td><%= projects %></td>
+          <td><%= truncate(project.details, length: 240) %></td>
+          <td><%= project.start_date %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'Back', user_projects_path(current_user),
+      class: "btn btn-success btn-lg link" %>
+
+</div>

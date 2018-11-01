@@ -1,0 +1,15 @@
+<h1 class="text-center">
+  New Project for
+  <%= try(:current_user).try(:full_name) %>
+</h1>
+
+<%= render 'form' %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-md-10 col-md-offset-2">
+      <%= link_to 'Back', projects_path(:user_id),
+          class: "btn btn-default link", id: "new-project-btn" %>
+    </div>
+  </div>
+</div>

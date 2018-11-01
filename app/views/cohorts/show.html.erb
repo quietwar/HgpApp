@@ -1,0 +1,16 @@
+<h1><%= @cohort.number %></h1>
+
+<table>
+  <thead>
+  <tr>
+    <th> Name </th>
+  </tr>
+  </thead>
+  <tbody>
+    <% @cohort.users.each do |student| %>
+      <tr>
+        <td><%= user.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
