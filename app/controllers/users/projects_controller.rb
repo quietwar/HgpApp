@@ -1,7 +1,6 @@
-class Users::ProjectsController < ApplicationController
-  #before_action :set_user, only: [:show, :new, :create, :edit, :update, :destroy]
-  #before_action :project_params, only: [:create, :edit]
-  helper_method :set_current_room, :current_user
+class ProjectsController < ApplicationController
+  before_action :project_params, only: [:create, :edit]
+  helper_method :set_current_room
   before_action :authenticate_user!
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
@@ -25,7 +24,7 @@ class Users::ProjectsController < ApplicationController
   end
 
   def new
-    @project = :current_user.Project.new
+    @project = Project.new[:id]
   end
 
   #def create
@@ -43,70 +42,48 @@ class Users::ProjectsController < ApplicationController
     #   end
     # end
   def create
-    # @project = Project.where(params[:id])
-    # @user.project.build(params[@user][@project.id])
-    @project = Project.new
-    @project.user = current_user
-
-    respond_to do |format|
-      if @project.save!
-        format.html { redirect_to user_url(@project.user_id), notice: 'Project has been created' }
-        format.json { render :show, status: :created, location: @project }
+    @project = current_user.project.new(project_params)
+      if @project.save
+        flash[:notice] = 'Project has been created'
+        redirect_to @project
       else
-        format.html { render :new }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        flash[:alert] = 'Project has not been created'
+        render :new
       end
-    end
   end
-
 
   def edit
   end
 
   def update
-    respond_to do |format|
-    if @project.update(params)
-      format.html { redirect_to user_url(@project.user_id), notice: 'Project has been updated'}
-      format.json { render :show, status: :created, location: @project }
+    if @project.update(project_params)
+      flash[:notice] = "project has been updated"
+      redirect_to [current_user, @project]
     else
-      format.html { render :edit }
-      format.json { render json: @project.errors, status: :unprocessable_entity }
-      end
+      flash[:alert] = "project has not been updated"
+      render :edit
     end
   end
 
   def destroy
     @project.destroy
-    respond_to do |format|
-      format.html { redirect_to user_url(@project.user_id), notice: "Project has been Deleted" }
-      format.json { head :no_content }
-    redirect_to user_projects_path(:user_id)
+    flash[:notice] = "project has been deleted"
+    redirect_to projects_path(:user_id)
   end
 
-
-
-
-protected
-
-  # def set_user
-  #   @user = User.find(params[:user_id])
-  # end
-
-  def my_sanitizer
-    params.require(:project).permit(:app_name, :coding, :project_details, :start_date)
-  end
+private
 
   def full_name
     "#{first_name} #{last_name}"
   end
 
   def set_project
-    @project = Project.find(params[id])
+    @project = user_projects_path(:user_id)
   end
 
-  # def project_params
-  #   params.require(:project).permit(:app_name, :user_id, :utf8, :commit, :coding, :project_details, :start_date, :url, :authenticity_token, :github, :locale)
-  # end
+  def project_params
+    params.permit(:app_name, :github, :url, :user_id, :coding, :project_details, :start_date, :utf8, :authenticity_token, :commit, :locale)
+  end
 
   def set_current_room
     if params[:roomId]
@@ -116,5 +93,5 @@ protected
     end
   end
     session[current_room] = @room.id if @room
-  end
+  #end
 end

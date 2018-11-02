@@ -1,7 +1,6 @@
 class AdminUser < ApplicationRecord
-  role_based_authorizable
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable
 
@@ -18,8 +17,8 @@ class AdminUser < ApplicationRecord
       # validates :provider, presence: false
       # validates :uid, uniqueness: false#{ scope: :provider }
     #  alias_attribute :Genius_Staff, :admin
-    #  has_many :active_admin_comments, as: :resource, class_name: 'ActiveAdmin::Comment'
-    #  alias_method :comments, :active_admin_comments
+     has_many :active_admin_comments, as: :resource, class_name: 'ActiveAdmin::Comment'
+     alias_method :comments, :active_admin_comments
 
       has_many :classrooms
 

@@ -64,6 +64,7 @@ body {
    }
 
 
+
 // home page styling
 
 .col-md-10 {
@@ -108,8 +109,13 @@ body {
 
 // navbar styling
 .navbar {
+<<<<<<< HEAD
   background-color: black;
   //opacity: 0.3;
+=======
+  background: black;
+  opacity: 0.5;
+>>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
 
 }
 
@@ -275,6 +281,11 @@ body {
 }
 
 // Devise Error Messages
+
+.alert-dismissible{
+   padding-top: 250px;
+ }
+
 #error_explanation {
  background-color: #f2dede;
  color: #a94442;

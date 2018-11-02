@@ -9,7 +9,7 @@ development:
   username: postgres
   password: wanjiri22
   encoding: unicode
-  database:  
+  database:
   pool: 5
 
 

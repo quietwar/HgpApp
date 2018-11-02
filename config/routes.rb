@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :cohorts
       resources :attendances
 
-  devise_for :users#, :only => :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" } 
+  devise_for :users#, :only => :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users do
     resources :projects, controller: 'users/projects'
     collection do

@@ -50,16 +50,16 @@ gem 'high_voltage', '~> 3.0.0'
 # Use jquery as the JavaScript library
 gem 'rails-assets-jquery', source: 'https://rails-assets.org'
 gem 'rails-assets-datatables', source: 'https://rails-assets.org'
-
-gem 'jquery-ui-rails'
-gem 'jquery-rails'
-gem 'bootstrap-datepicker-rails'
+gem 'rails-assets-jquery-ujs'
+# gem 'jquery-ui-rails'
+# gem 'jquery-rails'
+#gem 'bootstrap-datepicker-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
+gem 'redis', '~> 3.0'
 gem 'activemodel'
 gem 'activerecord'
 gem 'actionpack'
