@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_09_06_182155) do
+=======
+ActiveRecord::Schema.define(version: 2018_10_16_225635) do
+>>>>>>> activeadmin
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "adminpack"
@@ -76,27 +80,17 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet "current_sign_in_ip"
-    t.inet "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email2"
     t.bigint "cell"
     t.string "provider"
     t.string "uid"
-    t.integer "roles_mask"
     t.string "username"
-    t.boolean "superadmin"
     t.integer "utf8"
     t.string "login"
     t.string "city"
+<<<<<<< HEAD
 <<<<<<< HEAD
     t.bigint "role", default: 0, null: false
     t.string "avatar_file_name"
@@ -115,13 +109,52 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 >>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
+=======
+    t.integer "role", limit: 2, default: 0, null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.index ["confirmation_token"], name: "index_admin_users_on_confirmation_token", unique: true
+    t.index ["email"], name: "index_admin_users_on_email", unique: true
+    t.index ["provider"], name: "index_admin_users_on_provider", unique: true
+    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+    t.index ["uid"], name: "index_admin_users_on_uid", unique: true
   end
 
-  create_table "cohorts", id: :serial, force: :cascade do |t|
+  create_table "attendances", force: :cascade do |t|
+    t.string "user_id"
+    t.string "cohort_id"
+    t.string "attendance_id"
+    t.datetime "datepicker"
+    t.boolean "present"
+    t.boolean "ghost"
+    t.string "city"
+    t.index ["cohort_id"], name: "index_attendances_on_cohort_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id", unique: true
+  end
+
+  create_table "classrooms", force: :cascade do |t|
+    t.string "genius"
+    t.integer "cohort_id"
+    t.string "attendances"
+    t.string "city"
+>>>>>>> activeadmin
+  end
+
+  create_table "cohorts", force: :cascade do |t|
     t.string "genius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "city"
+<<<<<<< HEAD
     t.integer "cohort_id"
     t.bigint "cohort"
 <<<<<<< HEAD
@@ -130,6 +163,18 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.string "name"
 =======
 >>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
+=======
+    t.bigint "cohort_id"
+>>>>>>> activeadmin
+  end
+
+  create_table "event_occurrences", force: :cascade do |t|
+    t.string "schedulable_type"
+    t.bigint "schedulable_id"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["schedulable_type", "schedulable_id"], name: "index_event_occurrences_on_schedulable_type_and_schedulable_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -138,29 +183,33 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "features", id: :serial, force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "genius"
-    t.integer "user_id"
-    t.index ["user_id"], name: "index_features_on_user_id", unique: true
+    t.integer "admin_id"
+    t.string "location"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.integer "latitude"
+    t.integer "longitude"
   end
 
   create_table "friendships", force: :cascade do |t|
+<<<<<<< HEAD
     t.bigint "user_id"
     t.bigint "friend_id"
+=======
+    t.integer "user_id"
+    t.integer "friend_id"
+>>>>>>> activeadmin
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
     t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
-  create_table "messages", id: :serial, force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.text "body"
-    t.integer "user_id"
-    t.integer "room_id"
+    t.bigint "user_id"
+    t.bigint "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "friend_id"
@@ -168,61 +217,74 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+<<<<<<< HEAD
   create_table "projects", id: :serial, force: :cascade do |t|
+=======
+  create_table "projects", force: :cascade do |t|
+>>>>>>> activeadmin
     t.string "app_name"
     t.string "coding"
     t.text "project_details"
     t.date "start_date"
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.integer "utf8"
     t.string "authenticity_token"
     t.string "commit"
     t.string "locale"
     t.string "url"
     t.string "github"
+<<<<<<< HEAD
     t.string "url"
     t.index ["user_id"], name: "index_projects_on_user_id"
+=======
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> activeadmin
   end
 
-  create_table "rooms", id: :serial, force: :cascade do |t|
+  create_table "rooms", force: :cascade do |t|
     t.string "name"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.string "session_id", null: false
-    t.text "data"
+  create_table "schedules", force: :cascade do |t|
+    t.string "schedulable_type"
+    t.bigint "schedulable_id"
+    t.date "date"
+    t.time "time"
+    t.string "rule"
+    t.string "interval"
+    t.text "day"
+    t.text "day_of_week"
+    t.datetime "until"
+    t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
-    t.index ["updated_at"], name: "index_sessions_on_updated_at"
+    t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "sessions", force: :cascade do |t|
+    t.text "data"
+    t.string "session_id"
+  end
+
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
+<<<<<<< HEAD
     t.string "title"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+=======
+>>>>>>> activeadmin
     t.string "city"
     t.integer "cohort_id"
     t.string "email2"
@@ -237,7 +299,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.string "access_token"
     t.string "refresh_token"
     t.integer "project_id"
-    t.string "project"
     t.string "feature"
     t.string "provider"
     t.string "uid"
@@ -245,6 +306,7 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.integer "stipend"
     t.string "oauth_token"
     t.string "google_oauth2"
+<<<<<<< HEAD
     t.string "user"
     t.string "name"
 <<<<<<< HEAD
@@ -261,19 +323,35 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.string "color"
     t.boolean "admin"
 =======
+=======
+>>>>>>> activeadmin
     t.string "login"
     t.integer "classroom_id"
     t.integer "attendance_id"
     t.string "username"
     t.string "password"
+<<<<<<< HEAD
 >>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
     t.index ["access_token"], name: "index_users_on_access_token", unique: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+=======
+    t.string "reset_password_token"
+    t.datetime "remember_created_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> activeadmin
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["genius"], name: "index_users_on_genius", unique: true
-    t.index ["project"], name: "index_users_on_project", unique: true
-    t.index ["refresh_token"], name: "index_users_on_refresh_token", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+<<<<<<< HEAD
 <<<<<<< HEAD
   end
 
@@ -282,6 +360,8 @@ ActiveRecord::Schema.define(version: 2018_09_06_182155) do
     t.datetime "updated_at", null: false
 =======
 >>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
+=======
+>>>>>>> activeadmin
   end
 
   add_foreign_key "messages", "rooms"

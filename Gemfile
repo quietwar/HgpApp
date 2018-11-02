@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
+source 'http://gems.github.com'
 
 
 # Bundle edge Rails instead:
@@ -8,7 +9,7 @@ gem 'railties'
 gem 'bundler'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
-gem 'pg', '0.21.0'
+gem 'pg', '~> 0.21.0'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -21,7 +22,7 @@ gem 'coffee-rails'
 # gem 'therubyracer', platforms: :ruby
 #gem 'kaminari'
 gem 'ffi', '1.9.18'
-gem 'activeadmin'
+gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
 gem 'active_admin_theme'
 #gem 'fullcalendar-rails'
 gem 'momentjs-rails'
@@ -38,9 +39,14 @@ gem 'active_admin-duplicatable'
 gem 'responders'
 gem 'gmaps4rails'
 gem 'underscore-rails'
+<<<<<<< HEAD
 gem 'geocoder'
 #gem 'sinatra-google-auth'
 gem 'google-api-client',  require: 'google/apis/calendar_v3'
+=======
+#gem 'geocoder'
+#gem 'google-api-client',  require: 'google/apis/calendar_v3'
+>>>>>>> activeadmin
 gem 'omniauth'
 gem 'omniauth-google-oauth2', git: 'https://github.com/zquestz/omniauth-google-oauth2.git'
 gem 'omniauth-oauth2'
@@ -51,7 +57,7 @@ gem 'high_voltage', '~> 3.0.0'
 gem 'rails-assets-jquery', source: 'https://rails-assets.org'
 gem 'rails-assets-datatables', source: 'https://rails-assets.org'
 gem 'rails-assets-jquery-ujs'
-# gem 'jquery-ui-rails'
+gem 'jquery-ui-rails'
 # gem 'jquery-rails'
 #gem 'bootstrap-datepicker-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -100,7 +106,12 @@ end
 
 group :production do
   # Use Capistrano for deployment
+<<<<<<< HEAD
   gem 'capistrano'
+=======
+  #gem 'pg', '0.21.0'
+  gem 'capistrano', '~> 3.6'
+>>>>>>> activeadmin
   gem 'capistrano-rails', group: :development
 end
 

@@ -11,6 +11,11 @@ development:
   encoding: unicode
   database:
   pool: 5
+<<<<<<< HEAD
+=======
+  username: hodaritoure
+  password: wanjiri22
+>>>>>>> activeadmin
 
 
 test:

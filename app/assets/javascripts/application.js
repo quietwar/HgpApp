@@ -15,17 +15,34 @@
 //= require jquery_ujs
 //= require activestorage
 //= require bootstrap-sprockets
-//= require bootstrap-datepicker
+// require bootstrap-datepicker
 //= require moment
+<<<<<<< HEAD
+=======
+// require fullcalendar
+// require fullcalendar/gcal
+>>>>>>> activeadmin
 // require gcal
+//= require cocoon
 //= require d3
 //= require turbolinks
 //= require underscore
+<<<<<<< HEAD
 //= require gmaps/google
+=======
+// require gmaps/google
+// require fullcalendar
+// require fullcalendar/gcal
+//= require d3
+//= require turbolinks
+// require underscore
+// require gmaps/google
+>>>>>>> activeadmin
 // require active_admin_map_index
 //= require_tree .
 
 
+<<<<<<< HEAD
 // $(document).ready(function() {
 //    $("#calendar")({
 //      header:
@@ -40,3 +57,20 @@
 //      dragOpacity: "0.5"
 //   });
 // });
+=======
+$(document).ready(function() {
+   $("#calendar")
+   {
+     header:
+     left: "prev, next, today",
+     center: "title",
+     right: "month,agendaWeek,agendaDay",
+     defaultView: "month",
+     height: 500,
+     slotMinutes: 15,
+     eventSources: ["/events/info"],
+     timeFormat: "h:mm t{ - h:mm t} ",
+     dragOpacity: "0.5"
+  });
+});
+>>>>>>> activeadmin

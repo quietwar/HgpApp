@@ -1,2 +1,3 @@
-class Schedule < ApplicationRecord
+class Schedule
+  # Schedulable::Model::Schedule
 end

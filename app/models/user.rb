@@ -14,20 +14,31 @@ class User < ApplicationRecord
               after_create :create_cohort
               attr_accessor :login
               has_one :room, dependent: :destroy
+<<<<<<< HEAD
               has_one :cohort, inverse_of: :user
               has_many :user_projects
+=======
+>>>>>>> activeadmin
               has_many :projects, inverse_of: :user
                 accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
-                accepts_nested_attributes_for :cohort, :room, :projects, :allow_destroy => true
+                accepts_nested_attributes_for :room, :projects, :allow_destroy => true
               has_many :friendships, class_name: "Genius"
-              belongs_to :cohort, optional: true#, inverse_of: :users
+              belongs_to :cohort, polymorphic: true#, inverse_of: :users
+              accepts_nested_attributes_for :cohort
+              has_one :cohort#, inverse_of: :user
+              COHORT_TYPES = %w(Domain Service)
                 #validates_presence_of :cohort_id
               # belongs_to :classroom, inverse_of: :users
               #   validates_presence_of :cohort_id
-              has_many :attendances
-                accepts_nested_attributes_for :attendances, allow_destroy: true
+              has_many :attendances, inverse_of: :user
+              accepts_nested_attributes_for :attendances, reject_if: :all_blank, allow_destroy: true
 
+
+      def build_cohort(params)
+        raise "Unknown cohort_type: #{cohort_type}" unless COHORT_TYPES.include?(cohort_type)
+        self.cohort = cohort_type.constantize.new(params)
+      end
 
       def full_name
         "#{first_name} #{last_name}"

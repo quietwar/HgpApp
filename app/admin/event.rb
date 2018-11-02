@@ -31,7 +31,10 @@ ActiveAdmin.register Event do
    f.inputs do
      f.input :event
      f.input :location
+     f.input :address
+     f.input :city
      f.input :notes
+     
 
    end
    f.actions
