@@ -18,5 +18,6 @@
 #= require active_admin/initializers/datepicker
 #= require active_admin/initializers/filters
 #= require active_admin/initializers/tabs
+#=require select2
 
 @ActiveAdmin = {}

@@ -21,6 +21,8 @@ gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 #gem 'kaminari'
+# to insert share buttons for social media
+gem 'social-share-button'
 gem 'ffi', '1.9.18'
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
 gem 'active_admin_theme'

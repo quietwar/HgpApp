@@ -32,23 +32,18 @@ ActiveAdmin.register Classroom do
     f.semantic_errors    ### Declare here the model's own form fields:
     f.inputs "Hgp Cohorts" do
       f.input :city, label: "Office Location"
-      #f.input :classroom, label: "Cohort Number"
+      f.input :cohort_id, label: "Cohort Number"
     end
+    f.actions
 
-
-      f.input :attendances, as: :nested_select,
-                  level_1: { attribute: :cohort_id },
-                  level_2: { attribute: :genuis_id },
-                  level_3: { attribute: :attendances }
+    end
 
       sidebar :help do
       "Need help? Email us at help@example.com"
    end
 
 
-  f.actions
-  
-  end
+
 
   #content do
     #index_as_calendar
@@ -73,5 +68,4 @@ ActiveAdmin.register Classroom do
     ['admin', 'classroom']
     para "Hello Genius"
   end
-#end
-end
+ end
