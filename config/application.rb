@@ -1,8 +1,6 @@
-#require 'devise/orm/:active_record'
-require 'kaminari'
 require_relative 'boot'
-require 'rails/all'
 
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,21 +9,11 @@ Bundler.require(*Rails.groups)
 module GeniusLounge
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-
-
     config.load_defaults 5.2
-    #config.middleware.use Rack::MethodOverride
-    config.app_generators.scaffold_controller :responders_controller
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
-    # config.middleware.use ActionDispatch::Cookies
-    # config.middleware.use ActionDispatch::Session::CookieStore
-    # config.session_store :cookie_store
-    config.exceptions_app = self.routes
-    config.eager_load_paths = Dir.glob("#{Rails.root}/app/*").reject do |path|
-      path.include?("admin_user")
-    end
 
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration can go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded after loading
+    # the framework and any gems in your application.
   end
 end

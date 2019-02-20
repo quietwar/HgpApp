@@ -1,5 +1,5 @@
-source 'http://rubygems.org'
-source 'http://gems.github.com'
+source 'https://rubygems.org'
+#source 'https://gems.github.com'
 
 
 # Bundle edge Rails instead:
@@ -24,14 +24,14 @@ gem 'coffee-rails'
 # to insert share buttons for social media
 gem 'social-share-button'
 gem 'ffi', '1.9.18'
-gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin'#, :git => 'git://github.com/gregbell/active_admin.git'
 gem 'active_admin_theme'
 #gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'paperclip'
 gem "active_admin-sortable_tree"
 gem 'active_admin_importable'
-gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'inherited_resources'#, github: 'activeadmin/inherited_resources'
 gem 'activeadmin_addons'
 gem 'active_admin_datetimepicker'
 gem 'active_admin_role'
@@ -74,7 +74,7 @@ gem 'd3-rails','4.1.0'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'cocoon'
 gem 'rails_layout'
-gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'ransack'#, github: 'activerecord-hackery/ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -97,6 +97,7 @@ group :development do
   gem 'guard', '~>2.14.0'
   gem 'guard-rspec', '~> 4.7.2'
   gem 'guard-cucumber', '~> 2.1.2'
+  gem 'bootsnap', require: false
 end
 
 group :production do

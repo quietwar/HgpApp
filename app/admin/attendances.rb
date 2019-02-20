@@ -19,7 +19,7 @@ ActiveAdmin.register Attendance do
 
   form do |f|
     f.semantic_errors
-        f.inputs "Rollcall", collection:[true] do
+        f.inputs "Rollcall",:as => :select, collection:[true] do
            f.input :attendance_id, as: :nested_select,
                       level_1: { attribute: :cohorts_id },
                       level_2: { attribute: :users_id },
