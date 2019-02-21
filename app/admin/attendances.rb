@@ -19,20 +19,21 @@ ActiveAdmin.register Attendance do
 
   form do |f|
     f.semantic_errors
-    f.input :attendance_id, as: :nested_select,
+        f.inputs "Rollcall",:as => :select, collection:[true] do
+           f.input :attendance_id, as: :nested_select,
                       level_1: { attribute: :cohorts_id },
                       level_2: { attribute: :users_id },
                       level_3: { attribute: :attendance_id }
       end
-
-  #     f.inputs "Rollcall", collection:[true] do
-  #      f.input :attendance_id, as: :nested_select,
+     f.actions
+   end
+ end
   #
   #                  level_1: { attribute: :cohort },
   #                  level_2: { attribute: :users },
   #                  level_3: { attribute: :attendance_id }
   #
-       end
+
   #
   #
   #   f.inputs do |cd|
@@ -40,8 +41,7 @@ ActiveAdmin.register Attendance do
   #       cd.input :end_time, as: :datetime_picker
   #     #end
   #   end
-  #   f.actions
-  # end
+
 
   # f.inputs "class_date" do
   #         f.input :updated_at, as: :date_time_picker

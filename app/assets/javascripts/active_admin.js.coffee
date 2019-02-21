@@ -1,8 +1,5 @@
 #= require active_admin/base
 #= require activeadmin_addons/all
-<<<<<<< HEAD
-# require active_admin/sortable_ui5.js
-=======
 #= require jquery2
 # require jquery_ui
 #= require jquery_ujs
@@ -21,6 +18,6 @@
 #= require active_admin/initializers/datepicker
 #= require active_admin/initializers/filters
 #= require active_admin/initializers/tabs
+#=require select2
 
 @ActiveAdmin = {}
->>>>>>> activeadmin

@@ -8,11 +8,4 @@ class Cohort < ApplicationRecord
   #   after_save :genius
   #   belongs_to :user, presence: true
   #   validates :user, presence: true
-<<<<<<< HEAD
-
-  # def to_s
-  #    self.name
-  # end
-=======
->>>>>>> activeadmin
 end

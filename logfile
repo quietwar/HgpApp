@@ -2,14 +2,8 @@ LOG:  database system was shut down at 2017-09-21 14:13:08 PDT
 LOG:  MultiXact member wraparound protections are now enabled
 LOG:  database system is ready to accept connections
 LOG:  autovacuum launcher started
-<<<<<<< HEAD
-2018-07-15 18:43:13.476 PDT [10798] FATAL:  database files are incompatible with server
-2018-07-15 18:43:13.476 PDT [10798] DETAIL:  The data directory was initialized by PostgreSQL version 9.6, which is not compatible with this version 10.4.
-2018-07-15 21:08:11.542 PDT [15555] FATAL:  database files are incompatible with server
-2018-07-15 21:08:11.542 PDT [15555] DETAIL:  The data directory was initialized by PostgreSQL version 9.6, which is not compatible with this version 10.4.
 =======
 2018-09-24 19:23:38.243 PDT [31984] FATAL:  data directory "/Applications/Desktop/coding/hgpapp/new" has group or world access
 2018-09-24 19:23:38.243 PDT [31984] DETAIL:  Permissions should be u=rwx (0700).
 2018-09-24 19:24:59.474 PDT [32169] FATAL:  data directory "/Applications/Desktop/coding/hgpapp/new" has group or world access
 2018-09-24 19:24:59.474 PDT [32169] DETAIL:  Permissions should be u=rwx (0700).
->>>>>>> activeadmin

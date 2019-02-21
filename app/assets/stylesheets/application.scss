@@ -14,20 +14,16 @@
  *= require jquery-ui
  *= require jquery-ui/sortable
  *= require jquery-ui/datepicker
-<<<<<<< HEAD
- *= require bootstrap-datepicker
-=======
  *= require select2
  * require bootstrap-datepicker
  * require fullcalendar
->>>>>>> activeadmin
+ *= require select2
+ * require bootstrap-datepicker
+ * require fullcalendar 
  *= require_tree .
  *= require_self
  */
 
  //@import "font-awesome-sprockets";
  //@import "font-awesome";
-<<<<<<< HEAD
-=======
  //@import 'fullcalendar'
->>>>>>> activeadmin

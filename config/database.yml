@@ -10,12 +10,9 @@ development:
   password: wanjiri22
   encoding: unicode
   database:
-  pool: 5
-<<<<<<< HEAD
-=======
+  pool: 5 
   username: hodaritoure
   password: wanjiri22
->>>>>>> activeadmin
 
 
 test:

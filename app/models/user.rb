@@ -14,11 +14,7 @@ class User < ApplicationRecord
               after_create :create_cohort
               attr_accessor :login
               has_one :room, dependent: :destroy
-<<<<<<< HEAD
-              has_one :cohort, inverse_of: :user
-              has_many :user_projects
-=======
->>>>>>> activeadmin
+ 
               has_many :projects, inverse_of: :user
                 accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
@@ -34,6 +30,10 @@ class User < ApplicationRecord
               has_many :attendances, inverse_of: :user
               accepts_nested_attributes_for :attendances, reject_if: :all_blank, allow_destroy: true
 
+      def build_cohort(params)
+        raise "Unknown cohort_type: #{cohort_type}" unless COHORT_TYPES.include?(cohort_type)
+        self.cohort = cohort_type.constantize.new(params)
+      end
 
       def build_cohort(params)
         raise "Unknown cohort_type: #{cohort_type}" unless COHORT_TYPES.include?(cohort_type)

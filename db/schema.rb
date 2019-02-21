@@ -10,11 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_09_06_182155) do
-=======
 ActiveRecord::Schema.define(version: 2018_10_16_225635) do
->>>>>>> activeadmin
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "adminpack"
@@ -90,17 +87,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.integer "utf8"
     t.string "login"
     t.string "city"
-<<<<<<< HEAD
-<<<<<<< HEAD
-    t.bigint "role", default: 0, null: false
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.bigint "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.boolean "admin"
-    t.index ["email"], name: "index_admin_users_on_email", unique: true
-    t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
-=======
     t.integer "admin_users", limit: 2, default: 0, null: false
     t.integer "role", limit: 2, default: 0, null: false
     t.string "reset_password_token"
@@ -108,8 +94,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
->>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
-=======
     t.integer "role", limit: 2, default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -146,7 +130,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.integer "cohort_id"
     t.string "attendances"
     t.string "city"
->>>>>>> activeadmin
   end
 
   create_table "cohorts", force: :cascade do |t|
@@ -154,18 +137,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "city"
-<<<<<<< HEAD
-    t.integer "cohort_id"
-    t.bigint "cohort"
-<<<<<<< HEAD
-    t.string "city_id"
-    t.string "user"
-    t.string "name"
-=======
->>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
-=======
     t.bigint "cohort_id"
->>>>>>> activeadmin
   end
 
   create_table "event_occurrences", force: :cascade do |t|
@@ -193,13 +165,10 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
   end
 
   create_table "friendships", force: :cascade do |t|
-<<<<<<< HEAD
-    t.bigint "user_id"
-    t.bigint "friend_id"
-=======
+
     t.integer "user_id"
     t.integer "friend_id"
->>>>>>> activeadmin
+
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["friend_id"], name: "index_friendships_on_friend_id"
@@ -217,11 +186,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-<<<<<<< HEAD
-  create_table "projects", id: :serial, force: :cascade do |t|
-=======
   create_table "projects", force: :cascade do |t|
->>>>>>> activeadmin
     t.string "app_name"
     t.string "coding"
     t.text "project_details"
@@ -233,13 +198,10 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "locale"
     t.string "url"
     t.string "github"
-<<<<<<< HEAD
-    t.string "url"
-    t.index ["user_id"], name: "index_projects_on_user_id"
-=======
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
->>>>>>> activeadmin
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false 
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -277,14 +239,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.datetime "reset_password_sent_at"
     t.string "first_name"
     t.string "last_name"
-<<<<<<< HEAD
-    t.string "title"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-=======
->>>>>>> activeadmin
     t.string "city"
     t.integer "cohort_id"
     t.string "email2"
@@ -306,35 +260,17 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.integer "stipend"
     t.string "oauth_token"
     t.string "google_oauth2"
-<<<<<<< HEAD
-    t.string "user"
-    t.string "name"
-<<<<<<< HEAD
-    t.integer "roles_mask"
-    t.string "login"
-    t.integer "classroom_id"
-    t.integer "attendance_id"
-    t.string "ancestry"
-    t.string "username"
-    t.string "avatar_file_name"
-    t.string "avatar_content_type"
-    t.bigint "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.string "color"
-    t.boolean "admin"
-=======
-=======
->>>>>>> activeadmin
     t.string "login"
     t.integer "classroom_id"
     t.integer "attendance_id"
     t.string "username"
     t.string "password"
-<<<<<<< HEAD
->>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
-    t.index ["access_token"], name: "index_users_on_access_token", unique: true
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-=======
+
+    t.string "login"
+    t.integer "classroom_id"
+    t.integer "attendance_id"
+    t.string "username"
+    t.string "password"
     t.string "reset_password_token"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
@@ -348,22 +284,9 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
->>>>>>> activeadmin
+
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-<<<<<<< HEAD
-<<<<<<< HEAD
-  end
-
-  create_table "welcomes", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-=======
->>>>>>> efbb75635cfea57589720288e6e36b9dca72ebdd
-=======
->>>>>>> activeadmin
-  end
-
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "rooms", "users"
