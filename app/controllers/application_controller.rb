@@ -11,31 +11,23 @@ class ApplicationController < ActionController::Base
     def not_found_error
       render file: 'public/401.html', status: :not_found
     end
- 
+
    rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
     redirect_to root_url
   end
 
-#     #
-#     # def after_sign_out_path_for(user)
-#     #     root_path
-#     # end
-#     #
-#     # def after_sign_in_path_for(admin)
-#     #     admin_dashboard_path
-#     # end
-#     #
-#     # def after_sign_in_path_for(user)
-#     #     root_path
-#     # end
-#     #
-#     # def after_sign_out_path_for(admin)
-#     #     root_path
-#     # end
-#
-#
-#
+
+    def after_sign_out_path_for(user)
+        root_path
+    end
+
+    def after_sign_in_path_for(admin)
+        admin_dashboard_path
+    end
+
+
+
   def configure_permitted_parameters
        attributes = [:first_name, :last_name, :username, :email, :email2, :cell, :avatar, :cohort, :cohort_id, :city, :password, roles: []]
        devise_parameter_sanitizer.permit(:sign_in, keys: [:login, :email, :password, :password_confirmation])
@@ -51,11 +43,11 @@ private
   end
 
   def current_user
-    @current_user ||= User.find_by_id(session[:user])
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
   def logged_in?
-    current_user != nil
+    !!current_user
   end
 
   def admin_user_signed_in?

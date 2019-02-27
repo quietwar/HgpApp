@@ -16,7 +16,7 @@ ActiveAdmin.register_page "Dashboard" do
             small I18n.t("active_admin.dashboard_welcome.call_to_action")
           end
       end
-         
+
         columns do
           column do
             panel "Cohorts" do
@@ -67,7 +67,7 @@ ActiveAdmin.register_page "Dashboard" do
              panel "Events" do
                table_for Event.order("id desc").limit(10) do
                  ul "Upcoming Events" do
-                   li link_to "HGP Events Calendar"
+                   li link_to "THGP Events Calendar"
                  end
                 end
               end

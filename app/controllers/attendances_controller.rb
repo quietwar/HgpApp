@@ -11,6 +11,11 @@ class AttendancesController < ApplicationController
 
   def index
     @attendance = Attendance.all
+  end
+
+  def show
+
+  end
 
   def create
     @attendance = attendance.new(attendance_params)
@@ -24,13 +29,13 @@ class AttendancesController < ApplicationController
         flash[:notice] = 'attendance was successfully created'
         format.html { redirect_to classroom_attendances_path }
         format.json { render :show, status: :created, location: @attendance }
-      end
+
         format.html { render :new }
         format.json { render json: @attendance.errors,
           status: :unprocessable_entity }
-        end
-      end
-    #end
+    end
+  end
+
   def edit
     @classroom = Classroom.find(:classroom_id)
   end
@@ -47,8 +52,8 @@ private
   #      devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   # end
 
-  def project_params
-    params.permit(:genius, :users_id, :class_date, :cohort, :cohort_id, :present, :absent, :user_id, :halfday)
+    def project_params
+      params.permit(:genius, :attendance_id, :users_id, :class_date, :cohort, :cohort_id, :present, :absent, :user_id, :halfday)
+    end
   end
-end
 end

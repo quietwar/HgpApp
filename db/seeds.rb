@@ -20,7 +20,9 @@
 # end
 # puts "There are now #{Cohort.count} rows in the cohort table"
 # # Examples:
-#
+user = User.new({email: 'hodari@hgs.hiddengeniusproject.org', password: 'quiet927', password_confirmation: 'quiet927'})
+user.save
+
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # admins = Admin.create!([{
@@ -29,17 +31,18 @@
 #   password_confirmation: 'genius'
 #   admin: 'yes'
 #   }])
-# %i[guest user staff director admin].each do |role|
-#   AdminUser.find_or_create_by!(email: "#{role}hodari@hiddengeniusproject.org") do |admin_user|
-#     admin_user.first_name = 'Hodari'
-#     admin_user.last_name = 'Toure'
-#     admin_user.role = 'admin'
-#     admin_user.password = 'quiet927'
-#     admin_user.password_confirmation = 'quiet927'
-#   end
-# end
+%i[guest user staff director admin].each do |role|
+  AdminUser.find_or_create_by!(email: "#{role}hodari@hiddengeniusproject.org") do |admin_user|
+    admin_user.first_name = 'Hodari'
+    admin_user.last_name = 'Toure'
+    admin_user.role = 'admin'
+    admin_user.password = 'quiet927'
+    admin_user.password_confirmation = 'quiet927'
+  end
+end
+
 %i[admin].each do |role|
-  AdminUser.find_or_create_by!(email = "#{role}@genius.com") do |admin_user|
+  AdminUser.find_or_create_by!(email = "#{role}hodari@hiddengeniusproject.org") do |admin_user|
     admin_user.role = role
     admin_user.first_name = 'wpill'
     admin_user.last_name = 'wpill'

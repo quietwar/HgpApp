@@ -12,7 +12,7 @@ class Ability
     end
 
 #     # NOTE: Everyone can read the page of Permission Deny
-#     can :read, ActiveAdmin::Page, name: "Dashboard"
+     can :read, ActiveAdmin::Page, name: "Dashboard"
 # # ÷d
 
 

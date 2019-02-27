@@ -10,11 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_225635) do
-
+ActiveRecord::Schema.define(version: 2019_02_27_014652) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "adminpack"
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -43,7 +41,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
 
   create_table "active_admin_permissions", force: :cascade do |t|
     t.integer "managed_resource_id", null: false
-    t.string "[\"managed_resource_id\"]"
     t.integer "role", limit: 2, default: 0, null: false
     t.integer "state", limit: 2, default: 0, null: false
     t.index ["managed_resource_id", "role"], name: "active_admin_permissions_index", unique: true
@@ -87,13 +84,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.integer "utf8"
     t.string "login"
     t.string "city"
-    t.integer "admin_users", limit: 2, default: 0, null: false
-    t.integer "role", limit: 2, default: 0, null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.index ["email"], name: "index_admin_users_on_email", unique: true
-    t.index ["provider", "uid"], name: "index_admin_users_on_provider_and_uid", unique: true
-    t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
     t.integer "role", limit: 2, default: 0, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -106,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "admin"
     t.index ["confirmation_token"], name: "index_admin_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["provider"], name: "index_admin_users_on_provider", unique: true
@@ -138,6 +129,8 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.datetime "updated_at", null: false
     t.string "city"
     t.bigint "cohort_id"
+    t.string "users"
+    t.integer "cohort_number"
   end
 
   create_table "event_occurrences", force: :cascade do |t|
@@ -165,14 +158,10 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
   end
 
   create_table "friendships", force: :cascade do |t|
-
     t.integer "user_id"
     t.integer "friend_id"
-
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["friend_id"], name: "index_friendships_on_friend_id"
-    t.index ["user_id"], name: "index_friendships_on_user_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -181,7 +170,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.bigint "room_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "friend_id"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -200,8 +188,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "github"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false 
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -240,7 +226,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "first_name"
     t.string "last_name"
     t.string "city"
-    t.integer "cohort_id"
+    t.integer "cohort_number"
     t.string "email2"
     t.string "projects"
     t.bigint "cell"
@@ -265,12 +251,6 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.integer "attendance_id"
     t.string "username"
     t.string "password"
-
-    t.string "login"
-    t.integer "classroom_id"
-    t.integer "attendance_id"
-    t.string "username"
-    t.string "password"
     t.string "reset_password_token"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
@@ -284,9 +264,11 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "rooms", "users"

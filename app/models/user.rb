@@ -4,7 +4,7 @@ class User < ApplicationRecord
       devise :database_authenticatable, :registerable,
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
              validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-              validates :cohort_id, :city, presence: true
+              validates :cohort_number, :city, presence: true
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
               validates :password, presence: false #length: {:within => 6..46 }, on: :create
               validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
@@ -14,17 +14,18 @@ class User < ApplicationRecord
               after_create :create_cohort
               attr_accessor :login
               has_one :room, dependent: :destroy
- 
+
               has_many :projects, inverse_of: :user
                 accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
                 accepts_nested_attributes_for :room, :projects, :allow_destroy => true
               has_many :friendships, class_name: "Genius"
+              #belongs_to :cohort, optional: false
               belongs_to :cohort, polymorphic: true#, inverse_of: :users
               accepts_nested_attributes_for :cohort
-              has_one :cohort#, inverse_of: :user
+              has_one :cohort, inverse_of: :user
               COHORT_TYPES = %w(Domain Service)
-                #validates_presence_of :cohort_id
+              validates_presence_of :cohort_number
               # belongs_to :classroom, inverse_of: :users
               #   validates_presence_of :cohort_id
               has_many :attendances, inverse_of: :user
@@ -35,10 +36,6 @@ class User < ApplicationRecord
         self.cohort = cohort_type.constantize.new(params)
       end
 
-      def build_cohort(params)
-        raise "Unknown cohort_type: #{cohort_type}" unless COHORT_TYPES.include?(cohort_type)
-        self.cohort = cohort_type.constantize.new(params)
-      end
 
       def full_name
         "#{first_name} #{last_name}"
@@ -205,14 +202,14 @@ class User < ApplicationRecord
 
     private
 
-    # def create_cohort
-    #   hyphenated_username = self.full_name.split.join('-')
-    #   Cohort.create(name: hyphenated_username, user_id: self.id)
-    # end
+    def create_cohort
+      hyphenated_username = self.full_name.split.join('-')
+      Cohort.create(name: hyphenated_username, user_id: self.id)
+    end
 
-    # def create_room
-    #     hyphenated_username = self.full_name.split.join('-')
-    #     Room.create(name: hyphenated_username, user_id: self.id)
-    #   end
+    def create_room
+        hyphenated_username = self.full_name.split.join('-')
+        Room.create(name: hyphenated_username, user_id: self.id)
+      end
     end
 end

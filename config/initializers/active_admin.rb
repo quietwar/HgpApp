@@ -32,7 +32,7 @@ ActiveAdmin.setup do |config|
   #
   # This will create resources in the HelloWorld module and
   # will namespace routes to /hello_world/*
-  
+
   #
   # config.namespace :admin do |admin|
   #    admin.build_menu :utility_navigation do |menu|
@@ -120,13 +120,7 @@ ActiveAdmin.setup do |config|
   # Default:
    config.logout_link_method = :delete
 
-  # == Root
-  #
-  # Set the action to call for the root path. You can set different
-  # roots for each namespace.
-  #
-  # Default:
-  # config.root_to = 'classrooms#index'
+
 
   # == Admin Comments
   #

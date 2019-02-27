@@ -5,7 +5,4 @@ class ChatsController < ApplicationController
   @messages = Message.order(created_at: :asc)
   end
 
-  def index
-  @messages = Message.order(created_at: :asc)
-  end
 end

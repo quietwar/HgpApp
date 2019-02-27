@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
     resources :cohorts
-      resources :attendances
+      #resources :attendances
 
   devise_for :users#, :only => :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :users do
@@ -52,7 +52,7 @@ Rails.application.routes.draw do
       resources :features,only: [:create]
       resources :friendships, only: [:show, :create, :destroy]
       resources :messages, only: [:create]
-      resources :classrooms
+      #resources :classrooms
 
 
       root to: "classrooms#index"

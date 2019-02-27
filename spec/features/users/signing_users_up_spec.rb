@@ -39,8 +39,8 @@ RSpec.feature "Users signup" do
 
     click_button "Genius sign_up"
 
-    expect(cohort_id.to_i)
-    expect(cell.to_i)
+    # expect(cohort_id.to_i)
+    # expect(cell.to_i)
     expect(page).to have_content("First name can't be blank")
     expect(page).to have_content("Last name can't be blank")
   end

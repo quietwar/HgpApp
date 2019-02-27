@@ -8,8 +8,8 @@
                <li class="active"><%= link_to "Home", root_path %></li>
                <li class="active"><%= link_to "Genius Lounge - Staff only", admin_dashboard_path %></li>
 
-               <li class="active"><%= link_to "Classroom", new_attendance_path(:classroom_id) %></li>
-               <li class="active"><%= link_to "Staff tap in", new_admin_staff_path %></li>
+               <li class="active"><%= link_to "Classroom", new_admin_user_session_path %></li>
+               <li class="active"><%= link_to "Staff tap in", new_admin_user_path %></li>
 
             <% if logged_in? %>
                  <li class="active"><%= link_to "My Lab", user_projects_path(:user_id) %></li>
@@ -23,7 +23,7 @@
                       <li><%= link_to "delete your profile", user_path(:id) %></li>
                       <li><a href="#">Something else here</a></li>
                       <li role="separator" class="divider"></li>
-                    </ui>
+                    </ul>
 
                 <div class="navbar-right signed-in-user">
                     <p class="navbar-text">
@@ -46,15 +46,11 @@
               </li>
            </ul>
          </div>
-         <%= form_tag(search_field_tag,
-                           class: "navbar-form navbar-left",
-                           role: "search") do %> 
-               <div class="form-group">
-                 <%= text_field_tag :search_name, nil, placeholder:
-                         "Search for Geniuses", class: "form-control" do %>
-               </div>
-               <%= submit_tag "Search", class: 'btn btn-default' %>
-             <% end %>
+         <% form_tag users_path, :method => 'get' do %>
+            <p><%= text_field_tag :search, params[:search] %>
+            <%= submit_tag "Search for Geniuses", :name => nil %>
+            </p>
+          <% end %>
              <ul class="nav navbar-nav navbar-right">
 
              <div class="logo"><a href="http://www.hiddengeniusproject.org">

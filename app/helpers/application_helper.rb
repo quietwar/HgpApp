@@ -11,30 +11,26 @@ module ApplicationHelper
   def devise_mapping
      @devise_mapping ||= Devise.mappings[:user]
   end
-  
+
   def admin_user_signed_in?
     current_admin_user != nil
   end
 
-  def resource_name
-     :user
- end
-
- def resource
-    @resource ||= User.new
-  end
-
-  def devise_mapping
-    @devise_mapping ||= Devise.mappings[:user]
-  end
+  def session_link
+    if (logged_in?)
+      link_to "logout", destroy_user_session_path, method: :delete
+    else
+      link_to "login", new_user_session_path
+    end
 
   def avatar_profile_link(user, image_options={}, html_options={})
-  avatar_url = nil
-  unless user.nil?
-    avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
-    link_to(image_tag(avatar_url, image_options), profile_path(user.profile_name), html_options)
+       avatar_url = nil
+    unless user.nil?
+       avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
+       link_to(image_tag(avatar_url, image_options), profile_path(user.profile_name), html_options)
+    end
   end
-end
+
   def bootstrap_class_for(flash_type)
     {
         success: "alert-success",
@@ -68,5 +64,5 @@ end
     return current_user.color if (current_user && current_user.color.present?)
     '#fff'
   end
-
+ end
 end

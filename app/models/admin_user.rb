@@ -18,8 +18,6 @@ class AdminUser < ApplicationRecord
      has_many :active_admin_comments, as: :resource, class_name: 'ActiveAdmin::Comment'
      alias_method :comments, :active_admin_comments
 
-      has_many :classrooms
-
-
+    
        protected
      end

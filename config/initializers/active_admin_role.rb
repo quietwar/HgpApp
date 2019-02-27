@@ -18,5 +18,5 @@ ActiveAdminRole.configure do |config|
 
   # [Optional:Symbol]
   # == Default permission | default: :cannot
-  config.default_state = :can
+  config.default_state = :cannot
 end

@@ -12,8 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :Genius %>
+    <%= form.text_field :user, id: :genius %>
+
     <%= form.label :cohort %>
-    <%= form.number_field :cohort, id: :cohort %>
+    <%= form.number_field :cohort_number, id: :cohort %>
 
     <%= form.label :full_name %>
     <%= form.text_field :full_name, id: :genius_full_name %>

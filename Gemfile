@@ -70,6 +70,7 @@ gem "activesupport"
 gem 'bcrypt', '~> 3.1.7'
 gem 'font-awesome-sass'
 gem 'bootstrap-sass'
+gem 'simple_form'
 gem 'devise'
 gem 'cancancan'
 gem 'd3-rails'

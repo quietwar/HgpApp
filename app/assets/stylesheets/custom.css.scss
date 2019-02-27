@@ -7,45 +7,43 @@ html{
   background-color: black;
 }
 
-// body {
-//   background-color: black;
-// }
-=======
-// body {
-//   background-color: black;
-// }
-
-.container h2{
-  color: #4040a1;
-    /* padding-bottom: 10px; */
-    font-size: 40px;
-    /* font-weight: bold; */
-    font-style: normal;
-    text-align: center;
-    font-variant: normal;
-    font-weight: 300;
-    line-height: 1;
+body {
+  background-color: black;
+  padding-top: 50px;
 }
 
 
-.container p{
-  color: #4040a1;
-    padding-top: 25px;
-    /* padding-bottom: 10px; */
-    font-size: 20px;
-    /* font-weight: bold; */
-    font-style: normal;
-    text-align: center;
-    font-variant: normal;
-    font-weight: 50;
-    line-height: 1;
-}
+// .container h2{
+//   color: #4040a1;
+//     /* padding-bottom: 10px; */
+//     font-size: 40px;
+//     /* font-weight: bold; */
+//     font-style: normal;
+//     text-align: center;
+//     font-variant: normal;
+//     font-weight: 300;
+//     line-height: 1;
+// }
+//
+//
+// .container p{
+//   color: #4040a1;
+//     padding-top: 25px;
+//     /* padding-bottom: 10px; */
+//     font-size: 20px;
+//     /* font-weight: bold; */
+//     font-style: normal;
+//     text-align: center;
+//     font-variant: normal;
+//     font-weight: 50;
+//     line-height: 1;
+// }
 
 .container {
     background-color: black;
     color: #4040a1 !important;
     position: relative;
-    margin-top: 50px;
+    padding-top: 70px;
     width: 100%;
 
    }
@@ -112,7 +110,7 @@ html{
 // navbar styling
 .navbar {
   background: black;
-  opacity: 0.5;
+  //opacity: 0.5;
 
 }
 
@@ -198,6 +196,7 @@ html{
   width: 1200px;
   height: 700px;
 }
+
 .open .dropdown-toggle {
     color: #fff;
     background-color: #555 !important;
@@ -266,11 +265,10 @@ html{
 
 //About Section
 .col-lg-8 {
-   background-color: black;
-   // background- cover;
+   //background-color: black;
    padding: 50px;
    color: #4040a1 !important;
-   // text-align: center;
+    text-align: center;
    // margin-bottom: 25px;
     width: 100%;
    // height: 100%;

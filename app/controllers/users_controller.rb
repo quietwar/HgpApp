@@ -9,28 +9,13 @@ class UsersController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.new(user_params)
-  flash[:notice] = "User was successfully created." if @user.save
-  respond_with(@user)
-  # def create
-  #   @user = User.new(params)
-  #    respond_to do |format|
-  #     if @user.save
-  #       format.html do#{ render html: }
-  #       #format.json { render json: @user.to_json }
-  #          redirect_to
-  #         edit_user_path(current_user)
-  #        end
-  #        format.json { render json: @user.to_json }
-  #        notice: "%{@user] was Successfully created! Now select or create a new cohort."
-  #     else
-  #       render 'new'
-  #       # format.html { render :new }
-  #       # format.json { render json: @user.errors, status:
-  #       #   :unprocessable_entity }
-  #      end
-  #   end
-  end
+    if user = User.valid_login?(params[:email], params[:password])
+      allow_token_to_be_used_only_once_for(user)
+      send_auth_token_for_valid_login_of(user)
+    else
+      render_unauthorized("Error with your login or password")
+    end
+  #end
 
   def edit
     @user = User.find(params[:user_id])
@@ -48,6 +33,7 @@ class UsersController < Devise::RegistrationsController
 
   def index
      @users = User.cohort.where(params[:cohort_id])
+     @users = User.search(params[:search])
      #@users = User.find(params[:cohort_id])
      # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
      #    marker.lat user.latitude
