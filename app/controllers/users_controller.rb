@@ -1,5 +1,5 @@
 class UsersController < Devise::RegistrationsController
-  respond_to :html, :json
+respond_to :html, :json
 # require 'google/api_client'
 # require 'google/api_client/client_secrets'
 
@@ -9,13 +9,13 @@ class UsersController < Devise::RegistrationsController
   end
 
   def create
-    if user = User.valid_login?(params[:email], params[:password])
-      allow_token_to_be_used_only_once_for(user)
-      send_auth_token_for_valid_login_of(user)
-    else
-      render_unauthorized("Error with your login or password")
-    end
-  #end
+    # if user = User.valid_login?(params[:email], params[:password])
+    #   allow_token_to_be_used_only_once_for(user)
+    #   send_auth_token_for_valid_login_of(user)
+    # else
+    #   render_unauthorized("Error with your login or password")
+    # end
+  end
 
   def edit
     @user = User.find(params[:user_id])
@@ -25,6 +25,7 @@ class UsersController < Devise::RegistrationsController
 
   def show
     @user = User.find(params[:user_id])
+    byebug
     @cohort = @user.cohort
     unless @user == current_user
       redirect_to :back, :alert => "Access denied."
@@ -81,7 +82,7 @@ class UsersController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:avatar, :cohort_id, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
+    params.require(:user).permit(:avatar, :cohort_number, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
   end
 
   def project_params

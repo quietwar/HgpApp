@@ -31,7 +31,7 @@
                     </p>
                 </div>
             <% else %>
-                <li class="active"><%= link_to "Genius sign up", genius_signup_path %></li>
+                <li class="active"><%= link_to "Genius sign up", new_user_registration_path %></li>
                 <li class="active"><%= link_to "Tap in", new_user_session_path %></li>
               <% end %>
 
@@ -46,11 +46,7 @@
               </li>
            </ul>
          </div>
-         <% form_tag users_path, :method => 'get' do %>
-            <p><%= text_field_tag :search, params[:search] %>
-            <%= submit_tag "Search for Geniuses", :name => nil %>
-            </p>
-          <% end %>
+       
              <ul class="nav navbar-nav navbar-right">
 
              <div class="logo"><a href="http://www.hiddengeniusproject.org">

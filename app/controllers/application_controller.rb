@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  respond_to :html, :json
+
 
   protect_from_forgery with: :null_session
     skip_before_action :verify_authenticity_token
@@ -17,6 +19,9 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+    def after_sign_up_path_for(user)
+        root_path
+    end
 
     def after_sign_out_path_for(user)
         root_path

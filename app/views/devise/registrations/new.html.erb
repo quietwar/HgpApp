@@ -3,7 +3,7 @@
   <div class='col-md-12'>
     <%= form_for(resource, as: resource_name,
         :html => {class: "form-horizontal", role: "form"},
-        url: genius_signup_path, remote: true) do |f| %>
+        url: new_user_registration_path, remote: true) do |f| %>
       <%= devise_error_messages! %>
 
       <div class="form-group">
