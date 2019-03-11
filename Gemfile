@@ -7,6 +7,8 @@ gem 'rails'
 gem 'railties'
 
 gem 'bundler'
+gem 'nokogiri'
+gem 'pkg-config'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg', '~> 0.21.0'
