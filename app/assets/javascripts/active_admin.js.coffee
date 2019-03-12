@@ -1,7 +1,6 @@
 #= require active_admin/base
 #= require activeadmin_addons/all
-#= require jquery2
-# require jquery_ui
+#= require jquery3
 #= require jquery_ujs
 #= require_self
 #= require active_admin/lib/batch_actions

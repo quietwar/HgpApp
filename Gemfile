@@ -1,16 +1,18 @@
 source 'http://rubygems.org'
-source 'http://gems.github.com'
+#source 'http://gems.github.com'
 
 
 # Bundle edge Rails instead:
 gem 'rails'
 gem 'railties'
+gem 'concurrent-ruby'
 
-gem 'bundler', '>= 1.8.4'
+gem 'bundler'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 gem 'pg', '~> 0.21.0'
 # Use Puma as the app server
+
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -21,6 +23,8 @@ gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 #gem 'kaminari'
+
+gem 'simple_form'
 gem 'ffi', '1.9.18'
 gem 'activeadmin', :git => 'git://github.com/gregbell/active_admin.git'
 gem 'active_admin_theme'
@@ -50,8 +54,8 @@ gem 'high_voltage', '~> 3.0.0'
 gem 'rails-assets-jquery', source: 'https://rails-assets.org'
 gem 'rails-assets-datatables', source: 'https://rails-assets.org'
 gem 'rails-assets-jquery-ujs'
-gem 'jquery-ui-rails'
-# gem 'jquery-rails'
+#gem 'jquery-ui-rails'
+gem 'jquery-rails'
 #gem 'bootstrap-datepicker-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks'

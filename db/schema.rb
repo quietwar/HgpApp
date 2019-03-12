@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_225635) do
+ActiveRecord::Schema.define(version: 2019_02_27_014652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.boolean "admin"
     t.index ["confirmation_token"], name: "index_admin_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["provider"], name: "index_admin_users_on_provider", unique: true
@@ -128,6 +129,8 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.datetime "updated_at", null: false
     t.string "city"
     t.bigint "cohort_id"
+    t.string "users"
+    t.integer "cohort_number"
   end
 
   create_table "event_occurrences", force: :cascade do |t|
@@ -223,7 +226,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "first_name"
     t.string "last_name"
     t.string "city"
-    t.integer "cohort_id"
+    t.integer "cohort_number"
     t.string "email2"
     t.string "projects"
     t.bigint "cell"
@@ -261,6 +264,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_225635) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
