@@ -1,8 +1,7 @@
 ActiveAdmin.register Attendance do
   belongs_to :user, optional: true
   permit_params :name, :user_id, :class_date, :city_id,  :attendance_id ["Present, Absent, Halfday"], class_dates_attributes: [ :id, :start_time, :end_time, :_destroy ]
-#, :genius, :cohort, :username,  :city, :attendances,  :classroom_id#, :stipend,:project, :benchmark, :projects
-  #menu parent: "User"
+  menu parent: "User"
   #navigation_menu :genius
   duplicable?
 
@@ -25,9 +24,22 @@ ActiveAdmin.register Attendance do
                       level_2: { attribute: :users_id },
                       level_3: { attribute: :attendance_id }
       end
+
+      f.inputs :starts_at, as: :datepicker,
+                      datepicker_options: {
+                        min_date: "2013-10-8",
+                        max_date: "+3D"
+                      }
+
+                      f.input :ends_at, as: :datepicker,
+                    datepicker_options: {
+                      min_date: 3.days.ago.to_date,
+                      max_date: "+1W +5D"
+                    }
+      #end
      f.actions
    end
- end
+ #
   #
   #                  level_1: { attribute: :cohort },
   #                  level_2: { attribute: :users },
@@ -49,5 +61,5 @@ ActiveAdmin.register Attendance do
   #                         #   min_date: 3.days.ago.to_date,
   #                         #   max_date: "+1W +5D"
   #                         # }
-         #end
+         end
        #end

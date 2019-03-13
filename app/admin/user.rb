@@ -2,7 +2,7 @@ ActiveAdmin.register User do
   belongs_to :cohort, optional: true
   scope :all, default: true
 
-  permit_params :name, :cohort_id, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohorts_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+  permit_params :name, :cohort_number, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohorts_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
    duplicable?
@@ -31,7 +31,7 @@ ActiveAdmin.register User do
 
 
   filter :genius
-  filter :cohort_id
+  filter :cohort_number
   filter :city
   filter :stipend
   filter :benchmarks
@@ -44,7 +44,7 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
-      f.input :cohort_id
+      f.input :cohort_number
       f.input :genius
       f.input :city
       f.input :cell

@@ -35,6 +35,13 @@
                 <li class="active"><%= link_to "Tap in", new_user_session_path %></li>
               <% end %>
 
+              <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+              <input type="text" class="form-control" placeholder="Search for Geniuses">
+
+              
+                <%= f.submit "Search", class: "btn btn-primary" %>
+              <% end %>
+
              <li class="active">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Featured Geniuses
                 <span class="caret"></span></a>
@@ -46,7 +53,7 @@
               </li>
            </ul>
          </div>
-       
+
              <ul class="nav navbar-nav navbar-right">
 
              <div class="logo"><a href="http://www.hiddengeniusproject.org">
@@ -63,12 +70,6 @@
              </div>
            </ul>
 
-       <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search for Geniuses">
-        </div>
-        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-      </form>
      </nav>
    </header>
  </div>

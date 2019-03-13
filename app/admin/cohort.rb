@@ -1,5 +1,5 @@
 ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
-  permit_params :name, :genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday]
+  permit_params :name, :genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_number, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday]
   menu priority: 3
   config.batch_actions = true
     duplicable?
@@ -24,13 +24,13 @@ ActiveAdmin.register Cohort do#, :as => 'Hgp cohorts'
      selectable_column
      id_column
      column :city
-     column :cohort_id
+     column :cohort_number
 
      actions
    end
 
      filter :genius
-     filter :cohort_id
+     filter :cohort_number
      filter :city
      #filter :username
 
