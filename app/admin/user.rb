@@ -6,7 +6,7 @@ ActiveAdmin.register User do
   config.batch_actions = true
   menu priority: 4
    duplicable?
-   active_admin_import 
+   active_admin_import
 
 
 
@@ -63,16 +63,16 @@ ActiveAdmin.register User do
      end
    end
 
-   batch_action :flag, form: {
-     type: %w[Offensive Spam Other],
-     reason: :text,
-     notes:  :textarea,
-     hide:   :checkbox,
-     date:   :datepicker
-   } do |ids, inputs|
-     # inputs is a hash of all the form fields you requested
-     redirect_to collection_path, notice: [ids, inputs].to_s
-   end
+   # batch_action_form :flag,  {
+   #   type: %w[Offensive Spam Other],
+   #   reason: :text,
+   #   notes:  :textarea,
+   #   hide:   :checkbox,
+   #   date:   :datepicker
+   # do |ids, inputs|
+   #   # inputs is a hash of all the form fields you requested
+   #   redirect_to collection_path, notice: [ids, inputs].to_s
+   # end
 
 
 
