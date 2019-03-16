@@ -12,6 +12,7 @@
 //
 //= require jquery3
 //= require jquery_ujs
+// require jquery.ui.all
 //= require bootstrap-sprockets
 // require bootstrap-datepicker
 //= require moment

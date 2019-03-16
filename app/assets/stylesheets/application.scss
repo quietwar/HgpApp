@@ -11,9 +11,10 @@
  * It is generally better to create a new file per style scope.
  *
 
- *= require jquery-ui
- *= require jquery-ui/sortable
- *= require jquery-ui/datepicker
+ * require jquery
+ * require jquery.ui.all
+ * require jquery-ui/sortable
+ * require jquery-ui/datepicker
  * require bootstrap-datepicker
  * require fullcalendar
  *= require_tree .

@@ -7,6 +7,7 @@ class Ability
 
     if user.super_user?
       can :manage, :all
+      can :import, :all
     else
       register_role_based_abilities(user)
     end
