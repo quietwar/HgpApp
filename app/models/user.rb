@@ -17,13 +17,13 @@ class User < ApplicationRecord
               has_many :projects, inverse_of: :user
                 accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
-                accepts_nested_attributes_for :room, :projects, :allow_destroy => true
               has_many :friendships, class_name: "Genius"
-              belongs_to :cohort, polymorphic: true#, inverse_of: :users
+              belongs_to :cohort, polymorphic: true, inverse_of: :users
               accepts_nested_attributes_for :cohort
+              validates_presence_of :cohort
               has_one :cohort#, inverse_of: :user
               COHORT_TYPES = %w(Domain Service)
-                #validates_presence_of :cohort_id
+
               # belongs_to :classroom, inverse_of: :users
               #   validates_presence_of :cohort_id
               has_many :attendances, inverse_of: :user

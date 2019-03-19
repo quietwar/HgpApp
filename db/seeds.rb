@@ -29,24 +29,24 @@
 #   password_confirmation: 'genius'
 #   admin: 'yes'
 #   }])
-# %i[guest user staff director admin].each do |role|
-#   AdminUser.find_or_create_by!(email: "#{role}hodari@hiddengeniusproject.org") do |admin_user|
-#     admin_user.first_name = 'Hodari'
-#     admin_user.last_name = 'Toure'
-#     admin_user.role = 'admin'
-#     admin_user.password = 'quiet927'
-#     admin_user.password_confirmation = 'quiet927'
-#   end
-# end
-%i[admin].each do |role|
-  AdminUser.find_or_create_by!(email = "#{role}@genius.com") do |admin_user|
-    admin_user.role = role
-    admin_user.first_name = 'wpill'
-    admin_user.last_name = 'wpill'
-    admin_user.password = 'password'
-    admin_user.password_confirmation = 'password'
+%i[guest user staff director admin].each do |role|
+  AdminUser.find_or_create_by!(email: "#{role}hodari@hiddengeniusproject.org") do |admin_user|
+    admin_user.first_name = 'Hodari'
+    admin_user.last_name = 'Toure'
+    admin_user.role = 'admin'
+    admin_user.password = 'quiet927'
+    admin_user.password_confirmation = 'quiet927'
   end
 end
+# %i[admin].each do |role|
+#   AdminUser.find_or_create_by!(email = "#{role}@genius.com") do |admin_user|
+#     admin_user.role = role
+#     admin_user.first_name = 'wpill'
+#     admin_user.last_name = 'wpill'
+#     admin_user.password = 'password'
+#     admin_user.password_confirmation = 'password'
+#   end
+# end
 AdminUser.create!(
   first_name: 'wpill'
   last_name: 'wpill'

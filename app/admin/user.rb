@@ -1,8 +1,9 @@
+ActiveAdmin.register Cohort
 ActiveAdmin.register User do
   belongs_to :cohort, optional: true
   scope :all, default: true
 
-  permit_params :name, :cohort_number, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohorts_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+  permit_params :name, :cohort_number, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
    duplicable?
@@ -45,6 +46,7 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
+      f.input :cohort_id
       f.input :cohort_number
       f.input :name, input_html: { autocomplete: "Genius" }
       f.input :city
@@ -76,7 +78,7 @@ ActiveAdmin.register User do
 
 
 
-   # sidebar  :show do
+   # sidebar :attendances, :only => :show do
    #   resource.a_attendances
    #        f.input :ends_at, as: :datepicker,
    #                  datepicker_options: {
@@ -85,12 +87,7 @@ ActiveAdmin.register User do
    #                  }
    #            end
 
-      # sidebar :custom, only: :show do
-      #   attributes_table_for genius do
-      #     #row("Total Projects") { genius.projects.complete.count }
-      #     row("Total Value") do
-      #     end
-      #   end
-      # end
+
+      #end
    end
  end

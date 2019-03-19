@@ -78,7 +78,7 @@ gem 'd3-rails','4.1.0'
 gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'cocoon'
 gem 'rails_layout'
-gem 'ransack', github: 'activerecord-hackery/ransack'
+gem 'ransack', :git => 'https://github.com/activerecord-hackery/ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

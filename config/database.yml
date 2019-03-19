@@ -6,10 +6,12 @@
 #
 development:
   adapter: postgresql
+  username: postgres
+  password: wanjiri22
   encoding: unicode
-  database: HgpApp_development
+  database:
   pool: 5
-  username: hodaritoure
+  username: #hodaritoure
   password: wanjiri22
 
 

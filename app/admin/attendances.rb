@@ -1,3 +1,4 @@
+ActiveAdmin.register User
 ActiveAdmin.register Attendance do
   belongs_to :user, optional: true
     permit_params :name, :user_id, :class_date, :city_id#,  attendance_id: ["Present, Absent, Halfday"], class_dates_attributes: [ :id, :start_time, :end_time, :_destroy ]
@@ -20,6 +21,9 @@ ActiveAdmin.register Attendance do
           f.inputs "Rollcall",:as => :select, collection:[true] do
             f.semantic_errors *f.object.errors.keys
              f.input :attendance_id, as: :nested_select,
+                        fields: [:name, :id],
+                        display_name: :id,
+                        minimum_input_length: 3,
                         level_1: { attribute: :cohort_id },
                         level_2: { attribute: :user_id },
                         level_3: { attribute: :attendance_id }
