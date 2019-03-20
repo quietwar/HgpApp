@@ -43,6 +43,7 @@ ActiveAdmin.register Cohort do#, :as => 'Thgp cohorts'
                 user.input :cell
                 user.input :email
                 user.input :password, input_html: { autocomplete: "new-password" }
+                user.input :password_confirmation, input_html: { autocomplete: "new-password" }
                 user.input :email2
                 user.input :username
                 user.input :avatar, as: :file

@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-    resources :cohorts
-      resources :attendances
+
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-      resources :users do
-        resources :projects
-      end
+  resources :cohorts
+    resources :users do
+    resources :attendances
+    resources :projects
+  end
 
       devise_scope :user do
           # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'

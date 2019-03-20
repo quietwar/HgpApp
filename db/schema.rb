@@ -114,8 +114,6 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.string "city"
     t.string "name"
     t.bigint "classrooms_id"
-    t.datetime "ends_at"
-    t.datetime "starts_at"
     t.index ["classrooms_id"], name: "index_attendances_on_classrooms_id"
     t.index ["cohort_id"], name: "index_attendances_on_cohort_id"
     t.index ["user_id"], name: "index_attendances_on_user_id", unique: true
@@ -164,9 +162,6 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.string "state"
     t.integer "latitude"
     t.integer "longitude"
-    t.string "name"
-    t.bigint "admin_users_id"
-    t.index ["admin_users_id"], name: "index_events_on_admin_users_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -226,11 +221,6 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.datetime "end_time"
-    t.datetime "start_time"
-    t.bigint "events_id"
-    t.index ["events_id"], name: "index_schedules_on_events_id"
     t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
   end
 

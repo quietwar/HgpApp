@@ -1,6 +1,5 @@
 class CohortsController < ApplicationController
   before_action :set_cohort
-  params.require(:cohorts).permit(:genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
 
 
     def index
@@ -20,6 +19,7 @@ class CohortsController < ApplicationController
 
     def new
       @cohort = Cohort.new
+      user = @cohort.users.build
     end
 
     def create
@@ -47,13 +47,11 @@ class CohortsController < ApplicationController
     private
 
     def set_cohort
-      @cohort = current_admin.cohorts.find params[:id]
+      @cohort = cohort_path(:admin_user_id)
     end
 
     def cohort_params
-      params.require(:cohorts).permit(:genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
-
-      #params.require(:cohorts).permit(:cohort, :genius, :city, :cohort )
+      params.require(:cohorts).permit(:city, :cohort_number, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
     end
 
     def set_current_room

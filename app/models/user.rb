@@ -18,9 +18,9 @@ class User < ApplicationRecord
                 accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
               has_many :friendships, class_name: "Genius"
-              belongs_to :cohort, polymorphic: true, inverse_of: :users
+              belongs_to :cohort#, polymorphic: true
               accepts_nested_attributes_for :cohort
-              validates_presence_of :cohort
+              #validates :cohort, presence: true
               has_one :cohort#, inverse_of: :user
               COHORT_TYPES = %w(Domain Service)
 
