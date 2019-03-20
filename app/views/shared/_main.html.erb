@@ -4,10 +4,11 @@
       <% flash.each do |key, message| %>
         <div class="text-center alert
                     alert-<%= key == 'notice' ? 'success' : 'danger' %>">
-          <%= :message %>
+          <%= "Try again, Genius"   %>
         </div>
       <% end %>
 
       <%= yield :whole_page %>
     </div>
   </div>
+   

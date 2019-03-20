@@ -8,7 +8,11 @@ class UsersController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.find_by_name(params[:cohort][:user_id])
+
+    if @user.nil?
+      @user = User.new(name: params:cohort][:user_id])
+  end
     respond_to do |format|
       if @user.save!
         format.html { redirect_to
@@ -86,6 +90,10 @@ class UsersController < Devise::RegistrationsController
 
   def user_params
     params.require(:user).permit(:avatar, :cohort_id, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
+  end
+
+  def cohort_params
+    params.require(:cohorts).permit(:city, :cohort_number, user_attributes: [:name, :username, :genius, :cohort_number, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
   end
 
   def project_params

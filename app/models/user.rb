@@ -4,7 +4,7 @@ class User < ApplicationRecord
       devise :registerable,:database_authenticatable,:validatable,
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
              validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-              validates :cohort_id, :city, presence: true
+              #validates :cohort_id, :city, presence: true
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
               validates :password, presence: false #length: {:within => 6..46 }, on: :create
               validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
