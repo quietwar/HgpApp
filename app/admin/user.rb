@@ -46,13 +46,14 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
-      f.input :cohort_id
-      f.input :cohort_number
+      #f.input :cohort_
+      f.input :cohort, input_html: { class: "select2" }
       f.input :name, input_html: { autocomplete: "Genius" }
-      f.input :city
+      f.input :city, input_html: { class: "select2" }
       f.input :cell
       f.input :email
       f.input :password, input_html: { autocomplete: "new-password" }
+      f.input :password_confirmation, input_html: { autocomplete: "new-password" }
       f.input :email2
       f.input :username
       f.input :avatar, as: :file
