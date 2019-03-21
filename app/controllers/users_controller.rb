@@ -8,7 +8,7 @@ class UsersController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.find_by_name(params[:cohort][:user_id])
+    @user = User.find_by_name(allowed_params[:cohort][:user_id])
 
     if @user.nil?
       @user = User.new(name: params:cohort][:user_id])
@@ -88,11 +88,11 @@ class UsersController < Devise::RegistrationsController
     end
   end
 
-  def user_params
-    params.require(:user).permit(:avatar, :cohort_id, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
-  end
+  # def allowed_params
+  #   params.require(:user).permit(:name, :avatar, :cohort_number, :city, :username, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
+  # end
 
-  def cohort_params
+  def allowed_params
     params.require(:cohorts).permit(:city, :cohort_number, user_attributes: [:name, :username, :genius, :cohort_number, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
   end
 

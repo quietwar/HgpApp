@@ -13,30 +13,38 @@ class CohortsController < ApplicationController
     end
 
     def show
-      @cohort = Cohort.find_by_id(params[:cohort_id])
+      @cohort = Cohort.find_by_id(allowed_params[:cohort_id])
 
     end
 
     def new
       @cohort = Cohort.new
-      user = @cohort.users.build
+      @cohort.users.build
+
+      # has_many :through association .build method => @parent.through_child.build
+
+      # respond_to do |format|
+      #   format.html { render :new }
+      #   format.json { render json: @cohort.errors, status: :unprocessable_entity }
+      # end
     end
 
     def create
       @cohort = Cohort.new(cohort_params)
+
       respond_to do |format|
-      if @cohort.save
-        format.html { redirect_to @cohort, notice: 'Cohort was successfully created.' }
-        format.json { render :show, status: :created, location: @cohort }
-      else
-        format.html { render :new }
-        format.json { render json: @cohort.errors, status: :unprocessable_entity }
+        if @cohort.save
+          format.html { redirect_to @cohort, notice: 'Cohort was successfully created.' }
+          format.json { render :show, status: :created, location: @cohort }
+        else
+          format.html { render :new }
+          format.json { render json: @cohort.errors, status: :unprocessable_entity }
+        end
       end
-     end
     end
 
     def edit
-      @cohort = Cohort.find(params[:id])
+      @cohort = Cohort.find(cohort_params[:id])
       @user = @cohort.build_cohort
     end
 
@@ -47,11 +55,11 @@ class CohortsController < ApplicationController
     private
 
     def set_cohort
-      @cohort = cohort_path(:admin_user_id)
+      @cohort = Cohort.find(cohort_params[:id])
     end
 
     def cohort_params
-      params.require(:cohorts).permit(:city, :cohort_number, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
+      params.require(:cohorts).permit(:city, :cohort_number, user_attributes: [:name, :username, :genius, :email, :email2, :cell, :project], attendances_attributes: [:class_date, :absent, :present, :halfday])
     end
 
     def set_current_room
