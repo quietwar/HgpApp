@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
-#source 'http://gems.github.com'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
 
 
 # Bundle edge Rails instead:
@@ -9,8 +10,7 @@ gem 'concurrent-ruby'
 
 gem 'bundler'
 # Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
-gem 'pg', '~> 0.21.0'
+
 # Use Puma as the app server
 
 gem 'puma', '~> 3.0'
@@ -91,6 +91,8 @@ group :development do
   gem 'dotenv', '~> 2.2.1'
   gem "better_errors"
   gem "binding_of_caller"
+  #gem 'sqlite3'
+  gem 'pg', '0.21.0'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
@@ -98,14 +100,11 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'guard', '~>2.14.0'
-  gem 'guard-rspec', '~> 4.7.2'
-  gem 'guard-cucumber', '~> 2.1.2'
 end
 
 group :production do
   # Use Capistrano for deployment
-  #gem 'pg', '0.21.0'
+  gem 'pg', '0.21.0'
   gem 'capistrano', '~> 3.6'
   gem 'capistrano-rails', group: :development
 end

@@ -19,7 +19,7 @@ class Cohort < ApplicationRecord
     # Excuse the poor test parameters -- I set up a bare Rails project and
     # did not define any columns, so created_at and updated_at was all I
     # had to work with
-    parent_params =
+    user_params =
       {
         created_at: 'now',
         attendance_attributes: [{created_at: 'test'}]
