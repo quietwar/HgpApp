@@ -62,5 +62,4 @@ module ApplicationHelper
     return current_user.color if (current_user && current_user.color.present?)
     '#fff'
   end
- end
-end
+ end 

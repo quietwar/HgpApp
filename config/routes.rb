@@ -61,5 +61,5 @@ end
       root to: "classrooms#index"
     mount ActionCable.server => '/cable'
 
-    #end
+    end
   end
