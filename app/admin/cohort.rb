@@ -52,14 +52,4 @@ ActiveAdmin.register Cohort do#, :as => 'Thgp cohorts'
       end
   end
 end
-
-                #f.inputs "Rollcall", collection:[true] do
-        #    f.input :user_id, as: :nested_select,
-        #
-        #                level_1: { attribute: :city_id },
-        #                level_2: { attribute: :cohorts_id  },
-        #                level_3: { attribute: :user_id }
-
-      # f.input :category_id, as: :search_select, url: admin_categories_path,
-      # fields: [:name, :description], display_name: 'name', minimum_input_length: 2,
-      # order_by: 'description_asc'
+ 

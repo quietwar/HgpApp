@@ -5,11 +5,14 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :cohorts
-    resources :users do
-    resources :attendances
-    resources :projects
-  end
 
+    resources :users do
+      collection do
+               get :add_user
+      resources :attendances
+      resources :projects
+  end
+end
       devise_scope :user do
           # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
           # post 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
