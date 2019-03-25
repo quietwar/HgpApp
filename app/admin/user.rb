@@ -1,12 +1,13 @@
+ActiveAdmin.register Cohort
 ActiveAdmin.register User do
   belongs_to :cohort, optional: true
   scope :all, default: true
 
-  permit_params :name, :cohort_id, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohorts_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+  permit_params :name, :cohort_number, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
    duplicable?
-  active_admin_importable
+   active_admin_import
 
 
 
@@ -31,9 +32,10 @@ ActiveAdmin.register User do
 
 
   filter :genius
-  filter :cohort_id
+  filter :cohort_number
   filter :city
   filter :stipend
+  filter :projects
   filter :benchmarks
   filter :username
   filter :feature
@@ -44,12 +46,14 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
-      f.input :cohort_id
-      f.input :genius
-      f.input :city
+      #f.input :cohort_
+      f.input :cohort, input_html: { class: "select2" }
+      f.input :name, input_html: { autocomplete: "Genius" }
+      f.input :city, input_html: { class: "select2" }
       f.input :cell
       f.input :email
       f.input :password, input_html: { autocomplete: "new-password" }
+      f.input :password_confirmation, input_html: { autocomplete: "new-password" }
       f.input :email2
       f.input :username
       f.input :avatar, as: :file
@@ -57,39 +61,26 @@ ActiveAdmin.register User do
         f.semantic_fields_for :avatar_attributes do |avatar_fields|
          avatar_fields.input :_destroy, as: :boolean, label: 'Delete?'
        end
-     end
+
        f.actions
      end
    end
 
-     # controller do
-     #   # Instruct Inherited Resources to use `parent.scorecards` to find the related records.
-     #     defaults :collection_name => "Genius"
-     #
-     #     #belongs_to :cohort#, polymorphic: true
-     #
-     #     def update
-     #        if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-     #          params[:user].delete('password')
-     #          params[:user].delete('password_confirmation')
-     #        end
-     #        super
-     #     end
-     #
-     #   def create
-     #         @cohort = Cohort.find(params[:geniuses][:cohort])
-     #         @genius = Genius.find(params[:cohort][:geniuses])
-     #         params[:genius][:cohort] = @cohort.genius
-     #         params[:cohort][:genius] = @genius.cohort
-     #         @cohort = Cohort.new(params[:cohort])
-     #       super
-     #   end
-     # end
+   # batch_action_form :flag,  {
+   #   type: %w[Offensive Spam Other],
+   #   reason: :text,
+   #   notes:  :textarea,
+   #   hide:   :checkbox,
+   #   date:   :datepicker
+   # do |ids, inputs|
+   #   # inputs is a hash of all the form fields you requested
+   #   redirect_to collection_path, notice: [ids, inputs].to_s
+   # end
 
-   end
 
-   # sidebar :custom, only: :show do
-   #   resource.a_attendance
+
+   # sidebar :attendances, :only => :show do
+   #   resource.a_attendances
    #        f.input :ends_at, as: :datepicker,
    #                  datepicker_options: {
    #                    min_date: 3.days.ago.to_date,
@@ -97,12 +88,7 @@ ActiveAdmin.register User do
    #                  }
    #            end
 
-      # sidebar project: :show do
-      #   attributes_table_for genius do
-      #     #row("Total Projects") { genius.projects.complete.count }
-      #     row("Total Value") do
-      #     end
-      #   end
-      # end
-   #end
- #end
+
+      #end
+   end
+ end

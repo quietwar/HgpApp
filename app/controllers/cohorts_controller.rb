@@ -1,42 +1,37 @@
 class CohortsController < ApplicationController
   before_action :set_cohort
-  params.require(:cohorts).permit(:genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
 
 
     def index
       @cohort = Cohort.all
-      # @cohorts = current_admin.cohorts
-      #
-      #   respond_to do |format|
-      # format.html
-      # format.json { render json: UsersDatatable.new(view_context) }
-      # end
     end
 
     def show
-      @cohort = Cohort.find_by_id(params[:cohort_id])
+      @cohort = Cohort.find_by_id(cohort_params[:cohort_id])
 
     end
 
     def new
       @cohort = Cohort.new
+      @cohort.users.build
     end
 
     def create
       @cohort = Cohort.new(cohort_params)
+
       respond_to do |format|
-      if @cohort.save
-        format.html { redirect_to @cohort, notice: 'Cohort was successfully created.' }
-        format.json { render :show, status: :created, location: @cohort }
-      else
-        format.html { render :new }
-        format.json { render json: @cohort.errors, status: :unprocessable_entity }
+        if @cohort.save #add_user_users
+          format.html { redirect_to @cohort, notice: 'Cohort was successfully created.' }
+          format.json { render :show, status: :created, location: @cohort }
+        else
+          format.html { render :new }
+          format.json { render json: @cohort.errors, status: :unprocessable_entity }
+        end
       end
-     end
     end
 
     def edit
-      @cohort = Cohort.find(params[:id])
+      @cohort = Cohort.find(cohort_params[:id])
       @user = @cohort.build_cohort
     end
 
@@ -47,13 +42,17 @@ class CohortsController < ApplicationController
     private
 
     def set_cohort
-      @cohort = current_admin.cohorts.find params[:id]
+      @cohort = Cohort.find_by(cohort_params[:id])
     end
 
     def cohort_params
-      params.require(:cohorts).permit(:genius, :city, :cohort, user_attributes: [:first_name, :last_name, :username, :genius, :cohort_id, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
+      params.permit(:city, :cohort_number, user_attributes: [:name, :username, :genius, :email, :email2, :password, :cell, :project], attendances_attributes: [:class_date, :absent, :present, :halfday])
+    end
 
-      #params.require(:cohorts).permit(:cohort, :genius, :city, :cohort )
+    def add_user
+         @cohort = Cohort.new
+         @cohort.users.build
+         render "add_Genius", :layout => false
     end
 
     def set_current_room

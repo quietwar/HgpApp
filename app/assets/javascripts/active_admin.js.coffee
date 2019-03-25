@@ -1,8 +1,9 @@
 #= require active_admin/base
 #= require activeadmin_addons/all
-#= require jquery2
-# require jquery_ui
+#= require jquery3
 #= require jquery_ujs
+# require jquery.ui.all
+#= require active_admin/select2
 #= require_self
 #= require active_admin/lib/batch_actions
 #= require active_admin/lib/checkbox-toggler

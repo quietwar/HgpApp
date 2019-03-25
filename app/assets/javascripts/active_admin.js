@@ -1,5 +1,8 @@
 // require index_as_calendar/application
-//require jquery-ui
+// require jquery
+//= require jquery_ujs
+// require jquery.ui.all
+//= require active_admin/base
 
 $(document).ready(function() {
   jQuery('input.hasDatetimePicker').datetimepicker({

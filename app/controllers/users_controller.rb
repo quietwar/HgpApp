@@ -2,19 +2,28 @@ class UsersController < Devise::RegistrationsController
 respond_to :html, :json
 # require 'google/api_client'
 # require 'google/api_client/client_secrets'
+before_action :set_cohort
 
 
   def new
-    @user = User.new
+    @user = @cohort.users.new
+    @user.attendances.build
   end
 
   def create
-    # if user = User.valid_login?(params[:email], params[:password])
-    #   allow_token_to_be_used_only_once_for(user)
-    #   send_auth_token_for_valid_login_of(user)
-    # else
-    #   render_unauthorized("Error with your login or password")
-    # end
+    @user = @cohort.users.build(user_params)
+    if @user.save
+      redirect_to @cohort
+    else
+        format.html { redirect_to
+        edit_user_first_path(@user),
+        notice: "User created! Now select or create a cohort."}
+      #
+      #   format.html { render :new }
+      #   format.json { render json: @user.errors, status:
+      #     :unprocessable_entity}
+      # end
+    end
   end
 
   def edit
@@ -34,13 +43,6 @@ respond_to :html, :json
 
   def index
      @users = User.cohort.where(params[:cohort_id])
-     @users = User.search(params[:search])
-     #@users = User.find(params[:cohort_id])
-     # @hash = Gmaps4rails.build_markers(@users) do |user, marker|
-     #    marker.lat user.latitude
-     #    marker.lng user.longitude
-     #    marker.title user.title
-     # end
   end
 
   def update
@@ -70,6 +72,10 @@ respond_to :html, :json
 
  private
 
+ def set_cohort
+   @cohort = Cohort.find(params[:cohort_id])
+ end
+
  def create_login
     email = self.email.split(/@/)
     login_taken = User.where(login: email[0]).first
@@ -82,8 +88,24 @@ respond_to :html, :json
   end
 
   def user_params
-    params.require(:user).permit(:avatar, :cohort_number, :city, :username, :first_name, :last_name, :genius, :email, :password, :avatar, :email2, project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
-  end
+    params.require(:user).permit(
+      :name, :avatar, :cohort_number, :city, :username, :email, :password, :avatar, :email2,
+      attendance_attributes: [
+        :starts_at,
+        :ends_at,
+        :DateTime,
+        :_destroy
+      ]
+    ).merge(cohort: @cohort)
+end
+
+# def user_params
+#     params.require(:user).permit(:name, :avatar, :cohort_number, :city, :username, :email, :password, :avatar, :email2)# project_attributes: [:app_name, :user_id, :coding, :github, :url, :project_details, :start_date])
+#   end
+
+  # def user_params
+  #   params.require(:cohorts).permit(:city, :cohort_number, user_attributes: [:name, :username, :genius, :cohort_number, :city, :email, :email2, :cell, :stipend, :project], attendances_attributes: [:class_date, :absent,  :present, :halfday])
+  # end
 
   def project_params
     params.require(:project).permit(:authenticity_token, :github, :locale)

@@ -11,7 +11,7 @@ module DeviseBootstrapErrorsHelper
     <div class="alert alert-danger alert-block devise-bs">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <h5>#{sentence}</h5>
-      <ul>#{messages}</ul>
+      <ul>#{"Please try loggin in again Genius or sign up now!"}</ul>
     </div>
     HTML
 

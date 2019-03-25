@@ -4,11 +4,11 @@ class User < ApplicationRecord
       devise :database_authenticatable, :registerable,
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
              validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-              validates :cohort_number, :city, presence: true
+
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
-              validates :password, presence: false #length: {:within => 6..46 }, on: :create
-              validates :password_confirmation, presence: false #length: {:within => 6..40 }, on: :create
-              has_one_attached :avatar#, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png'
+              validates :password, presence: true, length: {:within => 6..46 }, on: :create
+              validates :password_confirmation, presence: true, length: {:within => 6..40 }, on: :create
+              has_one_attached :avatar#, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
                 #validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
               after_create :create_room
               after_create :create_cohort
@@ -16,19 +16,21 @@ class User < ApplicationRecord
               has_one :room, dependent: :destroy
 
               has_many :projects, inverse_of: :user
-                accepts_nested_attributes_for :projects, allow_destroy: true
+                       #before_save :run_before_add, after_add: :run_after_add
+              accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
-                accepts_nested_attributes_for :room, :projects, :allow_destroy => true
               has_many :friendships, class_name: "Genius"
-              #belongs_to :cohort, optional: false
-              belongs_to :cohort, polymorphic: true#, inverse_of: :users
-              accepts_nested_attributes_for :cohort
-              has_one :cohort, inverse_of: :user
+              has_many :cohort_users
+              belongs_to :cohort, inverse_of: :users# optional: true#, polymorphic: true
+
+              #validates :cohort, presence: true
+              has_one :cohort#, inverse_of: :user
               COHORT_TYPES = %w(Domain Service)
-              validates_presence_of :cohort_number
+
               # belongs_to :classroom, inverse_of: :users
               #   validates_presence_of :cohort_id
               has_many :attendances, inverse_of: :user
+                      #  before_save  :run_before_add, after_add:  :run_after_add
               accepts_nested_attributes_for :attendances, reject_if: :all_blank, allow_destroy: true
 
       def build_cohort(params)
@@ -160,6 +162,24 @@ class User < ApplicationRecord
          avatar.clear if has_destroy_flag?(attributes) && !avatar.dirty?
        end
 
+       def initialize(attributes)
+          puts 'user initializing'
+          super(attributes)
+        end
+
+        after_initialize do
+          puts 'after parent initialization'
+        end
+
+        # Runs before child object is added to this instance's #children
+        def run_before_add(attendance)
+          puts 'before adding attendance'
+        end
+
+        # Runs after child object is added to this instance's #children
+        def run_after_add(attendance)
+          puts 'after adding attendance'
+        end
 
     protected
 

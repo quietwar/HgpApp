@@ -1,0 +1,12 @@
+{
+  "name": "hodaritoure",
+  "version": "y",
+  "description": "updaate",
+  "main": "index.js",
+  "repository": "https://github.com/quietwar/HgpApp",
+  "author": "prof.toure <hodari@hiddengeniusproject.org>",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}

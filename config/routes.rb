@@ -1,23 +1,26 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-    resources :cohorts
-      #resources :attendances
-
-  devise_for :users#, :only => :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  #resources :users, skip: :all do
-    resources :projects, controller: 'users/projects'
-    # collection do
-    #   get 'search'
-    # end
-  #end
 
 
-    #  devise_scope :user do
-          #get 'sign_in', to: 'devise/sessions#new'
-           post '/users/sign_up', to: 'classrooms#index'
-          #get  '/users/sign_out', to: 'devise/sessions#destroy'
-          get '/user_google_oauth2_omniauth_authorize_path', to: 'events#calendars', as: 'calendars'
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  resources :cohorts
+
+    resources :users do
+      collection do
+               get :add_user
+      resources :attendances
+      resources :projects
+  end
+end
+      devise_scope :user do
+          # get 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
+          # post 'admin_user/registrations/new', to: 'active_admin/devise/registrations#new'
+          get "/admin/logout",to: 'active_admin/devise/sessions#destroy', via: 'destroy'
+          post 'admin/logout', to: 'classrooms#index'
+          get 'genius_signup', to: 'devise/registrations#new'
+          post 'genius_signup', to: 'classrooms#index'
+          get 'user_google_oauth2_omniauth_authorize_path', to: 'events#calendars', as: 'calendars'
           get '/redirect', to: 'events#redirect', as: 'redirect'
           get '/callback', to: 'events#callback', as: 'callback'
           get "/admin/logout",to: 'active_admin/devise/sessions#destroy', via: 'destroy'

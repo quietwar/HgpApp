@@ -10,8 +10,10 @@
 
 // Active Admin's got SASS!
 //= require activeadmin_addons/all
+// require jQuery
+
 //= require select2
-// require jquery-ui
+// require jquery.ui.all
 
 
 $skinMainFirstColor: #000!default;
@@ -20,7 +22,7 @@ $skinBorderWindowColor: #cccccc;
 
 @import "active_admin/mixins";
 @import "wigu/active_admin_theme";
-
+@import "active_admin/select2/base";
 
 //@import "arctic_admin";
 @import "active_admin/base";
@@ -28,6 +30,7 @@ $skinBorderWindowColor: #cccccc;
 
 //@import "arctic_admin";
 @import "active_admin/base";
+//@import "fullcalendar";
 //@import "index_as_calendar/application"
 
 

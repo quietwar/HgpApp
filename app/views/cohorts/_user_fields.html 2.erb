@@ -1,0 +1,69 @@
+
+<h2 class='text-center'>Sign up</h2>
+<div class='row'>
+  <div class='col-md-12'>
+
+    <%= cohort_type_form.fields_for :users do |user_field| %>
+      <div class="form-group">
+        <%= f.label :avatar, class: 'col-sm-2 control-label'  %>
+        <div class="col-sm-6">
+            <%= f.file_field :avatar %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='control-label col-md-3'>
+          <%= f.label :username %>
+        </div>
+        <div class='col-md-9'>
+          <%= f.text_field :username %>
+        </div>
+     </div>
+
+      <div class='form-group'>
+        <div class='control-label col-md-3'>
+          <%= f.label :name, "Full Name Genius" %>
+        </div>
+        <div class='col-md-9'>
+          <%= f.text_field :name, class: 'form-control',
+            autofocus: true %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='control-label col-md-3'>
+          <%= f.label :email %>
+        </div>
+        <div class='col-md-9'>
+          <%= f.text_field :email, class: 'form-control'  %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='control-label col-md-3'>
+          <%= f.label :password %>
+        </div>
+        <div class='col-md-9'>
+          <%= f.text_field :password, class: 'form-control',
+            autocomplete: "off" %>
+
+        </div>
+      </div>
+      <div class='form-group'>
+        <div class='control-label col-md-3'>
+          <%= f.label :password_confirmation %>
+        </div>
+        <div class='col-md-9'>
+            <%= f.text_field :password_confirmation,
+                      class: 'form-control', autocomplete: "off" %>
+        </div>
+      </div>
+
+      <div class='form-group'>
+        <div class='col-md-offset-3 col-md-9'>
+          <%= f.submit "Sign up", class: 'btn btn-success btn-lg' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
