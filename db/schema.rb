@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_010558) do
+ActiveRecord::Schema.define(version: 2019_03_26_220952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,18 +105,18 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
   end
 
   create_table "attendances", force: :cascade do |t|
-    t.string "user_id"
-    t.string "cohort_id"
-    t.string "attendance_id"
     t.datetime "datepicker"
     t.boolean "present"
     t.boolean "ghost"
     t.string "city"
     t.string "name"
     t.bigint "classrooms_id"
+    t.datetime "ends_at"
+    t.datetime "starts_at"
+    t.bigint "user_id"
+    t.bigint "cohort_id"
+    t.bigint "attendance_id"
     t.index ["classrooms_id"], name: "index_attendances_on_classrooms_id"
-    t.index ["cohort_id"], name: "index_attendances_on_cohort_id"
-    t.index ["user_id"], name: "index_attendances_on_user_id", unique: true
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -130,7 +130,6 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
   end
 
   create_table "cohorts", force: :cascade do |t|
-    t.string "genius"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "city"
@@ -138,6 +137,14 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.string "users"
     t.integer "cohort_number"
     t.string "name"
+    t.bigint "user_id"
+  end
+
+  create_table "cohorts_users", id: false, force: :cascade do |t|
+    t.bigint "cohort_id", null: false
+    t.bigint "user_id", null: false
+    t.index ["cohort_id", "user_id"], name: "index_cohorts_users_on_cohort_id_and_user_id"
+    t.index ["user_id", "cohort_id"], name: "index_cohorts_users_on_user_id_and_cohort_id"
   end
 
   create_table "event_occurrences", force: :cascade do |t|
@@ -162,6 +169,9 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.string "state"
     t.integer "latitude"
     t.integer "longitude"
+    t.string "name"
+    t.bigint "admin_users_id"
+    t.index ["admin_users_id"], name: "index_events_on_admin_users_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -221,6 +231,11 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.datetime "end_time"
+    t.datetime "start_time"
+    t.bigint "events_id"
+    t.index ["events_id"], name: "index_schedules_on_events_id"
     t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
   end
 
@@ -282,7 +297,13 @@ ActiveRecord::Schema.define(version: 2019_03_16_010558) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "attendances", "cohorts"
+  add_foreign_key "attendances", "users"
+  add_foreign_key "classrooms", "cohorts"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "projects", "users"
   add_foreign_key "rooms", "users"
+  add_foreign_key "users", "classrooms"
+  add_foreign_key "users", "cohorts"
 end

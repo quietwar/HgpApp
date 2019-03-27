@@ -3,7 +3,7 @@ ActiveAdmin.register User do
   belongs_to :cohort, optional: true
   scope :all, default: true
 
-  permit_params :name, :cohort_number, :avatar, :genius, :classroom_id, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :attendance_id, :users_id, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+  permit_params :id, :name, :cohort_number, :avatar, :classroom_id, :cohort, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :attendance_id, :user_id, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 4
    duplicable?
@@ -15,15 +15,17 @@ ActiveAdmin.register User do
       index do
         selectable_column
         id_column
-        column :genius
+        column :name, label: 'Genius'
+        column :city
+        column :cohort_number
         column :email
         column :email2
         column :username
         column :address
         column :cell
         column :projects
-        column :sign_in_count
-        column :created_at
+        # column :sign_in_count
+        # column :created_at
         #image_column :avatar, style: :thumb
 
         actions
@@ -31,25 +33,23 @@ ActiveAdmin.register User do
 
 
 
-  filter :genius
-  filter :cohort_number
-  filter :city
-  filter :stipend
-  filter :projects
-  filter :benchmarks
-  filter :username
-  filter :feature
-  filter :sign_in_count
-  filter :created_at
+      filter :cohort_number, as: :select2
+      filter :city, as: :select2
+      filter :stipend
+      filter :projects
+      filter :benchmarks
+      filter :username
+      filter :feature
+      filter :sign_in_count
+      filter :created_at
 
 
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
-      #f.input :cohort_
-      f.input :cohort, input_html: { class: "select2" }
+      f.input :city, as: :select
+      f.input :cohort_number, as: :select
       f.input :name, input_html: { autocomplete: "Genius" }
-      f.input :city, input_html: { class: "select2" }
       f.input :cell
       f.input :email
       f.input :password, input_html: { autocomplete: "new-password" }

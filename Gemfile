@@ -24,7 +24,7 @@ gem 'coffee-rails'
 # gem 'therubyracer', platforms: :ruby
 #gem 'kaminari'
 
-gem 'simple_form'
+#gem 'simple_form'
 gem 'ffi', '1.9.18'
 gem 'activeadmin', :git => 'https://github.com/gregbell/active_admin.git'
 gem 'active_admin_theme'

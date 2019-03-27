@@ -1,5 +1,5 @@
 ActiveAdmin.register Classroom do
-  permit_params :avatar, :name, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :genius, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
+  permit_params :avatar, :name, :first_name, :cohort, :last_name, :username, :email, :email2, :cell, :password, :password_confirmation, :stipend, :address, :benchmarks, :cohort_id, :city, :projects_attributes, avatar_attributes: [:_destroy]
   config.batch_actions = true
   menu priority: 6
   duplicable?
@@ -22,7 +22,7 @@ ActiveAdmin.register Classroom do
   #    column "halfday", :important, as: :boolean
   # end
 
-    filter :genius
+    filter :name, label: 'Genius'
     filter :cohort
     filter :city
     filter :username
@@ -47,7 +47,7 @@ ActiveAdmin.register Classroom do
 
 
   f.actions
-  
+
   end
 
   #content do

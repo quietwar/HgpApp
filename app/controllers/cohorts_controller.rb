@@ -18,6 +18,7 @@ class CohortsController < ApplicationController
 
     def create
       @cohort = Cohort.new(cohort_params)
+      Cohort.first.create_user(user_params) ?
 
       respond_to do |format|
         if @cohort.save #add_user_users
