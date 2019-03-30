@@ -21,15 +21,13 @@ $skinMainSecondColor: #FFE000!default;
 $skinBorderWindowColor: #cccccc;
 
 @import "active_admin/mixins";
+@import "active_admin/base";
 @import "wigu/active_admin_theme";
 @import "active_admin/select2/base";
+@import "active_admin_datetimepicker";
 
-//@import "arctic_admin";
-@import "active_admin/base";
 @import "jquery.xdan.datetimepicker";
 
-//@import "arctic_admin";
-@import "active_admin/base";
 //@import "fullcalendar";
 //@import "index_as_calendar/application"
 

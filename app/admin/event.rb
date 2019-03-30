@@ -4,7 +4,7 @@ ActiveAdmin.register Event do
  menu priority: 5
 
  action_item :only => [:show, :edit] do
-     link_to('Edit Registrants', admin_event_schedule_registrations_path(event))
+     link_to('Edit Registrants', new_admin_event_schedule_path(:event_id))
    end
 
    show do |o|

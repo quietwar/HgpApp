@@ -6,8 +6,8 @@ class User < ApplicationRecord
              validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
-              validates :password, presence: true, length: {:within => 6..46 }, on: :create
-              validates :password_confirmation, presence: true, length: {:within => 6..40 }, on: :create
+              # validates :password, presence: true, length: {:within => 6..46 }, on: :create
+              # validates :password_confirmation, presence: true, length: {:within => 6..40 }, on: :create
               has_one_attached :avatar#, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
                 #validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif", "application/pdf"]
               after_create :create_room
@@ -20,7 +20,7 @@ class User < ApplicationRecord
               has_many :messages, dependent: :destroy
               has_many :friendships, class_name: "Genius"
               has_many :cohort_users
-              belongs_to :cohort, inverse_of: :users# optional: true#, polymorphic: true
+              has_one :cohort# optional: true#, polymorphic: true
 
               #validates :cohort, presence: true
               has_one :cohort#, inverse_of: :user

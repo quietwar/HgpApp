@@ -109,9 +109,14 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.boolean "present"
     t.boolean "ghost"
     t.string "city"
+    t.string "name"
+    t.bigint "classrooms_id"
+    t.datetime "ends_at"
+    t.datetime "starts_at"
     t.bigint "user_id"
     t.bigint "cohort_id"
     t.bigint "attendance_id"
+    t.index ["classrooms_id"], name: "index_attendances_on_classrooms_id"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -128,6 +133,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.bigint "cohort_id"
     t.string "users"
     t.integer "cohort_number"
+    t.string "name"
     t.bigint "user_id"
   end
 
@@ -160,6 +166,9 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.string "state"
     t.integer "latitude"
     t.integer "longitude"
+    t.string "name"
+    t.bigint "admin_users_id"
+    t.index ["admin_users_id"], name: "index_events_on_admin_users_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -216,6 +225,11 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.datetime "end_time"
+    t.datetime "start_time"
+    t.bigint "events_id"
+    t.index ["events_id"], name: "index_schedules_on_events_id"
     t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
   end
 
@@ -282,4 +296,5 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
   add_foreign_key "projects", "users"
   add_foreign_key "rooms", "users"
   add_foreign_key "users", "classrooms"
+  add_foreign_key "users", "cohorts"
 end
