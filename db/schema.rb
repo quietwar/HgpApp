@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_26_220952) do
+ActiveRecord::Schema.define(version: 2019_03_31_063434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,14 +109,9 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.boolean "present"
     t.boolean "ghost"
     t.string "city"
-    t.string "name"
-    t.bigint "classrooms_id"
-    t.datetime "ends_at"
-    t.datetime "starts_at"
     t.bigint "user_id"
     t.bigint "cohort_id"
     t.bigint "attendance_id"
-    t.index ["classrooms_id"], name: "index_attendances_on_classrooms_id"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -133,7 +128,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.bigint "cohort_id"
     t.string "users"
     t.integer "cohort_number"
-    t.string "name"
     t.bigint "user_id"
   end
 
@@ -166,9 +160,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.string "state"
     t.integer "latitude"
     t.integer "longitude"
-    t.string "name"
-    t.bigint "admin_users_id"
-    t.index ["admin_users_id"], name: "index_events_on_admin_users_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -225,11 +216,6 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.integer "count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
-    t.datetime "end_time"
-    t.datetime "start_time"
-    t.bigint "events_id"
-    t.index ["events_id"], name: "index_schedules_on_events_id"
     t.index ["schedulable_type", "schedulable_id"], name: "index_schedules_on_schedulable_type_and_schedulable_id"
   end
 
@@ -261,7 +247,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.string "feature"
     t.string "provider"
     t.string "uid"
-    t.string "benchmarks"
+    t.string "name"
     t.integer "stipend"
     t.string "oauth_token"
     t.string "google_oauth2"
@@ -284,6 +270,7 @@ ActiveRecord::Schema.define(version: 2019_03_26_220952) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin"
+    t.integer "cohort_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

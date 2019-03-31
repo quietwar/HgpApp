@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
      helper_method :current_user, :logged_in?, :current_room, :authenticate_admin_user!, :authenticate_user!
     before_action :configure_permitted_parameters, if: :devise_controller?
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
+    require 'ostruct'
 
  protected
 
@@ -51,7 +52,12 @@ private
   end
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+      @current_user ||= User.find session[:user_id] if session[:user_id]
+    if @current_user
+      @current_user
+    else
+      OpenStruct.new(name: 'Guest')
+    end
   end
 
   def logged_in?

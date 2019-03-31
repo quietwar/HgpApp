@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # end
 
   # == Site Title
-  require 'active_admin'
+  #require 'active_admin'
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
@@ -13,7 +13,7 @@ ActiveAdmin.setup do |config|
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
   #
-  config.site_title_link = '/'
+  #config.site_title_link = '/admin'
 
   # Set an optional image to be displayed for the header
   # instead of a string (overrides :site_title)
@@ -32,20 +32,20 @@ ActiveAdmin.setup do |config|
   #
   # This will create resources in the HelloWorld module and
   # will namespace routes to /hello_world/*
-  
+
   #
-  # config.namespace :admin do |admin|
-  #    admin.build_menu :utility_navigation do |menu|
-  #      menu.add  :label  => proc{ display_name current_active_admin_user },
-  #                #:url    =>  proc{ edit_admin admin_path(current_active_admin_user) }  ,#link_to current_active_admin_user,
-  #                :id     => 'current_admin_user',
-  #                :if     => proc{ current_active_admin_user? }
-  #      admin.add_logout_button_to_menu menu
-  #      menu.add label: "HGP Website", url: "http://www.hiddengeniusproject.org",
-  #                                          html_options: { target: :blank }
-  #
-  #    end
-  #  end
+  config.namespace :admin do |admin|
+     admin.build_menu :utility_navigation do |menu|
+       menu.add  :label  => proc{ display_name current_active_admin_user },
+                 #:url    =>  proc{ edit_admin admin_path(current_active_admin_user) }  ,#link_to current_active_admin_user,
+                 :id     => 'current_admin_user',
+                 :if     => proc{ current_active_admin_user? }
+       admin.add_logout_button_to_menu menu
+       menu.add label: "HGP Website", url: "http://www.hiddengeniusproject.org",
+                                           html_options: { target: :blank }
+
+     end
+   end
 
 
 

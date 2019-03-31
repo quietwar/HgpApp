@@ -12,14 +12,14 @@ class AdminUsers::SessionsController < Devise::SessionsController
   # en
 
   #DELETE /resource/sign_out
-  def destroy
-    session[:user_id] = nil
-    redirect_to admin_dashboard_path
-    super
-  end
-
-
-  protected
+  # def destroy
+  #   session[:user_id] = nil
+  #   redirect_to admin_dashboard_path
+  #   super
+  # end
+  #
+  #
+  # protected
 
   # def admin_user_params
   #      params.require(:admin_user).permit(:first_name, :last_name, :city, :email, :avatar, :username, :cell, :title,

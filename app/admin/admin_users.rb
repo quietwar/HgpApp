@@ -29,7 +29,7 @@ ActiveAdmin.register AdminUser, :as => 'Staff' do
   filter :last_name
   filter :title
   filter :city
-  filter :title
+  filter :role
   filter :sign_in_count
   filter :created_at
 

@@ -35,17 +35,17 @@ class AdminUsers::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-   protected
-
-
-
-  # The path used after sign up.
-  def after_sign_up_path_for(admin)
-    super(admin_dashboard_path)
-  end
-
-  #The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
-    super(resource)
-  end
+  #  protected
+  #
+  #
+  #
+  # # The path used after sign up.
+  # def after_sign_up_path_for(admin)
+  #   super(admin_dashboard_path)
+  # end
+  #
+  # #The path used after sign up for inactive accounts.
+  # def after_inactive_sign_up_path_for(resource)
+  #   super(resource)
+  # end
 end

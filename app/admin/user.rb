@@ -31,6 +31,20 @@ ActiveAdmin.register User do
         actions
       end
 
+      # show title: :genius do
+      #   panel "Projects" do
+      #     table_for(user.projects) do
+      #       column("Project", sortable: :id) do |project|
+      #         link_to "##{project.id}", admin_project_path(project)
+      #       end
+      #       column("State") { |project| status_tag(project.state) }
+      #       column("Date", sortable: :checked_out_at) do |order|
+      #         pretty_format(order.checked_out_at)
+      #       end
+      #       column("Total") { |project| number_to_currency project.total_price }
+      #     end
+      #   end
+
 
 
       filter :cohort_number, as: :select2
@@ -47,8 +61,8 @@ ActiveAdmin.register User do
   form do |f|
     f.inputs 'Genius' do
       f.semantic_errors *f.object.errors.keys
-      f.input :city, as: :select
-      f.input :cohort_number, as: :select
+      f.input :city, as: :select2
+      f.input :cohort_number, as: :select2
       f.input :name, input_html: { autocomplete: "Genius" }
       f.input :cell
       f.input :email
@@ -89,6 +103,6 @@ ActiveAdmin.register User do
    #            end
 
 
-      #end
+      end
    end
- end
+ #ßend

@@ -7,6 +7,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails'
 gem 'railties'
 gem 'concurrent-ruby'
+gem 'pg', '0.21.0'
 
 gem 'bundler'
 # Use sqlite3 as the database for Active Record
@@ -92,7 +93,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   #gem 'sqlite3'
-  gem 'pg', '0.21.0'
+  #gem 'pg', '0.21.0'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'
