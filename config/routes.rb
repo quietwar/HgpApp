@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
+  # get 'cohort_users', to: 'cohorts#New'#, as: ''
+  # get 'cohort_users', to: 'cohorts#index#', as: ''
+
+  root to: "classrooms#index"
+  resources :curriculums
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
+  scope '/api' do
+      resources :classrooms
 
   #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :cohorts do
@@ -14,16 +20,15 @@ Rails.application.routes.draw do
       resources :features,only: [:create]
       resources :friendships, only: [:show, :create, :destroy] do
       resources :messages, only: [:create]
-      resources :classrooms
+      #resources :classrooms
         # collection do
         # post :search, to: 'classrooms#search'
         #   end
         end
-      #root to: "classrooms#index"
     mount ActionCable.server => '/cable'
 
     #end
-   #end
+   end
   end
 end
       #devise_scope :user do

@@ -15,7 +15,7 @@ before_action :set_cohort
       redirect_to @cohort
     else
         format.html { redirect_to
-        edit_user_first_path(@user),
+        edit_user_first_path(:user_id),
         notice: "User created! Now select or create a cohort."}
       #
       #   format.html { render :new }
@@ -87,7 +87,7 @@ before_action :set_cohort
 
   def user_params
     params.require(:user).permit(
-      :name, :avatar, :cohort_number, :city, :username, :email, :password, :avatar, :email2,
+      :name, :avatar, :cohort_number, :cohort_id, :city, :username, :email, :password, :avatar, :email2,
       attendance_attributes: [
         :starts_at,
         :ends_at,

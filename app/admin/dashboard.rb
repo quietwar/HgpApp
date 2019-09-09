@@ -24,7 +24,7 @@ ActiveAdmin.register_page "Dashboard" do
               table_for Cohort.order("id desc").limit(10) do
                 ul "HGP Cohorts" do
 
-                  # li link_to "Rich 1", admin_hgp_cohorts_path('Rich1')
+                   li link_to "Rich 1", admin_cohort_path(:id[1])
                   # li link_to "Rich 2", admin_hgp_cohorts_path('Rich2')
                   # li link_to "Oak 1", admin_hgp_cohorts_path('Oak1')
                   # li link_to "Oak 2", admin_hgp_cohorts_path('Oak2')
@@ -38,12 +38,13 @@ ActiveAdmin.register_page "Dashboard" do
             end
           end
 
+
           column do
             panel "Staff" do
-                ul link_to "Staffs sign in", new_admin_user_session_path
+                ul link_to "Staff  sign in", new_admin_user_session_path
                 # ul link_to "Staff sign in",  new_admin_staff_path
                  ul link_to "Staff sign up", admin_staffs_path
-                ul link_to "Staffs sign up", new_admin_staff_path
+                ul link_to "Staff sign up", new_admin_staff_path
             end
           end
 

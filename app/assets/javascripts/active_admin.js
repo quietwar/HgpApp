@@ -4,6 +4,10 @@
 // require jquery.ui.all
 //= require active_admin/base
 
+$(function() {
+  $('.clear_filters_btn').attr('href', '?commit=clear_filters');
+})
+
 $(document).ready(function() {
   jQuery('input.hasDatetimePicker').datetimepicker({
     dateFormat: "dd/mm/yy",

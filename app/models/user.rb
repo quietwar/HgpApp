@@ -1,11 +1,16 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable
+  include NormalizeBlankValues
+  NORMALIZABLE_ATTRIBUTES = %i(email)
       devise :registerable,:database_authenticatable,:validatable,
              :recoverable, :rememberable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2]#, :authentication_keys => {email: true, login: true}
-             validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
-
+              #validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
+              validates_format_of :username, with: /\A[@\w\-\.]+\z/,
+                                               allow_blank: true,
+                                               message: "should only contain letters, numbers, or .-_@"
               validates_format_of :email, { with:/\b[A-Z0-9._%a-z\-]+@hgs.hiddengeniusproject.org\z/, message: "only allows HGP addresses" }
+              validates_uniqueness_of :username, allow_blank: true
               # validates :password, presence: true, length: {:within => 6..46 }, on: :create
               # validates :password_confirmation, presence: true, length: {:within => 6..40 }, on: :create
               has_one_attached :avatar#, styles: { medium: '680x300>', thumb: '170x75>' }, default_url: '/assests/images/missing.png"'
@@ -18,9 +23,10 @@ class User < ApplicationRecord
                        #before_save :run_before_add, after_add: :run_after_add
               accepts_nested_attributes_for :projects, allow_destroy: true
               has_many :messages, dependent: :destroy
-              has_many :friendships, class_name: "Genius"
+              has_many :friendships#, class_name: "Genius"
+              has_many :user_infos
               has_many :cohort_users
-              has_one :cohort# optional: true#, polymorphic: true
+              has_one :cohort, through: :cohort_users# optional: true#, polymorphic: true
 
               #validates :cohort, presence: true
               has_one :cohort#, inverse_of: :user
@@ -64,19 +70,19 @@ class User < ApplicationRecord
        end
      end
 
-     def self.search_by_name(name)
-        names_array = name.split(' ')
-
-        if names_array.size == 1
-          where('first_name LIKE ? or last_name LIKE ?',
-            "%#{names_array[0]}%", "%#{names_array[0]}%").order(:first_name)
-        else
-          where('first_name LIKE ? or first_name LIKE ? or last_name LIKE ?
-            or last_name LIKE ?', "%#{names_array[0]}%",
-            "%#{names_array[1]}%", "%#{names_array[0]}%",
-            "%#{names_array[1]}%").order(:first_name)
-        end
-      end
+     # def self.search_by_name(name)
+     #    names_array = name.split(' ')
+     #
+     #    if names_array.size == 1
+     #      where('first_name LIKE ? or last_name LIKE ?',
+     #        "%#{names_array[0]}%", "%#{names_array[0]}%").order(:first_name)
+     #    else
+     #      where('first_name LIKE ? or first_name LIKE ? or last_name LIKE ?
+     #        or last_name LIKE ?', "%#{names_array[0]}%",
+     #        "%#{names_array[1]}%", "%#{names_array[0]}%",
+     #        "%#{names_array[1]}%").order(:first_name)
+     #    end
+     #  end
 
       def follows_or_same?(new_friend)
         friendships.map(&:friend).include?(new_friend) || self == new_friend

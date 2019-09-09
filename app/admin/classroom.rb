@@ -13,14 +13,14 @@ ActiveAdmin.register Classroom do
 
     actions
   end
-
-  # table Attendance do
-  #    column(:genius) { |attendance| }
-  #    column "Session day", :created_at
-  #    column "Present", :important, as: :boolean
-  #    column "Absent",  :important, as: :boolean
-  #    column "halfday", :important, as: :boolean
-  # end
+show title: :user do
+  table Attendance do
+     column(:user) { |attendance| }
+     column "Session day", :created_at
+     column "Present", :important, as: :boolean
+     column "Absent",  :important, as: :boolean
+     column "halfday", :important, as: :boolean
+  end
 
     filter :name, label: 'Genius'
     filter :cohort
@@ -33,7 +33,6 @@ ActiveAdmin.register Classroom do
     f.inputs "Hgp Cohorts" do
       f.input :city, label: "Office Location"
       #f.input :classroom, label: "Cohort Number"
-    end
 
 
       f.input :attendances, as: :nested_select,
@@ -41,13 +40,10 @@ ActiveAdmin.register Classroom do
                   level_2: { attribute: :genuis_id },
                   level_3: { attribute: :attendances }
 
-      sidebar :help do
-      "Need help? Email us at help@example.com"
-   end
 
 
   f.actions
-
+   end
   end
 
   #content do
@@ -67,11 +63,14 @@ ActiveAdmin.register Classroom do
   #   }
   # end
     #render partial: 'calendar'
+    sidebar :help do
+    "Need help? Email us at help@example.com"
+  end
 
 
   breadcrumb do
     ['admin', 'classroom']
     para "Hello Genius"
   end
-#end
+ end
 end

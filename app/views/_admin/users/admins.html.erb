@@ -1,0 +1,7 @@
+<div class="calendar">
+  <div id="calendar"></div>
+<%= react_component("HelloWorld", { greeting: "Hello from react-rails." }) %>
+    <%= form_tag calendars_path do %>
+      <%= submit_tag 'Add calandar event' %>
+  </div>
+<% end %>

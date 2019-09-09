@@ -2,7 +2,7 @@ class Cohort < ApplicationRecord
 
   has_many :classrooms, inverse_of: :cohort
     accepts_nested_attributes_for :classrooms, allow_destroy: true
-  has_many :users, inverse_of: :cohort, autosave: true
+  has_many :users, through: :cohort_users#inverse_of: :cohort, autosave: true
   accepts_nested_attributes_for :users, allow_destroy: true
     #before_save :run_before_add, after_add: :run_after_add
   validates :cohort_number && :city, uniqueness: true, on: :create
@@ -11,6 +11,7 @@ class Cohort < ApplicationRecord
   has_many :attendances, through: :users
     accepts_nested_attributes_for :attendances, allow_destroy: true
   has_many :cohort_users
+  has_many :user_infos, through: :users
 
   def self.test
     @cohort = Cohort.first

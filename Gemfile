@@ -40,7 +40,7 @@ gem 'active_admin_datetimepicker'
 gem 'active_admin_role'
 #gem 'activeadmin-index_as_calendar', github: 'bys-control/activeadmin-index_as_calendar'
 gem 'active_admin-duplicatable'
-gem 'select2-rails'
+# gem 'select2-rails'
 gem 'activeadmin-select2', :git => 'https://github.com/mfairburn/activeadmin-select2'
 gem 'responders', '~> 2.2'
 #gem 'gmaps4rails'
@@ -63,7 +63,8 @@ gem 'rails-assets-jquery-ujs'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-#gem 'jbuilder', '~> 2.5'
+#gem 'jbuilder', '~> 2.5'\
+gem 'thor'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 3.0'
 gem 'activemodel'
@@ -80,11 +81,14 @@ gem 'will_paginate-bootstrap', '~> 1.0.1'
 gem 'cocoon'
 gem 'rails_layout'
 gem 'ransack', :git => 'https://github.com/activerecord-hackery/ransack'
+# gem "react_on_rails", "11.1.4" # Update to the current version
+ gem "webpacker", "~> 3" # Newer versions might be supported
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '3.5.1'
+
 end
 
 group :development do
@@ -92,8 +96,7 @@ group :development do
   gem 'dotenv', '~> 2.2.1'
   gem "better_errors"
   gem "binding_of_caller"
-  #gem 'sqlite3'
-  #gem 'pg', '0.21.0'
+  gem 'foreman', '~> 0.82.0'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
   gem 'listen', '~> 3.0.5'

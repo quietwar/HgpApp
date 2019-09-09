@@ -47,7 +47,7 @@ class CohortsController < ApplicationController
     end
 
     def cohort_params
-      params.permit(:city, :cohort_number, user_attributes: [:name, :username, :genius, :email, :email2, :password, :cell, :project], attendances_attributes: [:class_date, :absent, :present, :halfday])
+      params.permit(:city, :cohort_id, :cohort_number, user_attributes: [:name, :cohort_id, :username, :genius, :email, :email2, :password, :cell, :project], attendances_attributes: [:class_date, :absent, :present, :halfday])
     end
 
     def add_user

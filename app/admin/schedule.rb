@@ -16,12 +16,12 @@ ActiveAdmin.register Schedule do
         actions
       end
 
-    filter :created_at, as: :date_time_range
+    filter :created_at#, as: :date_time_range
 
 
     form do |f|
-      f.input :starts_at, as: :date_time_picker, datepicker_options: { min_date: "2013-10-8",        max_date: "+3D" }
-      f.input :ends_at,   as: :date_time_picker, datepicker_options: { min_date: 3.days.ago.to_date, max_date: "+1W +5D" }
+      f.input :start_time#, as: :date_time,   { min_date: "2013-10-8",  max_date: "+3D" }
+      f.input :end_time#,   as: :date_time,  { min_date: "2013-10-8",  max_date: "+1W +5D" }
     end
         #content do
       #index_as_calendar
@@ -47,4 +47,4 @@ ActiveAdmin.register Schedule do
       para "Hello World"
     end
   end
-  #end
+#end
